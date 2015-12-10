@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2015/12/10/hello-world/</loc>
+    <loc>http://crazyhoney.github.io/2015/12/10/blog/</loc>
+    <lastmod>2015-12-10T05:23:50.289Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://crazyhoney.github.io/2015/12/10/hello-world/</loc>
     <lastmod>2015-12-10T02:56:07.033Z</lastmod>
   </url>
   

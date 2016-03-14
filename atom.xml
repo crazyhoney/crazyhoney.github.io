@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-03-14T05:37:44.212Z</updated>
+  <updated>2016-03-14T08:19:27.239Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://crazyhoney.github.io/2016/03/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89/"/>
     <id>http://crazyhoney.github.io/2016/03/14/设计模式（五）/</id>
     <published>2016-03-14T04:46:43.000Z</published>
-    <updated>2016-03-14T05:37:44.212Z</updated>
+    <updated>2016-03-14T08:19:27.239Z</updated>
     <content type="html"><![CDATA[<h1 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A" class="headerlink" title="简单的说就是(๑•ᴗ•๑)："></a>简单的说就是(๑•ᴗ•๑)：</h2><blockquote>
 <ul>
 <li>你点一下一个按钮（比如说：帮助-&gt;关于），你再点一次的话，它不会再弹出一个窗口。</li>
@@ -32,6 +32,13 @@
 </ul>
 </blockquote>
 <p><img src="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png" alt="Singleton"></p>
+<h2 id="u505A_u6CD5"><a href="#u505A_u6CD5" class="headerlink" title="做法"></a>做法</h2><blockquote>
+<ul>
+<li><strong>构造函数私有化（类外不可以调用构造函数，便不可以创建对象）</strong></li>
+<li><strong>有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿汉”）</strong></li>
+<li><strong>有一个公有的函数，可以返回一个该类对象（如果有的话直接返回，如果没有则创建）</strong></li>
+</ul>
+</blockquote>
 <h2 id="u61D2_u6C49"><a href="#u61D2_u6C49" class="headerlink" title="懒汉"></a>懒汉</h2><blockquote>
 <ul>
 <li><strong>顾名思义：需要创建时才创建对象</strong></li>

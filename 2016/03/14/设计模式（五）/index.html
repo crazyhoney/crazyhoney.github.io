@@ -51,39 +51,68 @@
 
 
 
-<meta name="description" content="适配器模式简单的说就是(๑•ᴗ•๑)：电源适配器（把220V的交流电转换为电器能够使用的电压）
-专业一点就是(⊙ˍ⊙)：想复用一些现成的类，但是接口又与复用环境要求不一致。那么使用适配器转换接口。
+<meta name="description" content="单例模式简单的说就是:smile:：
 
-1、类适配器
-[x] 适用于C++（因为它支持多继承）
+你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
+类比：  计划生育，让你只能生一个孩子。
 
 
-适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换&quot;&amp;gt;适配器类继承了Target">
+专业一点就是:joy:：
+
+保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+
+
+
+懒汉
+
+顾名思义：需要创建时才创建对象
+
+
+1234567891011121314151617181920212223242526272">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式（四）">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/13/设计模式（四）/index.html">
+<meta property="og:title" content="设计模式（五）">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/14/设计模式（五）/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="适配器模式简单的说就是(๑•ᴗ•๑)：电源适配器（把220V的交流电转换为电器能够使用的电压）
-专业一点就是(⊙ˍ⊙)：想复用一些现成的类，但是接口又与复用环境要求不一致。那么使用适配器转换接口。
+<meta property="og:description" content="单例模式简单的说就是:smile:：
 
-1、类适配器
-[x] 适用于C++（因为它支持多继承）
+你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
+类比：  计划生育，让你只能生一个孩子。
 
 
-适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换&quot;&amp;gt;适配器类继承了Target">
-<meta property="og:image" content="http://www.myexception.cn/img/2012/09/10/111548767.jpg">
-<meta property="og:image" content="http://www.myexception.cn/img/2012/06/25/1359217096.png">
-<meta property="og:updated_time" content="2016-03-14T01:18:06.369Z">
+专业一点就是:joy:：
+
+保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+
+
+
+懒汉
+
+顾名思义：需要创建时才创建对象
+
+
+1234567891011121314151617181920212223242526272">
+<meta property="og:image" content="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png">
+<meta property="og:updated_time" content="2016-03-14T05:27:39.240Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式（四）">
-<meta name="twitter:description" content="适配器模式简单的说就是(๑•ᴗ•๑)：电源适配器（把220V的交流电转换为电器能够使用的电压）
-专业一点就是(⊙ˍ⊙)：想复用一些现成的类，但是接口又与复用环境要求不一致。那么使用适配器转换接口。
+<meta name="twitter:title" content="设计模式（五）">
+<meta name="twitter:description" content="单例模式简单的说就是:smile:：
 
-1、类适配器
-[x] 适用于C++（因为它支持多继承）
+你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
+类比：  计划生育，让你只能生一个孩子。
 
 
-适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换&quot;&amp;gt;适配器类继承了Target">
+专业一点就是:joy:：
+
+保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+
+
+
+懒汉
+
+顾名思义：需要创建时才创建对象
+
+
+1234567891011121314151617181920212223242526272">
 
 
 
@@ -95,7 +124,7 @@
   };
 </script>
 
-  <title> 设计模式（四） | Hexo </title>
+  <title> 设计模式（五） | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -235,7 +264,7 @@
             
             
               
-                设计模式（四）
+                设计模式（五）
               
             
           </h1>
@@ -244,8 +273,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-13T21:41:52+08:00" content="2016-03-13">
-              2016-03-13
+            <time itemprop="dateCreated" datetime="2016-03-14T12:46:43+08:00" content="2016-03-14">
+              2016-03-14
             </time>
           </span>
 
@@ -255,8 +284,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/13/设计模式（四）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/13/设计模式（四）/" itemprop="commentsCount"></span>
+                <a href="/2016/03/14/设计模式（五）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/设计模式（五）/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -275,15 +304,30 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="u9002_u914D_u5668_u6A21_u5F0F"><a href="#u9002_u914D_u5668_u6A21_u5F0F" class="headerlink" title="适配器模式"></a>适配器模式</h2><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A" class="headerlink" title="简单的说就是(๑•ᴗ•๑)："></a>简单的说就是(๑•ᴗ•๑)：</h2><p>电源适配器（把220V的交流电转换为电器能够使用的电压）</p>
-<h2 id="u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_u2299_u02CD_u2299_29_uFF1A"><a href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_u2299_u02CD_u2299_29_uFF1A" class="headerlink" title="专业一点就是(⊙ˍ⊙)："></a>专业一点就是(⊙ˍ⊙)：</h2><p>想复用一些现成的类，但是接口又与复用环境要求不一致。那么使用适配器转换接口。</p>
-<hr>
-<h2 id="1_u3001_u7C7B_u9002_u914D_u5668"><a href="#1_u3001_u7C7B_u9002_u914D_u5668" class="headerlink" title="1、类适配器"></a>1、类适配器</h2><ul>
-<li>[x] 适用于C++（因为它支持多继承）</li>
+        <span itemprop="articleBody"><h2 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h2><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_3Asmile_3A_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_3Asmile_3A_uFF1A" class="headerlink" title="简单的说就是:smile:："></a>简单的说就是:smile:：</h2><blockquote>
+<ul>
+<li>你点一下一个按钮（比如说：帮助-&gt;关于），你再点一次的话，它不会再弹出一个窗口。</li>
+<li>类比：<br>  计划生育，让你只能生一个孩子。</li>
 </ul>
-<p><img src="http://www.myexception.cn/img/2012/09/10/111548767.jpg" alt="ClassAdapter"></p>
-<h2 id="u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u548CAdaptee_u7684_u65B9_u6CD5_uFF0C_u6240_u4EE5_u53EF_u4EE5_u76F4_u63A5_u5728_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u7684_u8F6C_u6362"><a href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u548CAdaptee_u7684_u65B9_u6CD5_uFF0C_u6240_u4EE5_u53EF_u4EE5_u76F4_u63A5_u5728_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u7684_u8F6C_u6362" class="headerlink" title="<strong>适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换</strong>"></a><strong>适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换</strong></h2><h2 id="2_u3001_u5BF9_u8C61_u9002_u914D_u5668"><a href="#2_u3001_u5BF9_u8C61_u9002_u914D_u5668" class="headerlink" title="2、对象适配器"></a>2、对象适配器</h2><p><img src="http://www.myexception.cn/img/2012/06/25/1359217096.png" alt="ObjectAdapter"></p>
-<h2 id="u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u7684_u65B9_u6CD5_uFF0C_u5E76_u4E14_u542B_u6709Adaptee_u7684_u5BF9_u8C61_uFF08_u6216_u8005_u6307_u9488_uFF09_u3002_u53EF_u4EE5_u518D_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u8F6C_u6362"><a href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u7684_u65B9_u6CD5_uFF0C_u5E76_u4E14_u542B_u6709Adaptee_u7684_u5BF9_u8C61_uFF08_u6216_u8005_u6307_u9488_uFF09_u3002_u53EF_u4EE5_u518D_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u8F6C_u6362" class="headerlink" title="<strong>适配器类继承了Target的方法，并且含有Adaptee的对象（或者指针）。可以再方法中调用Adaptee的方法，实现接口转换</strong>"></a><strong>适配器类继承了Target的方法，并且含有Adaptee的对象（或者指针）。可以再方法中调用Adaptee的方法，实现接口转换</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Adapter.cpp</span><br><span class="line"> *</span><br><span class="line"> *  Created on: 2016年3月11日 下午4:48:49</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Target &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我要20V的电压"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> Adaptee &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">SpecialMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我这里提供10V的电压"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//类适配器</span></span><br><span class="line"><span class="keyword">class</span> ClsAdapter: <span class="keyword">public</span> Target, <span class="keyword">private</span> Adaptee &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"类适配器"</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"你要20V，我给你20V"</span> &lt;&lt; endl;</span><br><span class="line">		SpecialMethod();</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我给你转换为20V"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象适配器</span></span><br><span class="line"><span class="keyword">class</span> ObjAdapter: <span class="keyword">public</span> Target &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Adaptee ptr;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">/*ObjAdapter(Adaptee ptr)&#123;</span><br><span class="line">	 this-&gt;ptr = ptr;</span><br><span class="line">	 &#125;*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"对象适配器"</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"你要20V，我给你20V"</span> &lt;&lt; endl;</span><br><span class="line">		ptr.SpecialMethod();</span><br><span class="line">		<span class="comment">//ptr-&gt;SpecialMethod();</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我给你转换为20V"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//类适配器</span></span><br><span class="line">	ClsAdapter cls;</span><br><span class="line">	cls.Method();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"=================="</span> &lt;&lt; endl;</span><br><span class="line">	<span class="comment">//对象适配器</span></span><br><span class="line">	ObjAdapter obj;</span><br><span class="line">	obj.Method();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_3Ajoy_3A_uFF1A"><a href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_3Ajoy_3A_uFF1A" class="headerlink" title="专业一点就是:joy:："></a>专业一点就是:joy:：</h2><blockquote>
+<ul>
+<li>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+</ul>
+</blockquote>
+<p><img src="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png" alt="Singleton"></p>
+<h2 id="u61D2_u6C49"><a href="#u61D2_u6C49" class="headerlink" title="懒汉"></a>懒汉</h2><blockquote>
+<ul>
+<li><strong>顾名思义：需要创建时才创建对象</strong></li>
+</ul>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Singleton.cpp</span><br><span class="line"> *	单例模式</span><br><span class="line"> *  Created on: 2016年3月11日 下午3:38:31</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 懒汉：需要创建时才创建对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">class</span> Singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton * instance;</span><br><span class="line">	Singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton * <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (instance == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      <span class="comment">//懒汉，进入函数后判断是否创建，如果未创建则创建对象</span></span><br><span class="line">			instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里不创建</span></span><br><span class="line">Singleton* Singleton::instance = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//懒汉</span></span><br><span class="line">	Singleton * s1 = Singleton::GetInstance();</span><br><span class="line">	Singleton * s2 = Singleton::GetInstance();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u997F_u6C49"><a href="#u997F_u6C49" class="headerlink" title="饿汉"></a>饿汉</h2><blockquote>
+<ul>
+<li><strong>顾名思义：从一开始加载的时候就创建对象</strong></li>
+</ul>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * singleton2.cpp</span><br><span class="line"> *	单例模式  饿汉</span><br><span class="line"> *  Created on: 2016年3月11日 下午4:24:03</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">class</span> singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> singleton* instance;</span><br><span class="line">	singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//饿汉，直接返回已经创建好的对象</span></span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里直接创建</span></span><br><span class="line">singleton* singleton::instance = <span class="keyword">new</span> singleton();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	singleton* s1 = singleton::GetInstace();</span><br><span class="line">	singleton* s2 = singleton::GetInstace();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </span>
       
     </div>
@@ -295,17 +339,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/13/设计模式（三）/" rel="next" title="设计模式（三）">
-                <i class="fa fa-chevron-left"></i> 设计模式（三）
+              <a href="/2016/03/13/设计模式（四）/" rel="next" title="设计模式（四）">
+                <i class="fa fa-chevron-left"></i> 设计模式（四）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/设计模式（五）/" rel="prev" title="设计模式（五）">
-                设计模式（五） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -332,8 +372,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/13/设计模式（四）/"
-           data-title="设计模式（四）" data-url="http://crazyhoney.github.io/2016/03/13/设计模式（四）/">
+      <div class="ds-thread" data-thread-key="2016/03/14/设计模式（五）/"
+           data-title="设计模式（五）" data-url="http://crazyhoney.github.io/2016/03/14/设计模式（五）/">
       </div>
     
   </div>
@@ -440,7 +480,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u9002_u914D_u5668_u6A21_u5F0F"><span class="nav-number">1.</span> <span class="nav-text">适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">简单的说就是(๑•ᴗ•๑)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_u2299_u02CD_u2299_29_uFF1A"><span class="nav-number">3.</span> <span class="nav-text">专业一点就是(⊙ˍ⊙)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1_u3001_u7C7B_u9002_u914D_u5668"><span class="nav-number">4.</span> <span class="nav-text">1、类适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u548CAdaptee_u7684_u65B9_u6CD5_uFF0C_u6240_u4EE5_u53EF_u4EE5_u76F4_u63A5_u5728_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u7684_u8F6C_u6362"><span class="nav-number">5.</span> <span class="nav-text">适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_u3001_u5BF9_u8C61_u9002_u914D_u5668"><span class="nav-number">6.</span> <span class="nav-text">2、对象适配器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u7684_u65B9_u6CD5_uFF0C_u5E76_u4E14_u542B_u6709Adaptee_u7684_u5BF9_u8C61_uFF08_u6216_u8005_u6307_u9488_uFF09_u3002_u53EF_u4EE5_u518D_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u8F6C_u6362"><span class="nav-number">7.</span> <span class="nav-text">适配器类继承了Target的方法，并且含有Adaptee的对象（或者指针）。可以再方法中调用Adaptee的方法，实现接口转换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5355_u4F8B_u6A21_u5F0F"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_3Asmile_3A_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">简单的说就是:smile:：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_3Ajoy_3A_uFF1A"><span class="nav-number">3.</span> <span class="nav-text">专业一点就是:joy:：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u61D2_u6C49"><span class="nav-number">4.</span> <span class="nav-text">懒汉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u997F_u6C49"><span class="nav-number">5.</span> <span class="nav-text">饿汉</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

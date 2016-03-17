@@ -51,15 +51,30 @@
 
 
 
-<meta name="description" content="你在什么地方不重要,重要的是向着什么前进">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://crazyhoney.github.io/index.html">
+<meta name="description" content="join()操作：在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。相当于方法调用。
+yield()操作：当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。
+举例&amp;lt;(￣︶￣)&amp;gt;:
+你在厕所坑位前准备上厕所，来了一个人急的马上要拉到裤子上了。你调用一下yield(),说：“你先来吧，我先让你上厕所！”
+sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java线程复习">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/17/Java线程复习/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="你在什么地方不重要,重要的是向着什么前进">
+<meta property="og:description" content="join()操作：在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。相当于方法调用。
+yield()操作：当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。
+举例&amp;lt;(￣︶￣)&amp;gt;:
+你在厕所坑位前准备上厕所，来了一个人急的马上要拉到裤子上了。你调用一下yield(),说：“你先来吧，我先让你上厕所！”
+sync">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f1z1sa3pybj205j09t0u7.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/75544e9fjw1f1yyyt6bkbj206g0510t8.jpg">
+<meta property="og:updated_time" content="2016-03-17T03:08:25.522Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="你在什么地方不重要,重要的是向着什么前进">
+<meta name="twitter:title" content="Java线程复习">
+<meta name="twitter:description" content="join()操作：在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。相当于方法调用。
+yield()操作：当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。
+举例&amp;lt;(￣︶￣)&amp;gt;:
+你在厕所坑位前准备上厕所，来了一个人急的马上要拉到裤子上了。你调用一下yield(),说：“你先来吧，我先让你上厕所！”
+sync">
 
 
 
@@ -71,7 +86,7 @@
   };
 </script>
 
-  <title> Hexo </title>
+  <title> Java线程复习 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -92,9 +107,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,24 +204,9 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <section id="posts" class="posts-expand">
 
+  <div id="posts" class="posts-expand">
     
-
-    
-    
-      
-      
-        
-        
-        
-      
-
-      
-    
-
-    
-      
 
   
   
@@ -228,10 +226,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/03/17/Java线程复习/" itemprop="url">
-                  Java线程复习
-                </a>
+                Java线程复习
               
             
           </h1>
@@ -271,10 +266,7 @@
       
 
       
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="join_28_29_u64CD_u4F5C_uFF1A"><a href="#join_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="join()操作："></a>join()操作：</h2><p>在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。<br><strong>相当于方法调用</strong>。</p>
+        <span itemprop="articleBody"><h2 id="join_28_29_u64CD_u4F5C_uFF1A"><a href="#join_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="join()操作："></a>join()操作：</h2><p>在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。<br><strong>相当于方法调用</strong>。</p>
 <h2 id="yield_28_29_u64CD_u4F5C_uFF1A"><a href="#yield_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="yield()操作："></a>yield()操作：</h2><p>当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。</p>
 <p>举例&lt;(￣︶￣)&gt;:</p>
 <p>你在厕所坑位前准备上厕所，来了一个人急的马上要拉到裤子上了。你调用一下yield(),说：“你先来吧，我先让你上厕所！”</p>
@@ -330,10 +322,7 @@
 <blockquote>
 <p>*　wait()是Object类的方法，wait()执行时，（必须是在锁定对象里调用wait）别的线程可以访问被锁定对象。</p>
 </blockquote>
-
-            
-          </span>
-        
+</span>
       
     </div>
 
@@ -341,20 +330,32 @@
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/14/设计模式（六）/" rel="next" title="设计模式（六）">
+                <i class="fa fa-chevron-left"></i> 设计模式（六）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
 
-  </section>
-
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
         </div>
@@ -363,6 +364,14 @@
 
 
         
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/17/Java线程复习/"
+           data-title="Java线程复习" data-url="http://crazyhoney.github.io/2016/03/17/Java线程复习/">
+      </div>
+    
+  </div>
+
 
       </div>
 
@@ -383,8 +392,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" src="http://ww1.sinaimg.cn/mw690/75544e9fjw8ey9iw3vxz2j20ku0kuq40.jpg" alt="wayne Hao" itemprop="image"/>
           <p class="site-author-name" itemprop="name">wayne Hao</p>
@@ -446,6 +464,23 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#join_28_29_u64CD_u4F5C_uFF1A"><span class="nav-number">1.</span> <span class="nav-text">join()操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yield_28_29_u64CD_u4F5C_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">yield()操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized_u64CD_u4F5C"><span class="nav-number">3.</span> <span class="nav-text">synchronized操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized_u65B9_u6CD5_uFF1A"><span class="nav-number">3.1.</span> <span class="nav-text">synchronized方法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7ED3_u679C_uFF1A"><span class="nav-number">4.</span> <span class="nav-text">结果：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized_u5757_uFF1A"><span class="nav-number">4.1.</span> <span class="nav-text">synchronized块：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep_28_29_u64CD_u4F5C"><span class="nav-number">5.</span> <span class="nav-text">sleep()操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F46_u662F"><span class="nav-number">5.1.</span> <span class="nav-text">但是</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wait_28_29_u64CD_u4F5C"><span class="nav-number">6.</span> <span class="nav-text">wait()操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5F3A_u8C03_uFF1A"><span class="nav-number">7.</span> <span class="nav-text">强调：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notify_28_29_u64CD_u4F5C"><span class="nav-number">8.</span> <span class="nav-text">notify()操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notifyAll_28_29_u64CD_u4F5C"><span class="nav-number">9.</span> <span class="nav-text">notifyAll()操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EE5_u4E0B_u662F_u5F15_u7528_u4E00_u4E2A_u4EC1_u5144_u5728_u767E_u5EA6_u4E0A_u7684_u56DE_u7B54_uFF0C_u89C9_u5F97_u5F88_u6709_u9053_u7406_uFF1A"><span class="nav-number">9.1.</span> <span class="nav-text">以下是引用一个仁兄在百度上的回答，觉得很有道理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep_28_29_u548Cwait_28_29_u7684_u91CD_u5927_u533A_u522B_uFF1A"><span class="nav-number">10.</span> <span class="nav-text">sleep()和wait()的重大区别：</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
       
 
     </div>
@@ -533,6 +568,167 @@
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 

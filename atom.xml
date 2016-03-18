@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-03-17T03:08:25.522Z</updated>
+  <updated>2016-03-17T09:35:08.076Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -15,11 +15,76 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[SQL和数据库设计]]></title>
+    <link href="http://crazyhoney.github.io/2016/03/17/SQL%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://crazyhoney.github.io/2016/03/17/SQL和数据库设计/</id>
+    <published>2016-03-17T07:56:41.000Z</published>
+    <updated>2016-03-17T09:35:08.076Z</updated>
+    <content type="html"><![CDATA[<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>(从mysql入手)<br>先数据库，再表，再有数据</p>
+<h2 id="u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406"><a href="#u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406" class="headerlink" title="一、数据库管理"></a>一、数据库管理</h2><h3 id="1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93"><a href="#1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93" class="headerlink" title="1、查询所有数据库"></a>1、查询所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">databases</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2_u3001_u521B_u5EFA_u6570_u636E_u5E93"><a href="#2_u3001_u521B_u5EFA_u6570_u636E_u5E93" class="headerlink" title="2、创建数据库"></a>2、创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称      <span class="comment">--使用默认字符集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8</span></span><br></pre></td></tr></table></figure>
+<h3 id="3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6"><a href="#3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6" class="headerlink" title="3、查看数据库的默认字符集"></a>3、查看数据库的默认字符集</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> 数据库名称</span></span><br></pre></td></tr></table></figure>
+<h3 id="4_u3001_u5220_u9664_u6570_u636E_u5E93"><a href="#4_u3001_u5220_u9664_u6570_u636E_u5E93" class="headerlink" title="4、删除数据库"></a>4、删除数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">database</span> 数据库名称</span></span><br></pre></td></tr></table></figure>
+<h3 id="5_u3001_u4FEE_u6539_u6570_u636E_u5E93_u5B57_u7B26_u96C6_u683C_u5F0F"><a href="#5_u3001_u4FEE_u6539_u6570_u636E_u5E93_u5B57_u7B26_u96C6_u683C_u5F0F" class="headerlink" title="5、修改数据库字符集格式"></a>5、修改数据库字符集格式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> gbk</span></span><br></pre></td></tr></table></figure>
+<h2 id="u4E8C_u3001_u8868_u7BA1_u7406"><a href="#u4E8C_u3001_u8868_u7BA1_u7406" class="headerlink" title="二、表管理"></a>二、表管理</h2><h3 id="1_u3001_u67E5_u770B_u6240_u6709_u8868"><a href="#1_u3001_u67E5_u770B_u6240_u6709_u8868" class="headerlink" title="1、查看所有表"></a>1、查看所有表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">tables</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2_u3001_u521B_u5EFA_u8868"><a href="#2_u3001_u521B_u5EFA_u8868" class="headerlink" title="2、创建表"></a>2、创建表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> 表名称(</span><br><span class="line">  字段名 字段类型，</span><br><span class="line">  字段名 字段类型(类型长度)</span><br><span class="line">  ...</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="3_u3001_u67E5_u770B_u8868_u7ED3_u6784"><a href="#3_u3001_u67E5_u770B_u8868_u7ED3_u6784" class="headerlink" title="3、查看表结构"></a>3、查看表结构</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 表名</span><br></pre></td></tr></table></figure>
+<h3 id="4_u3001_u5220_u9664_u8868"><a href="#4_u3001_u5220_u9664_u8868" class="headerlink" title="4、删除表"></a>4、删除表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">table</span> 表名</span></span><br></pre></td></tr></table></figure>
+<h3 id="5_u3001_u4FEE_u6539_u8868"><a href="#5_u3001_u4FEE_u6539_u8868" class="headerlink" title="5、修改表"></a>5、修改表</h3><h4 id="281_29_u3001_u6DFB_u52A0_u5B57_u6BB5"><a href="#281_29_u3001_u6DFB_u52A0_u5B57_u6BB5" class="headerlink" title="(1)、添加字段"></a>(1)、添加字段</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">column</span> 字段名 字段类型(类型长度)</span></span><br></pre></td></tr></table></figure>
+<h4 id="282_29_u3001_u5220_u9664_u5B57_u6BB5"><a href="#282_29_u3001_u5220_u9664_u5B57_u6BB5" class="headerlink" title="(2)、删除字段"></a>(2)、删除字段</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">column</span> 字段名</span></span><br></pre></td></tr></table></figure>
+<h4 id="284_29_u3001_u4FEE_u6539_u5B57_u6BB5_u7C7B_u578B"><a href="#284_29_u3001_u4FEE_u6539_u5B57_u6BB5_u7C7B_u578B" class="headerlink" title="(4)、修改字段类型"></a>(4)、修改字段类型</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">modify</span> <span class="keyword">column</span> 字段名 字段类型（类型长度）</span></span><br></pre></td></tr></table></figure>
+<h4 id="285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0"><a href="#285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0" class="headerlink" title="(5)、修改字段名称"></a>(5)、修改字段名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">change</span> <span class="keyword">column</span> 字段名 字段类型（类型长度）</span></span><br></pre></td></tr></table></figure>
+<h4 id="286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0"><a href="#286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0" class="headerlink" title="(6)、修改表名称"></a>(6)、修改表名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">rename</span> <span class="keyword">to</span> 新表名</span></span><br></pre></td></tr></table></figure>
+<h3 id="6_u3001_u589E_u5220_u6539_u6570_u636E"><a href="#6_u3001_u589E_u5220_u6539_u6570_u636E" class="headerlink" title="6、增删改数据"></a>6、增删改数据</h3><h2 id="u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684"><a href="#u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684" class="headerlink" title="以后有时间再写，干不动了。先写数据库设计的"></a>以后有时间再写，干不动了。先写数据库设计的</h2><hr>
+<h1 id="u6570_u636E_u5E93_u8BBE_u8BA1"><a href="#u6570_u636E_u5E93_u8BBE_u8BA1" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>键：一个属性或多个属性组合<br>候选键：用来唯一标识一条元组。（一个关系可以有多个）<br>主键：所有候选键拿出来用的键。（一个关系只能有一个）</p>
+<h2 id="u4E00_u3001_u8303_u5F0F"><a href="#u4E00_u3001_u8303_u5F0F" class="headerlink" title="一、范式"></a>一、范式</h2><h3 id="u7B2C_u4E00_u8303_u5F0F_281NF_29"><a href="#u7B2C_u4E00_u8303_u5F0F_281NF_29" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h3><p>条件：关系R的每个属性的值域是不可分割的值。<br>即：要求每个字段必须是不可分割的独立单元</p>
+<h3 id="u7B2C_u4E8C_u8303_u5F0F_282NF_29"><a href="#u7B2C_u4E8C_u8303_u5F0F_282NF_29" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>非主属性</strong>都完全依赖于候选键（这种依赖包括传递的依赖）<br>A-&gt;B : A决定B，B依赖A<br>A-&gt;B B-&gt;C : A决定C。C依赖A（B传递了C对A的依赖）</p>
+<h3 id="u7B2C_u4E09_u8303_u5F0F_283NF_29"><a href="#u7B2C_u4E09_u8303_u5F0F_283NF_29" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h3><p>条件一：关系R是2NF<br>条件二：关系R的每个<strong>非主属性</strong>都不传递对候选键的依赖。<br>即：每个非主属性都依赖于某一候选键（这种依赖不包括传递的依赖）</p>
+<h3 id="BSCNF_u8303_u5F0F"><a href="#BSCNF_u8303_u5F0F" class="headerlink" title="BSCNF范式"></a>BSCNF范式</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>属性</strong>都不传递对候选键的依赖。</p>
+<p>理解：3NF说的是每个非主属性，而BCNF范式说的是每个属性。<br>因为主属性（主键）可以是属性的组合。所以存在以下情况：<br>存在关系R: (A,B)-&gt;B B-&gt;C  (A,B)是关系的候选键也是主键，B传递了C对于候选键的依赖。<br>所以R不是BCNF。<br>以后再来这个补充例子</p>
+<p>2016-03-17 17：03</p>
+<hr>
+<h2 id="u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB"><a href="#u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB" class="headerlink" title="二、关系的对应联系"></a>二、关系的对应联系</h2><h3 id="1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29"><a href="#1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29" class="headerlink" title="1、一对一联系(1:1)"></a>1、一对一联系(1:1)</h3><p>一个关系的一条元组唯一对另一个关系的一条元组。</p>
+<blockquote>
+<ul>
+<li>两个关系的联系实质是在看两个关系的同名属性上的值的对应联系。</li>
+</ul>
+</blockquote>
+<p><strong>两个关系通过候选键属性进行关联</strong></p>
+<h3 id="2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29"><a href="#2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29" class="headerlink" title="2、一对多联系(1:n)"></a>2、一对多联系(1:n)</h3><p>一个关系的一条元组对应另一个关系的多条元组<br>条件：1）两个关系有同名属性<br>      2）一方的同名属性一定是候选键<br>         多方的同名属性一定不是候选键（是外键）<br>外键：连个关系在关联时，多方的同名属性。<br>    作用：保证两个关系的关联。</p>
+<h3 id="3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29"><a href="#3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29" class="headerlink" title="3、多对多联系(m:n)"></a>3、多对多联系(m:n)</h3><blockquote>
+<p><em>　两个关系必然没有同名属性，且不可将一方主键加到另一方作外键。
+</em>　两个关系分别向对方是一对多。</p>
+</blockquote>
+<p><strong>解决多对多联系：</strong></p>
+<blockquote>
+<ul>
+<li>产生第三方联系表。</li>
+</ul>
+</blockquote>
+<p>第三方表：</p>
+<p>a)包含两个多方候选键（主键）</p>
+<p>b)主键：包含两个多方表的主键</p>
+<p>c)外键：两个，分别是两个多方表的主键</p>
+<blockquote>
+<ul>
+<li>将一个多对多(m:n)——&gt;两个一对多(1:n)</li>
+</ul>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>(从mysql入手)<br>先数据库，再表，再有数据</p>
+<h2 id="u4E00_u3001_u6570_u636E_u5E]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Java线程复习]]></title>
     <link href="http://crazyhoney.github.io/2016/03/17/Java%E7%BA%BF%E7%A8%8B%E5%A4%8D%E4%B9%A0/"/>
     <id>http://crazyhoney.github.io/2016/03/17/Java线程复习/</id>
     <published>2016-03-17T03:06:14.000Z</published>
-    <updated>2016-03-17T03:08:25.522Z</updated>
+    <updated>2016-03-17T09:47:59.497Z</updated>
     <content type="html"><![CDATA[<h2 id="join_28_29_u64CD_u4F5C_uFF1A"><a href="#join_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="join()操作："></a>join()操作：</h2><p>在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。<br><strong>相当于方法调用</strong>。</p>
 <h2 id="yield_28_29_u64CD_u4F5C_uFF1A"><a href="#yield_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="yield()操作："></a>yield()操作：</h2><p>当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。</p>
 <p>举例&lt;(￣︶￣)&gt;:</p>
@@ -76,6 +141,8 @@
 <blockquote>
 <p>*　wait()是Object类的方法，wait()执行时，（必须是在锁定对象里调用wait）别的线程可以访问被锁定对象。</p>
 </blockquote>
+<p>场景应用：<br>对于一个数据库文件，读操作是可以让多线程同时访问的(读一下又不会怀孕(๑•ᴗ•๑))，但是写操作应该是要加锁的，否则就会出现数据不一致等问题。</p>
+<p>类比：大街上看见一美女，看操作是可以让很多人(多线程)同时看的(又不犯法)，但是搭讪操作应该是要加锁的，否则你让美女跟哪个人说话，美女不就乱套了吗？<br>P.S 当然更不能摸。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<h2 id="join_28_29_u64CD_u4F5C_uFF1A"><a href="#join_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="join()操作："></a>join()操作：</h2><p>在主程序]]>

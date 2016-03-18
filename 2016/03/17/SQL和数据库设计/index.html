@@ -1,0 +1,735 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="SQL(从mysql入手)先数据库，再表，再有数据
+一、数据库管理1、查询所有数据库1show databases
+2、创建数据库123create database 数据库名称      --使用默认字符集create database 数据库名称 default character set utf8
+3、查看数据库的默认字符集1show create database 数据库名称
+4、删除数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL和数据库设计">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/17/SQL和数据库设计/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SQL(从mysql入手)先数据库，再表，再有数据
+一、数据库管理1、查询所有数据库1show databases
+2、创建数据库123create database 数据库名称      --使用默认字符集create database 数据库名称 default character set utf8
+3、查看数据库的默认字符集1show create database 数据库名称
+4、删除数据">
+<meta property="og:updated_time" content="2016-03-17T09:35:08.076Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL和数据库设计">
+<meta name="twitter:description" content="SQL(从mysql入手)先数据库，再表，再有数据
+一、数据库管理1、查询所有数据库1show databases
+2、创建数据库123create database 数据库名称      --使用默认字符集create database 数据库名称 default character set utf8
+3、查看数据库的默认字符集1show create database 数据库名称
+4、删除数据">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> SQL和数据库设计 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL和数据库设计
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T15:56:41+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/SQL和数据库设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/SQL和数据库设计/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>(从mysql入手)<br>先数据库，再表，再有数据</p>
+<h2 id="u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406"><a href="#u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406" class="headerlink" title="一、数据库管理"></a>一、数据库管理</h2><h3 id="1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93"><a href="#1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93" class="headerlink" title="1、查询所有数据库"></a>1、查询所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">databases</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2_u3001_u521B_u5EFA_u6570_u636E_u5E93"><a href="#2_u3001_u521B_u5EFA_u6570_u636E_u5E93" class="headerlink" title="2、创建数据库"></a>2、创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称      <span class="comment">--使用默认字符集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8</span></span><br></pre></td></tr></table></figure>
+<h3 id="3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6"><a href="#3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6" class="headerlink" title="3、查看数据库的默认字符集"></a>3、查看数据库的默认字符集</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> 数据库名称</span></span><br></pre></td></tr></table></figure>
+<h3 id="4_u3001_u5220_u9664_u6570_u636E_u5E93"><a href="#4_u3001_u5220_u9664_u6570_u636E_u5E93" class="headerlink" title="4、删除数据库"></a>4、删除数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">database</span> 数据库名称</span></span><br></pre></td></tr></table></figure>
+<h3 id="5_u3001_u4FEE_u6539_u6570_u636E_u5E93_u5B57_u7B26_u96C6_u683C_u5F0F"><a href="#5_u3001_u4FEE_u6539_u6570_u636E_u5E93_u5B57_u7B26_u96C6_u683C_u5F0F" class="headerlink" title="5、修改数据库字符集格式"></a>5、修改数据库字符集格式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> gbk</span></span><br></pre></td></tr></table></figure>
+<h2 id="u4E8C_u3001_u8868_u7BA1_u7406"><a href="#u4E8C_u3001_u8868_u7BA1_u7406" class="headerlink" title="二、表管理"></a>二、表管理</h2><h3 id="1_u3001_u67E5_u770B_u6240_u6709_u8868"><a href="#1_u3001_u67E5_u770B_u6240_u6709_u8868" class="headerlink" title="1、查看所有表"></a>1、查看所有表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">tables</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2_u3001_u521B_u5EFA_u8868"><a href="#2_u3001_u521B_u5EFA_u8868" class="headerlink" title="2、创建表"></a>2、创建表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> 表名称(</span><br><span class="line">  字段名 字段类型，</span><br><span class="line">  字段名 字段类型(类型长度)</span><br><span class="line">  ...</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="3_u3001_u67E5_u770B_u8868_u7ED3_u6784"><a href="#3_u3001_u67E5_u770B_u8868_u7ED3_u6784" class="headerlink" title="3、查看表结构"></a>3、查看表结构</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 表名</span><br></pre></td></tr></table></figure>
+<h3 id="4_u3001_u5220_u9664_u8868"><a href="#4_u3001_u5220_u9664_u8868" class="headerlink" title="4、删除表"></a>4、删除表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">table</span> 表名</span></span><br></pre></td></tr></table></figure>
+<h3 id="5_u3001_u4FEE_u6539_u8868"><a href="#5_u3001_u4FEE_u6539_u8868" class="headerlink" title="5、修改表"></a>5、修改表</h3><h4 id="281_29_u3001_u6DFB_u52A0_u5B57_u6BB5"><a href="#281_29_u3001_u6DFB_u52A0_u5B57_u6BB5" class="headerlink" title="(1)、添加字段"></a>(1)、添加字段</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">column</span> 字段名 字段类型(类型长度)</span></span><br></pre></td></tr></table></figure>
+<h4 id="282_29_u3001_u5220_u9664_u5B57_u6BB5"><a href="#282_29_u3001_u5220_u9664_u5B57_u6BB5" class="headerlink" title="(2)、删除字段"></a>(2)、删除字段</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">column</span> 字段名</span></span><br></pre></td></tr></table></figure>
+<h4 id="284_29_u3001_u4FEE_u6539_u5B57_u6BB5_u7C7B_u578B"><a href="#284_29_u3001_u4FEE_u6539_u5B57_u6BB5_u7C7B_u578B" class="headerlink" title="(4)、修改字段类型"></a>(4)、修改字段类型</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">modify</span> <span class="keyword">column</span> 字段名 字段类型（类型长度）</span></span><br></pre></td></tr></table></figure>
+<h4 id="285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0"><a href="#285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0" class="headerlink" title="(5)、修改字段名称"></a>(5)、修改字段名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">change</span> <span class="keyword">column</span> 字段名 字段类型（类型长度）</span></span><br></pre></td></tr></table></figure>
+<h4 id="286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0"><a href="#286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0" class="headerlink" title="(6)、修改表名称"></a>(6)、修改表名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">rename</span> <span class="keyword">to</span> 新表名</span></span><br></pre></td></tr></table></figure>
+<h3 id="6_u3001_u589E_u5220_u6539_u6570_u636E"><a href="#6_u3001_u589E_u5220_u6539_u6570_u636E" class="headerlink" title="6、增删改数据"></a>6、增删改数据</h3><h2 id="u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684"><a href="#u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684" class="headerlink" title="以后有时间再写，干不动了。先写数据库设计的"></a>以后有时间再写，干不动了。先写数据库设计的</h2><hr>
+<h1 id="u6570_u636E_u5E93_u8BBE_u8BA1"><a href="#u6570_u636E_u5E93_u8BBE_u8BA1" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>键：一个属性或多个属性组合<br>候选键：用来唯一标识一条元组。（一个关系可以有多个）<br>主键：所有候选键拿出来用的键。（一个关系只能有一个）</p>
+<h2 id="u4E00_u3001_u8303_u5F0F"><a href="#u4E00_u3001_u8303_u5F0F" class="headerlink" title="一、范式"></a>一、范式</h2><h3 id="u7B2C_u4E00_u8303_u5F0F_281NF_29"><a href="#u7B2C_u4E00_u8303_u5F0F_281NF_29" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h3><p>条件：关系R的每个属性的值域是不可分割的值。<br>即：要求每个字段必须是不可分割的独立单元</p>
+<h3 id="u7B2C_u4E8C_u8303_u5F0F_282NF_29"><a href="#u7B2C_u4E8C_u8303_u5F0F_282NF_29" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>非主属性</strong>都完全依赖于候选键（这种依赖包括传递的依赖）<br>A-&gt;B : A决定B，B依赖A<br>A-&gt;B B-&gt;C : A决定C。C依赖A（B传递了C对A的依赖）</p>
+<h3 id="u7B2C_u4E09_u8303_u5F0F_283NF_29"><a href="#u7B2C_u4E09_u8303_u5F0F_283NF_29" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h3><p>条件一：关系R是2NF<br>条件二：关系R的每个<strong>非主属性</strong>都不传递对候选键的依赖。<br>即：每个非主属性都依赖于某一候选键（这种依赖不包括传递的依赖）</p>
+<h3 id="BSCNF_u8303_u5F0F"><a href="#BSCNF_u8303_u5F0F" class="headerlink" title="BSCNF范式"></a>BSCNF范式</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>属性</strong>都不传递对候选键的依赖。</p>
+<p>理解：3NF说的是每个非主属性，而BCNF范式说的是每个属性。<br>因为主属性（主键）可以是属性的组合。所以存在以下情况：<br>存在关系R: (A,B)-&gt;B B-&gt;C  (A,B)是关系的候选键也是主键，B传递了C对于候选键的依赖。<br>所以R不是BCNF。<br>以后再来这个补充例子</p>
+<p>2016-03-17 17：03</p>
+<hr>
+<h2 id="u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB"><a href="#u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB" class="headerlink" title="二、关系的对应联系"></a>二、关系的对应联系</h2><h3 id="1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29"><a href="#1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29" class="headerlink" title="1、一对一联系(1:1)"></a>1、一对一联系(1:1)</h3><p>一个关系的一条元组唯一对另一个关系的一条元组。</p>
+<blockquote>
+<ul>
+<li>两个关系的联系实质是在看两个关系的同名属性上的值的对应联系。</li>
+</ul>
+</blockquote>
+<p><strong>两个关系通过候选键属性进行关联</strong></p>
+<h3 id="2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29"><a href="#2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29" class="headerlink" title="2、一对多联系(1:n)"></a>2、一对多联系(1:n)</h3><p>一个关系的一条元组对应另一个关系的多条元组<br>条件：1）两个关系有同名属性<br>      2）一方的同名属性一定是候选键<br>         多方的同名属性一定不是候选键（是外键）<br>外键：连个关系在关联时，多方的同名属性。<br>    作用：保证两个关系的关联。</p>
+<h3 id="3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29"><a href="#3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29" class="headerlink" title="3、多对多联系(m:n)"></a>3、多对多联系(m:n)</h3><blockquote>
+<p><em>　两个关系必然没有同名属性，且不可将一方主键加到另一方作外键。
+</em>　两个关系分别向对方是一对多。</p>
+</blockquote>
+<p><strong>解决多对多联系：</strong></p>
+<blockquote>
+<ul>
+<li>产生第三方联系表。</li>
+</ul>
+</blockquote>
+<p>第三方表：</p>
+<p>a)包含两个多方候选键（主键）</p>
+<p>b)主键：包含两个多方表的主键</p>
+<p>c)外键：两个，分别是两个多方表的主键</p>
+<blockquote>
+<ul>
+<li>将一个多对多(m:n)——&gt;两个一对多(1:n)</li>
+</ul>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/17/Java线程复习/" rel="next" title="Java线程复习">
+                <i class="fa fa-chevron-left"></i> Java线程复习
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/17/SQL和数据库设计/"
+           data-title="SQL和数据库设计" data-url="http://crazyhoney.github.io/2016/03/17/SQL和数据库设计/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://ww1.sinaimg.cn/mw690/75544e9fjw8ey9iw3vxz2j20ku0kuq40.jpg" alt="wayne Hao" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">wayne Hao</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">你在什么地方不重要,重要的是向着什么前进</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyhoney" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.baidu.com" target="_blank">baidu</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL"><span class="nav-number">1.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406"><span class="nav-number">1.1.</span> <span class="nav-text">一、数据库管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、查询所有数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2_u3001_u521B_u5EFA_u6570_u636E_u5E93"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、查看数据库的默认字符集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4_u3001_u5220_u9664_u6570_u636E_u5E93"><span class="nav-number">1.1.4.</span> <span class="nav-text">4、删除数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5_u3001_u4FEE_u6539_u6570_u636E_u5E93_u5B57_u7B26_u96C6_u683C_u5F0F"><span class="nav-number">1.1.5.</span> <span class="nav-text">5、修改数据库字符集格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u3001_u8868_u7BA1_u7406"><span class="nav-number">1.2.</span> <span class="nav-text">二、表管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1_u3001_u67E5_u770B_u6240_u6709_u8868"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、查看所有表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2_u3001_u521B_u5EFA_u8868"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3_u3001_u67E5_u770B_u8868_u7ED3_u6784"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、查看表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4_u3001_u5220_u9664_u8868"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、删除表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5_u3001_u4FEE_u6539_u8868"><span class="nav-number">1.2.5.</span> <span class="nav-text">5、修改表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#281_29_u3001_u6DFB_u52A0_u5B57_u6BB5"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">(1)、添加字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#282_29_u3001_u5220_u9664_u5B57_u6BB5"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">(2)、删除字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#284_29_u3001_u4FEE_u6539_u5B57_u6BB5_u7C7B_u578B"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">(4)、修改字段类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">(5)、修改字段名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0"><span class="nav-number">1.2.5.5.</span> <span class="nav-text">(6)、修改表名称</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6_u3001_u589E_u5220_u6539_u6570_u636E"><span class="nav-number">1.2.6.</span> <span class="nav-text">6、增删改数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684"><span class="nav-number">1.3.</span> <span class="nav-text">以后有时间再写，干不动了。先写数据库设计的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u6570_u636E_u5E93_u8BBE_u8BA1"><span class="nav-number">2.</span> <span class="nav-text">数据库设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E00_u3001_u8303_u5F0F"><span class="nav-number">2.1.</span> <span class="nav-text">一、范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E00_u8303_u5F0F_281NF_29"><span class="nav-number">2.1.1.</span> <span class="nav-text">第一范式(1NF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E8C_u8303_u5F0F_282NF_29"><span class="nav-number">2.1.2.</span> <span class="nav-text">第二范式(2NF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u7B2C_u4E09_u8303_u5F0F_283NF_29"><span class="nav-number">2.1.3.</span> <span class="nav-text">第三范式(3NF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSCNF_u8303_u5F0F"><span class="nav-number">2.1.4.</span> <span class="nav-text">BSCNF范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB"><span class="nav-number">2.2.</span> <span class="nav-text">二、关系的对应联系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、一对一联系(1:1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、一对多联系(1:n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29"><span class="nav-number">2.2.3.</span> <span class="nav-text">3、多对多联系(m:n)</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wayne Hao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"crazyhoneyman"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

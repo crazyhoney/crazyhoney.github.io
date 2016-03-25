@@ -51,62 +51,36 @@
 
 
 
-<meta name="description" content="单例模式简单的说就是(๑•ᴗ•๑)：
+<meta name="description" content="后面再来放截图2016-03-25场景一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。
+你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。
+假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。
+你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？
+解决方案：
 
-你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
-类比：  计划生育，让你只能生一个孩子。
-
-
-专业一点就是(￢_￢)：
-
-保证一个类仅有一个实例，并提供一个访问它的全局访问点。
-
-
-
-做法
-
-构造函数私有化（类外不可以调用构造函数，便不可以创建对象）
-有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿">
+*　自定义InputFormat类，来实现复杂分隔符的处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式（五）">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/14/设计模式（五）/index.html">
+<meta property="og:title" content="Hive自定义分隔符---自定义InputFormat">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/25/Hive自定义分隔符-自定义InputFormat/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="单例模式简单的说就是(๑•ᴗ•๑)：
+<meta property="og:description" content="后面再来放截图2016-03-25场景一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。
+你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。
+假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。
+你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？
+解决方案：
 
-你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
-类比：  计划生育，让你只能生一个孩子。
-
-
-专业一点就是(￢_￢)：
-
-保证一个类仅有一个实例，并提供一个访问它的全局访问点。
-
-
-
-做法
-
-构造函数私有化（类外不可以调用构造函数，便不可以创建对象）
-有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿">
-<meta property="og:image" content="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png">
-<meta property="og:updated_time" content="2016-03-14T08:19:27.239Z">
+*　自定义InputFormat类，来实现复杂分隔符的处理">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f28z84wa66j2064064747.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/e739bec3jw1egdj7nmzusj208c0bgt9d.jpg">
+<meta property="og:updated_time" content="2016-03-25T04:20:01.679Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式（五）">
-<meta name="twitter:description" content="单例模式简单的说就是(๑•ᴗ•๑)：
+<meta name="twitter:title" content="Hive自定义分隔符---自定义InputFormat">
+<meta name="twitter:description" content="后面再来放截图2016-03-25场景一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。
+你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。
+假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。
+你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？
+解决方案：
 
-你点一下一个按钮（比如说：帮助-&amp;gt;关于），你再点一次的话，它不会再弹出一个窗口。
-类比：  计划生育，让你只能生一个孩子。
-
-
-专业一点就是(￢_￢)：
-
-保证一个类仅有一个实例，并提供一个访问它的全局访问点。
-
-
-
-做法
-
-构造函数私有化（类外不可以调用构造函数，便不可以创建对象）
-有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿">
+*　自定义InputFormat类，来实现复杂分隔符的处理">
 
 
 
@@ -118,7 +92,7 @@
   };
 </script>
 
-  <title> 设计模式（五） | Hexo </title>
+  <title> Hive自定义分隔符---自定义InputFormat | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +232,7 @@
             
             
               
-                设计模式（五）
+                Hive自定义分隔符---自定义InputFormat
               
             
           </h1>
@@ -267,8 +241,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-14T12:46:43+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-03-25T10:23:04+08:00" content="2016-03-25">
+              2016-03-25
             </time>
           </span>
 
@@ -278,8 +252,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/设计模式（五）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/设计模式（五）/" itemprop="commentsCount"></span>
+                <a href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/25/Hive自定义分隔符-自定义InputFormat/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -298,37 +272,39 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A" class="headerlink" title="简单的说就是(๑•ᴗ•๑)："></a>简单的说就是(๑•ᴗ•๑)：</h2><blockquote>
-<ul>
-<li>你点一下一个按钮（比如说：帮助-&gt;关于），你再点一次的话，它不会再弹出一个窗口。</li>
-<li>类比：<br>  计划生育，让你只能生一个孩子。</li>
-</ul>
+        <span itemprop="articleBody"><h2 id="u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25"><a href="#u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25" class="headerlink" title="后面再来放截图2016-03-25"></a>后面再来放截图2016-03-25</h2><h1 id="u573A_u666F"><a href="#u573A_u666F" class="headerlink" title="场景"></a>场景</h1><p>一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。</p>
+<p>你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。</p>
+<p>假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。</p>
+<p>你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？</p>
+<p><strong>解决方案：</strong></p>
+<blockquote>
+<p>*　自定义InputFormat类，来实现复杂分隔符的处理</p>
 </blockquote>
-<h2 id="u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_uFFE2__uFFE2_29_uFF1A"><a href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_uFFE2__uFFE2_29_uFF1A" class="headerlink" title="专业一点就是(￢_￢)："></a>专业一点就是(￢_￢)：</h2><blockquote>
-<ul>
-<li>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
-</ul>
-</blockquote>
-<p><img src="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png" alt="Singleton"></p>
-<h2 id="u505A_u6CD5"><a href="#u505A_u6CD5" class="headerlink" title="做法"></a>做法</h2><blockquote>
-<ul>
-<li><strong>构造函数私有化（类外不可以调用构造函数，便不可以创建对象）</strong></li>
-<li><strong>有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿汉”）</strong></li>
-<li><strong>有一个公有的函数，可以返回一个该类对象（如果有的话直接返回，如果没有则创建）</strong></li>
-</ul>
-</blockquote>
-<h2 id="u61D2_u6C49"><a href="#u61D2_u6C49" class="headerlink" title="懒汉"></a>懒汉</h2><blockquote>
-<ul>
-<li><strong>顾名思义：需要创建时才创建对象</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Singleton.cpp</span><br><span class="line"> *	单例模式</span><br><span class="line"> *  Created on: 2016年3月11日 下午3:38:31</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 懒汉：需要创建时才创建对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">class</span> Singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton * instance;</span><br><span class="line">	Singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton * <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (instance == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      <span class="comment">//懒汉，进入函数后判断是否创建，如果未创建则创建对象</span></span><br><span class="line">			instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里不创建</span></span><br><span class="line">Singleton* Singleton::instance = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//懒汉</span></span><br><span class="line">	Singleton * s1 = Singleton::GetInstance();</span><br><span class="line">	Singleton * s2 = Singleton::GetInstance();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u997F_u6C49"><a href="#u997F_u6C49" class="headerlink" title="饿汉"></a>饿汉</h2><blockquote>
-<ul>
-<li><strong>顾名思义：从一开始加载的时候就创建对象</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * singleton2.cpp</span><br><span class="line"> *	单例模式  饿汉</span><br><span class="line"> *  Created on: 2016年3月11日 下午4:24:03</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">class</span> singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> singleton* instance;</span><br><span class="line">	singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//饿汉，直接返回已经创建好的对象</span></span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里直接创建</span></span><br><span class="line">singleton* singleton::instance = <span class="keyword">new</span> singleton();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	singleton* s1 = singleton::GetInstace();</span><br><span class="line">	singleton* s2 = singleton::GetInstace();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="u81EA_u5B9A_u4E49InputFormat_u7C7B"><a href="#u81EA_u5B9A_u4E49InputFormat_u7C7B" class="headerlink" title="自定义InputFormat类"></a>自定义InputFormat类</h1><h2 id="u7B2C_u4E00_u6B21_u5C1D_u8BD5"><a href="#u7B2C_u4E00_u6B21_u5C1D_u8BD5" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>  想着简单啊，把里面默认的分隔符换成$@_@$，不就搞定了吗？说干就干：</p>
+<p>把原有的org.apache.hadoop.mapred.TextInputFormat，复制了一份，放在自己写的Hive.myinputformat中。<br>    添加以下改动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> RecordReader&lt;LongWritable, Text&gt; getRecordReader(</span><br><span class="line">	InputSplit genericSplit, JobConf job, Reporter reporter)</span><br><span class="line">			<span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">		reporter.setStatus(genericSplit.toString());</span><br><span class="line"></span><br><span class="line">		<span class="comment">/**</span><br><span class="line">		 * 修改"textinputformat.record.delimiter"值</span><br><span class="line">		 */</span></span><br><span class="line">		job.set(<span class="string">"textinputformat.record.delimiter"</span>, <span class="string">"$@_@$"</span>);</span><br><span class="line"></span><br><span class="line">		String delimiter = job.get(<span class="string">"textinputformat.record.delimiter"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//delimiter.toLowerCase().replaceAll("\\$@_@\\$", "\001");</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span>[] recordDelimiterBytes = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">null</span> != delimiter) &#123;</span><br><span class="line">			recordDelimiterBytes = delimiter.getBytes(Charsets.UTF_8);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> LineRecordReader(job, (FileSplit) genericSplit,</span><br><span class="line">				recordDelimiterBytes);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>  还有个插曲：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;hive&#62;create table t1(id int,name string)&#10;    stored as InputFormat &#39;myinputformat&#39;&#10;    outputformat&#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39;;</span><br></pre></td></tr></table></figure>
+<p>   显示：cannot find class myinputformat.</p>
+<p>   问题：没加包名 -_-</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;hive&#62;create table t1(id int,name string)&#10;    stored as InputFormat &#39;Hive.myinputformat&#39;&#10;    outputformat&#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39;;</span><br></pre></td></tr></table></figure>
+<p>显示：cannot find class Hive.myinputformat.</p>
+<p><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f28z84wa66j2064064747.jpg" alt=""></p>
+<p>问题：居然要重新进入一遍Hive。(。﹏。*)<br>      可能是要刷新，不会。直接重新进入就好了。</p>
+<p>本以为这该好了。可是数据一导入，卧槽。还是跪了0_0</p>
+<pre><code>显示：
+
+1     NULL
+NULL  NULL
+</code></pre><h2 id="u53EF_u60DC_uFF0C_u7406_u60F3_u5F88_u4E30_u6EE1_uFF0C_u73B0_u5B9E_u5F88_u9AA8_u611F_28_uFFE2__uFFE2_29"><a href="#u53EF_u60DC_uFF0C_u7406_u60F3_u5F88_u4E30_u6EE1_uFF0C_u73B0_u5B9E_u5F88_u9AA8_u611F_28_uFFE2__uFFE2_29" class="headerlink" title="可惜，理想很丰满，现实很骨感(￢_￢)"></a>可惜，理想很丰满，现实很骨感(￢_￢)</h2><h2 id="u5931_u8D25_u3002"><a href="#u5931_u8D25_u3002" class="headerlink" title="失败。"></a>失败。</h2><h2 id="u7B2C_u4E8C_u6B21_u5C1D_u8BD5"><a href="#u7B2C_u4E8C_u6B21_u5C1D_u8BD5" class="headerlink" title="第二次尝试"></a>第二次尝试</h2><p>百度，找到以下解决方法：<a href="http://www.micmiu.com/bigdata/hive/hive-inputformat-string/" target="_blank" rel="external">http://www.micmiu.com/bigdata/hive/hive-inputformat-string/</a></p>
+<p>把他的类复制下来，搞成jar包。直接用他的分隔符|@^_^@|<br>直接成功了。<br><img src="http://ww1.sinaimg.cn/large/e739bec3jw1egdj7nmzusj208c0bgt9d.jpg" alt=""></p>
+<p>研究了一下他的代码，主要是这句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strReplace = text.toString().toLowerCase()</span><br><span class="line">						.replaceAll(<span class="string">"\\|@\\^_\\^@\\|"</span>, <span class="string">"\001"</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4F46_u662F_u6211_u5C31_u5947_u4E86_u602A_3A"><a href="#u4F46_u662F_u6211_u5C31_u5947_u4E86_u602A_3A" class="headerlink" title="但是我就奇了怪:"></a>但是我就奇了怪:</h2><p><strong>为啥不是|@^<em>^@|，而是\|@\^</em>\^@\|</strong><br>经过一番折腾：<br>原来replaceAll()函数是去匹配正则表达式。</p>
+<p>这里的意思是：用Hive默认的“\001”去替换原本的“|@^_^@|”。</p>
+<p>而加上很多反斜杠是正则表达式的<strong>原因</strong>：</p>
+<p>要告诉编译器，别解析我这里面的字符。我是一个整体的。</p>
+<p>我就把这句改成了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strReplace = text.toString().toLowerCase()</span><br><span class="line">						.replaceAll(<span class="string">"\\$@_@\\$"</span>, <span class="string">"\001"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后，打包，放入lib目录下。建表，导入数据。成功~</p>
 </span>
       
     </div>
@@ -340,17 +316,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/13/设计模式（四）/" rel="next" title="设计模式（四）">
-                <i class="fa fa-chevron-left"></i> 设计模式（四）
+              <a href="/2016/03/24/Hive的复合类型UNION/" rel="next" title="Hive的复合类型UNION">
+                <i class="fa fa-chevron-left"></i> Hive的复合类型UNION
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/设计模式（六）/" rel="prev" title="设计模式（六）">
-                设计模式（六） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -377,8 +349,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/设计模式（五）/"
-           data-title="设计模式（五）" data-url="http://crazyhoney.github.io/2016/03/14/设计模式（五）/">
+      <div class="ds-thread" data-thread-key="2016/03/25/Hive自定义分隔符-自定义InputFormat/"
+           data-title="Hive自定义分隔符---自定义InputFormat" data-url="http://crazyhoney.github.io/2016/03/25/Hive自定义分隔符-自定义InputFormat/">
       </div>
     
   </div>
@@ -485,7 +457,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u5355_u4F8B_u6A21_u5F0F"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><span class="nav-number">1.1.</span> <span class="nav-text">简单的说就是(๑•ᴗ•๑)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_uFFE2__uFFE2_29_uFF1A"><span class="nav-number">1.2.</span> <span class="nav-text">专业一点就是(￢_￢)：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u505A_u6CD5"><span class="nav-number">1.3.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u61D2_u6C49"><span class="nav-number">1.4.</span> <span class="nav-text">懒汉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u997F_u6C49"><span class="nav-number">1.5.</span> <span class="nav-text">饿汉</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25"><span class="nav-number">1.</span> <span class="nav-text">后面再来放截图2016-03-25</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u573A_u666F"><span class="nav-number"></span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u81EA_u5B9A_u4E49InputFormat_u7C7B"><span class="nav-number"></span> <span class="nav-text">自定义InputFormat类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E00_u6B21_u5C1D_u8BD5"><span class="nav-number">1.</span> <span class="nav-text">第一次尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u53EF_u60DC_uFF0C_u7406_u60F3_u5F88_u4E30_u6EE1_uFF0C_u73B0_u5B9E_u5F88_u9AA8_u611F_28_uFFE2__uFFE2_29"><span class="nav-number">2.</span> <span class="nav-text">可惜，理想很丰满，现实很骨感(￢_￢)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5931_u8D25_u3002"><span class="nav-number">3.</span> <span class="nav-text">失败。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7B2C_u4E8C_u6B21_u5C1D_u8BD5"><span class="nav-number">4.</span> <span class="nav-text">第二次尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F46_u662F_u6211_u5C31_u5947_u4E86_u602A_3A"><span class="nav-number">5.</span> <span class="nav-text">但是我就奇了怪:</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

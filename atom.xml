@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-03-24T02:38:03.586Z</updated>
+  <updated>2016-03-25T04:20:01.679Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hive自定义分隔符---自定义InputFormat]]></title>
+    <link href="http://crazyhoney.github.io/2016/03/25/Hive%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E9%9A%94%E7%AC%A6-%E8%87%AA%E5%AE%9A%E4%B9%89InputFormat/"/>
+    <id>http://crazyhoney.github.io/2016/03/25/Hive自定义分隔符-自定义InputFormat/</id>
+    <published>2016-03-25T02:23:04.000Z</published>
+    <updated>2016-03-25T04:20:01.679Z</updated>
+    <content type="html"><![CDATA[<h2 id="u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25"><a href="#u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25" class="headerlink" title="后面再来放截图2016-03-25"></a>后面再来放截图2016-03-25</h2><h1 id="u573A_u666F"><a href="#u573A_u666F" class="headerlink" title="场景"></a>场景</h1><p>一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。</p>
+<p>你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。</p>
+<p>假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。</p>
+<p>你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？</p>
+<p><strong>解决方案：</strong></p>
+<blockquote>
+<p>*　自定义InputFormat类，来实现复杂分隔符的处理</p>
+</blockquote>
+<h1 id="u81EA_u5B9A_u4E49InputFormat_u7C7B"><a href="#u81EA_u5B9A_u4E49InputFormat_u7C7B" class="headerlink" title="自定义InputFormat类"></a>自定义InputFormat类</h1><h2 id="u7B2C_u4E00_u6B21_u5C1D_u8BD5"><a href="#u7B2C_u4E00_u6B21_u5C1D_u8BD5" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>  想着简单啊，把里面默认的分隔符换成$@_@$，不就搞定了吗？说干就干：</p>
+<p>把原有的org.apache.hadoop.mapred.TextInputFormat，复制了一份，放在自己写的Hive.myinputformat中。<br>    添加以下改动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> RecordReader&lt;LongWritable, Text&gt; getRecordReader(</span><br><span class="line">	InputSplit genericSplit, JobConf job, Reporter reporter)</span><br><span class="line">			<span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">		reporter.setStatus(genericSplit.toString());</span><br><span class="line"></span><br><span class="line">		<span class="comment">/**</span><br><span class="line">		 * 修改"textinputformat.record.delimiter"值</span><br><span class="line">		 */</span></span><br><span class="line">		job.set(<span class="string">"textinputformat.record.delimiter"</span>, <span class="string">"$@_@$"</span>);</span><br><span class="line"></span><br><span class="line">		String delimiter = job.get(<span class="string">"textinputformat.record.delimiter"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//delimiter.toLowerCase().replaceAll("\\$@_@\\$", "\001");</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span>[] recordDelimiterBytes = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">null</span> != delimiter) &#123;</span><br><span class="line">			recordDelimiterBytes = delimiter.getBytes(Charsets.UTF_8);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> LineRecordReader(job, (FileSplit) genericSplit,</span><br><span class="line">				recordDelimiterBytes);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>  还有个插曲：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;hive&#62;create table t1(id int,name string)&#10;    stored as InputFormat &#39;myinputformat&#39;&#10;    outputformat&#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39;;</span><br></pre></td></tr></table></figure>
+<p>   显示：cannot find class myinputformat.</p>
+<p>   问题：没加包名 -_-</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;hive&#62;create table t1(id int,name string)&#10;    stored as InputFormat &#39;Hive.myinputformat&#39;&#10;    outputformat&#39;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&#39;;</span><br></pre></td></tr></table></figure>
+<p>显示：cannot find class Hive.myinputformat.</p>
+<p><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f28z84wa66j2064064747.jpg" alt=""></p>
+<p>问题：居然要重新进入一遍Hive。(。﹏。*)<br>      可能是要刷新，不会。直接重新进入就好了。</p>
+<p>本以为这该好了。可是数据一导入，卧槽。还是跪了0_0</p>
+<pre><code>显示：
+
+1     NULL
+NULL  NULL
+</code></pre><h2 id="u53EF_u60DC_uFF0C_u7406_u60F3_u5F88_u4E30_u6EE1_uFF0C_u73B0_u5B9E_u5F88_u9AA8_u611F_28_uFFE2__uFFE2_29"><a href="#u53EF_u60DC_uFF0C_u7406_u60F3_u5F88_u4E30_u6EE1_uFF0C_u73B0_u5B9E_u5F88_u9AA8_u611F_28_uFFE2__uFFE2_29" class="headerlink" title="可惜，理想很丰满，现实很骨感(￢_￢)"></a>可惜，理想很丰满，现实很骨感(￢_￢)</h2><h2 id="u5931_u8D25_u3002"><a href="#u5931_u8D25_u3002" class="headerlink" title="失败。"></a>失败。</h2><h2 id="u7B2C_u4E8C_u6B21_u5C1D_u8BD5"><a href="#u7B2C_u4E8C_u6B21_u5C1D_u8BD5" class="headerlink" title="第二次尝试"></a>第二次尝试</h2><p>百度，找到以下解决方法：<a href="http://www.micmiu.com/bigdata/hive/hive-inputformat-string/" target="_blank" rel="external">http://www.micmiu.com/bigdata/hive/hive-inputformat-string/</a></p>
+<p>把他的类复制下来，搞成jar包。直接用他的分隔符|@^_^@|<br>直接成功了。<br><img src="http://ww1.sinaimg.cn/large/e739bec3jw1egdj7nmzusj208c0bgt9d.jpg" alt=""></p>
+<p>研究了一下他的代码，主要是这句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strReplace = text.toString().toLowerCase()</span><br><span class="line">						.replaceAll(<span class="string">"\\|@\\^_\\^@\\|"</span>, <span class="string">"\001"</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4F46_u662F_u6211_u5C31_u5947_u4E86_u602A_3A"><a href="#u4F46_u662F_u6211_u5C31_u5947_u4E86_u602A_3A" class="headerlink" title="但是我就奇了怪:"></a>但是我就奇了怪:</h2><p><strong>为啥不是|@^<em>^@|，而是\|@\^</em>\^@\|</strong><br>经过一番折腾：<br>原来replaceAll()函数是去匹配正则表达式。</p>
+<p>这里的意思是：用Hive默认的“\001”去替换原本的“|@^_^@|”。</p>
+<p>而加上很多反斜杠是正则表达式的<strong>原因</strong>：</p>
+<p>要告诉编译器，别解析我这里面的字符。我是一个整体的。</p>
+<p>我就把这句改成了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String strReplace = text.toString().toLowerCase()</span><br><span class="line">						.replaceAll(<span class="string">"\\$@_@\\$"</span>, <span class="string">"\001"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后，打包，放入lib目录下。建表，导入数据。成功~</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25"><a href="#u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25" class="headerlin]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hive的复合类型UNION]]></title>

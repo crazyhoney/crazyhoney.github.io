@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-03-25T04:20:01.679Z</updated>
+  <updated>2016-03-29T02:44:12.792Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -13,6 +13,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hive复杂数据类型的嵌套]]></title>
+    <link href="http://crazyhoney.github.io/2016/03/29/Hive%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%B5%8C%E5%A5%97/"/>
+    <id>http://crazyhoney.github.io/2016/03/29/Hive复杂数据类型的嵌套/</id>
+    <published>2016-03-29T02:05:55.000Z</published>
+    <updated>2016-03-29T02:44:12.792Z</updated>
+    <content type="html"><![CDATA[<p>前几天尝试map,struct,map的嵌套，结果失败。之后又查到union还不完善，就以为这个办不成。<br>今早机缘巧合，看到一篇文章</p>
+<p>提到在嵌套多层的情况下，分隔符会随着复合类型嵌套层次的递增而发生变化，分隔符默认会以\001,\002,\003,\004…<br>变化。<br>我一看，不行那就试试喽，死马当活马医嘛，结果给“治”好了(￢_￢)。果然药不能停~~~</p>
+<h2 id="u4E0B_u9762_u6211_u4EEC_u5206_u9636_u6BB5_u6765_u641E_u8FD9_u4E2A_u5D4C_u5957_u5B9E_u9A8C_uFF0C_u9010_u5C42_u589E_u52A0_u96BE_u5EA6"><a href="#u4E0B_u9762_u6211_u4EEC_u5206_u9636_u6BB5_u6765_u641E_u8FD9_u4E2A_u5D4C_u5957_u5B9E_u9A8C_uFF0C_u9010_u5C42_u589E_u52A0_u96BE_u5EA6" class="headerlink" title="下面我们分阶段来搞这个嵌套实验，逐层增加难度"></a>下面我们分阶段来搞这个嵌套实验，逐层增加难度</h2><h1 id="map_u548Carray_u5D4C_u5957"><a href="#map_u548Carray_u5D4C_u5957" class="headerlink" title="map和array嵌套"></a>map和array嵌套</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> testmaparray(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">  student_id <span class="built_in">int</span>,</span><br><span class="line">  staff_id <span class="built_in">int</span>,</span><br><span class="line">  <span class="keyword">value</span> <span class="built_in">int</span>,  </span><br><span class="line">  items <span class="built_in">array</span>&lt;</span><br><span class="line">              <span class="keyword">struct</span>&lt;</span><br><span class="line">                      <span class="keyword">value</span>:<span class="built_in">int</span>,</span><br><span class="line">                      staff_id:<span class="built_in">int</span>,</span><br><span class="line">                      logtime:<span class="built_in">date</span></span><br><span class="line">                    &gt;  </span><br><span class="line">             &gt;)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span></span><br><span class="line">collection items <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">' '</span></span><br><span class="line"><span class="keyword">map</span> <span class="keyword">keys</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span>;</span></span><br></pre></td></tr></table></figure>
+<p>数据文件</p>
+<pre><code>1       3       2       15      15,2,2015-09-03
+</code></pre><p>load到表中后，查询出来：</p>
+<pre><code>1       3       2       15      [{&quot;value&quot;:15,&quot;staff_id&quot;:2,&quot;logtime&quot;:&quot;2015-09-03&quot;}]
+</code></pre><p>说明map keys那个分隔符可以分隔<strong>struct里面的各个元素</strong></p>
+<h1 id="map_u548Cstruct_u5D4C_u5957"><a href="#map_u548Cstruct_u5D4C_u5957" class="headerlink" title="map和struct嵌套"></a>map和struct嵌套</h1><h2 id="u7B2C_u4E00_u6B21_u5B9E_u9A8C"><a href="#u7B2C_u4E00_u6B21_u5B9E_u9A8C" class="headerlink" title="第一次实验"></a>第一次实验</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> testmapstruct(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">  comp <span class="keyword">struct</span>&lt;</span><br><span class="line">              info:<span class="keyword">map</span>&lt;<span class="keyword">string</span>,<span class="keyword">string</span>&gt;</span><br><span class="line">             &gt;,</span><br><span class="line">  favors <span class="built_in">array</span>&lt;<span class="keyword">string</span>&gt;)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span></span><br><span class="line">collection items <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">map</span> <span class="keyword">keys</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">':'</span>;</span></span><br></pre></td></tr></table></figure>
+<p>数据文件</p>
+<pre><code>1       zhuzhi:xianyang,xueli:master,jiguan:shanxi      swimming,running
+</code></pre><p>导入，查询结果：</p>
+<pre><code>1       {&quot;info&quot;:{&quot;zhuzhi&quot;:null,&quot;xianyang&quot;:null}}        [&quot;swimming&quot;,&quot;running&quot;]
+</code></pre><blockquote>
+<ul>
+<li><p>本来是用“:”做map里键值的分隔符，结果被解析成struct的分隔符。这里有了歧义。</p>
+</li>
+<li><p>所以就不能用这种分隔符了。要试试默认的分隔符。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="u7B2C_u4E8C_u6B21_u5B9E_u9A8C"><a href="#u7B2C_u4E8C_u6B21_u5B9E_u9A8C" class="headerlink" title="第二次实验"></a>第二次实验</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> testmapstruct2(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">  comp <span class="keyword">struct</span>&lt;</span><br><span class="line">              info:<span class="keyword">map</span>&lt;<span class="keyword">string</span>,<span class="keyword">string</span>&gt;</span><br><span class="line">             &gt;,</span><br><span class="line">  favors <span class="built_in">array</span>&lt;<span class="keyword">string</span>&gt;);</span></span><br></pre></td></tr></table></figure>
+<p>分析默认分隔符：</p>
+<blockquote>
+<ul>
+<li>字段之间用\001</li>
+<li>struct和array里的每个元素之间用\002</li>
+<li>struct里面的map的每个元素之间用\003</li>
+<li>map的每个键值对里面的键和值之间用\004</li>
+</ul>
+</blockquote>
+<p>数据文件</p>
+<pre><code>1^Azhuzhi^Dxianyang^Cxueli^Dmaster^Cjiguan^Dshanxi^Aswimming^Brunning
+</code></pre><p>导入，查询结果：</p>
+<pre><code>1       {&quot;info&quot;:{&quot;zhuzhi&quot;:&quot;xianyang&quot;,&quot;xueli&quot;:&quot;master&quot;,&quot;jiguan&quot;:&quot;shanxi&quot;}}       [&quot;swimming&quot;,&quot;running&quot;]
+</code></pre><h1 id="map_u3001struct_u548Cmap_u5D4C_u5957"><a href="#map_u3001struct_u548Cmap_u5D4C_u5957" class="headerlink" title="map、struct和map嵌套"></a>map、struct和map嵌套</h1><h2 id="u540E_u9762_u518D_u6765_u5199_u54C8_28_u273F_u25E1_u203F_u25E1_29"><a href="#u540E_u9762_u518D_u6765_u5199_u54C8_28_u273F_u25E1_u203F_u25E1_29" class="headerlink" title="后面再来写哈(✿◡‿◡)"></a>后面再来写哈(✿◡‿◡)</h2>]]></content>
+    <summary type="html">
+    <![CDATA[<p>前几天尝试map,struct,map的嵌套，结果失败。之后又查到union还不完善，就以为这个办不成。<br>今早机缘巧合，看到一篇文章</p>
+<p>提到在嵌套多层的情况下，分隔符会随着复合类型嵌套层次的递增而发生变化，分隔符默认会以\001,\002,\003,\00]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hive自定义分隔符---自定义InputFormat]]></title>

@@ -51,32 +51,19 @@
 
 
 
-<meta name="description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
+<meta name="description" content="原因最近在学习Hive，学习到了自定义函数UDF。要继承一个类org.apache.hadoop.hive.ql.exec.UDF所以要添加Hive的依赖，下载源码才可以进行自定义函数。
+一、添加依赖1234567891011121314151617181920212223242526272829303132333435&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hive的复合类型UNION">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/24/Hive的复合类型UNION/index.html">
+<meta property="og:title" content="maven工程添加依赖，查看源码">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/30/maven工程添加依赖，查看源码/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f27r1rj8dhj20t60gptdt.jpg">
-<meta property="og:updated_time" content="2016-03-24T02:38:03.586Z">
+<meta property="og:description" content="原因最近在学习Hive，学习到了自定义函数UDF。要继承一个类org.apache.hadoop.hive.ql.exec.UDF所以要添加Hive的依赖，下载源码才可以进行自定义函数。
+一、添加依赖1234567891011121314151617181920212223242526272829303132333435&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.a">
+<meta property="og:updated_time" content="2016-03-30T06:28:06.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hive的复合类型UNION">
-<meta name="twitter:description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
+<meta name="twitter:title" content="maven工程添加依赖，查看源码">
+<meta name="twitter:description" content="原因最近在学习Hive，学习到了自定义函数UDF。要继承一个类org.apache.hadoop.hive.ql.exec.UDF所以要添加Hive的依赖，下载源码才可以进行自定义函数。
+一、添加依赖1234567891011121314151617181920212223242526272829303132333435&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.a">
 
 
 
@@ -88,7 +75,7 @@ This means that UNIONTYPEs are effectively look-at-only.
   };
 </script>
 
-  <title> Hive的复合类型UNION | Hexo </title>
+  <title> maven工程添加依赖，查看源码 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -228,7 +215,7 @@ This means that UNIONTYPEs are effectively look-at-only.
             
             
               
-                Hive的复合类型UNION
+                maven工程添加依赖，查看源码
               
             
           </h1>
@@ -237,8 +224,8 @@ This means that UNIONTYPEs are effectively look-at-only.
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-24T10:27:05+08:00" content="2016-03-24">
-              2016-03-24
+            <time itemprop="dateCreated" datetime="2016-03-30T14:06:20+08:00" content="2016-03-30">
+              2016-03-30
             </time>
           </span>
 
@@ -248,8 +235,8 @@ This means that UNIONTYPEs are effectively look-at-only.
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/24/Hive的复合类型UNION/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/Hive的复合类型UNION/" itemprop="commentsCount"></span>
+                <a href="/2016/03/30/maven工程添加依赖，查看源码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/maven工程添加依赖，查看源码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -268,13 +255,31 @@ This means that UNIONTYPEs are effectively look-at-only.
       
 
       
-        <span itemprop="articleBody"><p>这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。</p>
-<h2 id="u7A81_u7136_u60F3_u5230"><a href="#u7A81_u7136_u60F3_u5230" class="headerlink" title="突然想到"></a>突然想到</h2><p>能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。<br>百度之，资料不多，没啥用处。就找到了官网文档。</p>
-<p>如下：</p>
-<p><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f27r1rj8dhj20t60gptdt.jpg" alt=""></p>
-<p><strong>This means that UNIONTYPEs are effectively look-at-only.</strong></p>
-<p>这个类型目前只能看啊！卧槽◔ ‸◔?<br>没啥实际作用！</p>
-</span>
+        <span itemprop="articleBody"><h1 id="u539F_u56E0"><a href="#u539F_u56E0" class="headerlink" title="原因"></a>原因</h1><p>最近在学习Hive，学习到了自定义函数UDF。要继承一个类org.apache.hadoop.hive.ql.exec.UDF<br>所以要添加Hive的依赖，下载源码才可以进行自定义函数。</p>
+<h1 id="u4E00_u3001_u6DFB_u52A0_u4F9D_u8D56"><a href="#u4E00_u3001_u6DFB_u52A0_u4F9D_u8D56" class="headerlink" title="一、添加依赖"></a>一、添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-exec<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-serde<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-service<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-metastore<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-common<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-cli<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-jdbc<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>把以上依赖添加到maven工程的pom.xml中。<br>按理来说，保存后，它会自动下载所依赖的jar包。<br>但是可能是我哪里没有配置好，它没有自动下载。</p>
+<p>这个时候添加的依赖那里会出现一堆红叉。不要紧<br>，进入第二步。</p>
+<h1 id="u4E8C_u3001_u4E0B_u8F7D_u4F9D_u8D56_u7684jar_u5305"><a href="#u4E8C_u3001_u4E0B_u8F7D_u4F9D_u8D56_u7684jar_u5305" class="headerlink" title="二、下载依赖的jar包"></a>二、下载依赖的jar包</h1><h2 id="1_u3001_u6253_u5F00cmd_uFF0C_u8FDB_u5165_u5230_u9879_u76EE_u6240_u5728_u7684_u76EE_u5F55"><a href="#1_u3001_u6253_u5F00cmd_uFF0C_u8FDB_u5165_u5230_u9879_u76EE_u6240_u5728_u7684_u76EE_u5F55" class="headerlink" title="1、打开cmd，进入到项目所在的目录"></a>1、打开cmd，进入到项目所在的目录</h2><h2 id="2_u3001_u6267_u884Cmvn_clean_package_28_u8FD9_u6837_u53EF_u4EE5_u628A_u6240_u6709_u672A_u4E0B_u8F7D_u7684jar_u5305_u91CD_u65B0_u4E0B_u8F7D_29"><a href="#2_u3001_u6267_u884Cmvn_clean_package_28_u8FD9_u6837_u53EF_u4EE5_u628A_u6240_u6709_u672A_u4E0B_u8F7D_u7684jar_u5305_u91CD_u65B0_u4E0B_u8F7D_29" class="headerlink" title="2、执行mvn clean package(这样可以把所有未下载的jar包重新下载)"></a>2、执行mvn clean package(这样可以把所有未下载的jar包重新下载)</h2><blockquote>
+<ul>
+<li><p>此时需要耐心等待，因为服务器在国外（你懂滴）。</p>
+</li>
+<li><p>出现BULID SUCCESS即表示完成。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="3_u3001_u6D88_u9664_u7EA2_u53C9"><a href="#3_u3001_u6D88_u9664_u7EA2_u53C9" class="headerlink" title="3、消除红叉"></a>3、消除红叉</h2><p>此时，虽然jar包都已经下载完毕。但是红叉依旧存在。<br>此时在</p>
+<p><strong>项目上右键-&gt;Maven-&gt;Update project…</strong></p>
+<p>等它结束后，红叉都消失了</p>
+<p>p.s 我就是这样搞定的(不行的话，我也母鸡(╰_╯)# )</p>
+<h2 id="4_u3001_u6DFB_u52A0_u6E90_u7801"><a href="#4_u3001_u6DFB_u52A0_u6E90_u7801" class="headerlink" title="4、添加源码"></a>4、添加源码</h2><p>按理说，jar包我都下载好了。源代码我应该都可以看了啊。</p>
+<p>可是，问题依旧没有结束。。。</p>
+<p>eclipse中open type中输入hive<br><strong>结果：</strong></p>
+<h2 id="source_not_found"><a href="#source_not_found" class="headerlink" title="source not found"></a>source not found</h2><p>真是哔了狗了。我特么都下载了源代码，居然说找不到。闹哪样啊！！！</p>
+<h3 id="u5C1D_u8BD5_u2460"><a href="#u5C1D_u8BD5_u2460" class="headerlink" title="尝试①"></a>尝试①</h3><pre><code>添加external 源。把下好的jar包添加进去。还特么不行。
+</code></pre><h3 id="u5C1D_u8BD5_u2461"><a href="#u5C1D_u8BD5_u2461" class="headerlink" title="尝试②"></a>尝试②</h3><pre><code>我看到项目上右键-&gt;Maven里面有一个Download Sources
+我想着，不就是sources找不到吗，试试喽。点了一下。等了半天。居然好了。。。
+</code></pre><p><strong>看了一下，原来下载依赖的地方，多了一个以sources<br>结尾的jar包。可能必须要下载这个才可以吧。</strong></p>
+<h2 id="u6B64_u65F6_uFF0C_u6E90_u4EE3_u7801_u90FD_u5DF2_u7ECF_u53EF_u4EE5_u67E5_u770B_u4E86_u3002"><a href="#u6B64_u65F6_uFF0C_u6E90_u4EE3_u7801_u90FD_u5DF2_u7ECF_u53EF_u4EE5_u67E5_u770B_u4E86_u3002" class="headerlink" title="此时，源代码都已经可以查看了。"></a>此时，源代码都已经可以查看了。</h2></span>
       
     </div>
 
@@ -285,17 +290,13 @@ This means that UNIONTYPEs are effectively look-at-only.
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/18/Java的IO流/" rel="next" title="Java的IO流">
-                <i class="fa fa-chevron-left"></i> Java的IO流
+              <a href="/2016/03/29/Hive复杂数据类型的嵌套/" rel="next" title="Hive复杂数据类型的嵌套">
+                <i class="fa fa-chevron-left"></i> Hive复杂数据类型的嵌套
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/" rel="prev" title="Hive自定义分隔符---自定义InputFormat">
-                Hive自定义分隔符---自定义InputFormat <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -322,8 +323,8 @@ This means that UNIONTYPEs are effectively look-at-only.
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/Hive的复合类型UNION/"
-           data-title="Hive的复合类型UNION" data-url="http://crazyhoney.github.io/2016/03/24/Hive的复合类型UNION/">
+      <div class="ds-thread" data-thread-key="2016/03/30/maven工程添加依赖，查看源码/"
+           data-title="maven工程添加依赖，查看源码" data-url="http://crazyhoney.github.io/2016/03/30/maven工程添加依赖，查看源码/">
       </div>
     
   </div>
@@ -430,7 +431,7 @@ This means that UNIONTYPEs are effectively look-at-only.
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7A81_u7136_u60F3_u5230"><span class="nav-number">1.</span> <span class="nav-text">突然想到</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u539F_u56E0"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E00_u3001_u6DFB_u52A0_u4F9D_u8D56"><span class="nav-number">2.</span> <span class="nav-text">一、添加依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E8C_u3001_u4E0B_u8F7D_u4F9D_u8D56_u7684jar_u5305"><span class="nav-number">3.</span> <span class="nav-text">二、下载依赖的jar包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_u3001_u6253_u5F00cmd_uFF0C_u8FDB_u5165_u5230_u9879_u76EE_u6240_u5728_u7684_u76EE_u5F55"><span class="nav-number">3.1.</span> <span class="nav-text">1、打开cmd，进入到项目所在的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_u3001_u6267_u884Cmvn_clean_package_28_u8FD9_u6837_u53EF_u4EE5_u628A_u6240_u6709_u672A_u4E0B_u8F7D_u7684jar_u5305_u91CD_u65B0_u4E0B_u8F7D_29"><span class="nav-number">3.2.</span> <span class="nav-text">2、执行mvn clean package(这样可以把所有未下载的jar包重新下载)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_u3001_u6D88_u9664_u7EA2_u53C9"><span class="nav-number">3.3.</span> <span class="nav-text">3、消除红叉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_u3001_u6DFB_u52A0_u6E90_u7801"><span class="nav-number">3.4.</span> <span class="nav-text">4、添加源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source_not_found"><span class="nav-number">3.5.</span> <span class="nav-text">source not found</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u5C1D_u8BD5_u2460"><span class="nav-number">3.5.1.</span> <span class="nav-text">尝试①</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5C1D_u8BD5_u2461"><span class="nav-number">3.5.2.</span> <span class="nav-text">尝试②</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6B64_u65F6_uFF0C_u6E90_u4EE3_u7801_u90FD_u5DF2_u7ECF_u53EF_u4EE5_u67E5_u770B_u4E86_u3002"><span class="nav-number">3.6.</span> <span class="nav-text">此时，源代码都已经可以查看了。</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

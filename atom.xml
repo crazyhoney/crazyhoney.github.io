@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-03-30T06:28:06.155Z</updated>
+  <updated>2016-03-31T02:29:36.144Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[HBase的物理模型]]></title>
+    <link href="http://crazyhoney.github.io/2016/03/31/HBase%E7%9A%84%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://crazyhoney.github.io/2016/03/31/HBase的物理模型/</id>
+    <published>2016-03-31T02:07:57.000Z</published>
+    <updated>2016-03-31T02:29:36.144Z</updated>
+    <content type="html"><![CDATA[<h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E" class="headerlink" title="<em>刚学习了HBase的物理模型，有些心得，记录一下~</em>"></a><em>刚学习了HBase的物理模型，有些心得，记录一下~</em></h3><h4 id="u4E00_u3001_u57FA_u672C_u6982_u5FF5"><a href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1_u3001region_server"><a href="#1_u3001region_server" class="headerlink" title="1、region server"></a>1、region server</h5><p>  HBase是分布式数据库，region server 就是每一个存储数据的节点。</p>
+<h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
+<h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
+<h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
+<h4 id="u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="四、region过大怎么办"></a>四、region过大怎么办</h4><p>按上面描述，region过大，也会出现插入、查询的速度降低的问题。</p>
+<p><em>解决：</em></p>
+<p>原来的一个region,拆成两个region。</p>
+<blockquote>
+<ul>
+<li>类似于细胞分裂</li>
+</ul>
+</blockquote>
+<h4 id="u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="五、region server过大怎么办"></a>五、region server过大怎么办</h4><p>路子和上面相同，分裂为两个region server。</p>
+<h4 id="u516D_u3001_u4E3E_u4F8B"><a href="#u516D_u3001_u4E3E_u4F8B" class="headerlink" title="六、举例"></a>六、举例</h4><p>原来一个region server中row key的索引是[1,1亿]。<br>现在分裂为两个region server,增加了一个节点。row key 索引分别是[1,5000万]、[5000万，1亿]。<br>这在总的索引表中，只有很细微的变化，就保证了存储文件的region不会变的很大(当然，region肯定是有限额的，超过多少，就会分裂)。<strong>所以，它就可以保证插入、查询的速度。</strong></p>
+<h4 id="u4E03_u3001_u7C7B_u6BD4"><a href="#u4E03_u3001_u7C7B_u6BD4" class="headerlink" title="七、类比"></a>七、类比</h4><p><em>region的分裂，可以想象成细胞的分裂。</em></p>
+<blockquote>
+<ul>
+<li>一直专注于一个细胞，细胞一旦太大，性能就变慢了，就<strong>裂变</strong>成新的小细胞。</li>
+</ul>
+</blockquote>
+<h4 id="u516B_u3001_u4F5C_u7528"><a href="#u516B_u3001_u4F5C_u7528" class="headerlink" title="八、作用"></a>八、作用</h4><blockquote>
+<ul>
+<li>保证了HBase的快速插入、查询。</li>
+</ul>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[maven工程添加依赖，查看源码]]></title>

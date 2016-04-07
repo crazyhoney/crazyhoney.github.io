@@ -51,32 +51,22 @@
 
 
 
-<meta name="description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
+<meta name="description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
+2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
+二、问题引入HBase的数据是按列族分开存储的。当一个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hive的复合类型UNION">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/24/Hive的复合类型UNION/index.html">
+<meta property="og:title" content="HBase的物理模型">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f27r1rj8dhj20t60gptdt.jpg">
-<meta property="og:updated_time" content="2016-03-24T02:38:03.586Z">
+<meta property="og:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
+2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
+二、问题引入HBase的数据是按列族分开存储的。当一个">
+<meta property="og:updated_time" content="2016-03-31T02:29:36.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hive的复合类型UNION">
-<meta name="twitter:description" content="这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。
-突然想到能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。百度之，资料不多，没啥用处。就找到了官网文档。
-如下：
-
-This means that UNIONTYPEs are effectively look-at-only.
-这个类型目前只能看啊！卧槽◔ ‸">
+<meta name="twitter:title" content="HBase的物理模型">
+<meta name="twitter:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
+2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
+二、问题引入HBase的数据是按列族分开存储的。当一个">
 
 
 
@@ -88,7 +78,7 @@ This means that UNIONTYPEs are effectively look-at-only.
   };
 </script>
 
-  <title> Hive的复合类型UNION | Hexo </title>
+  <title> HBase的物理模型 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -228,7 +218,7 @@ This means that UNIONTYPEs are effectively look-at-only.
             
             
               
-                Hive的复合类型UNION
+                HBase的物理模型
               
             
           </h1>
@@ -237,8 +227,8 @@ This means that UNIONTYPEs are effectively look-at-only.
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-24T10:27:05+08:00" content="2016-03-24">
-              2016-03-24
+            <time itemprop="dateCreated" datetime="2016-03-31T10:07:57+08:00" content="2016-03-31">
+              2016-03-31
             </time>
           </span>
 
@@ -248,8 +238,8 @@ This means that UNIONTYPEs are effectively look-at-only.
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/24/Hive的复合类型UNION/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/Hive的复合类型UNION/" itemprop="commentsCount"></span>
+                <a href="/2016/03/31/HBase的物理模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/31/HBase的物理模型/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -268,12 +258,31 @@ This means that UNIONTYPEs are effectively look-at-only.
       
 
       
-        <span itemprop="articleBody"><p>这两天正在学Hive,学习到了复合数据类型ARRAY,MAP,STRUCT。</p>
-<h2 id="u7A81_u7136_u60F3_u5230"><a href="#u7A81_u7136_u60F3_u5230" class="headerlink" title="突然想到"></a>突然想到</h2><p>能不能把许多类型放在一起，用上面的类型嵌套，始终不太得劲。所以查了查，发现有个UNION类型好像可以干这个事。<br>百度之，资料不多，没啥用处。就找到了官网文档。</p>
-<p>如下：</p>
-<p><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f27r1rj8dhj20t60gptdt.jpg" alt=""></p>
-<p><strong>This means that UNIONTYPEs are effectively look-at-only.</strong></p>
-<p>这个类型目前只能看啊！卧槽◔ ‸◔?<br>没啥实际作用！</p>
+        <span itemprop="articleBody"><h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E" class="headerlink" title="<em>刚学习了HBase的物理模型，有些心得，记录一下~</em>"></a><em>刚学习了HBase的物理模型，有些心得，记录一下~</em></h3><h4 id="u4E00_u3001_u57FA_u672C_u6982_u5FF5"><a href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1_u3001region_server"><a href="#1_u3001region_server" class="headerlink" title="1、region server"></a>1、region server</h5><p>  HBase是分布式数据库，region server 就是每一个存储数据的节点。</p>
+<h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
+<h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
+<h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
+<h4 id="u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="四、region过大怎么办"></a>四、region过大怎么办</h4><p>按上面描述，region过大，也会出现插入、查询的速度降低的问题。</p>
+<p><em>解决：</em></p>
+<p>原来的一个region,拆成两个region。</p>
+<blockquote>
+<ul>
+<li>类似于细胞分裂</li>
+</ul>
+</blockquote>
+<h4 id="u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="五、region server过大怎么办"></a>五、region server过大怎么办</h4><p>路子和上面相同，分裂为两个region server。</p>
+<h4 id="u516D_u3001_u4E3E_u4F8B"><a href="#u516D_u3001_u4E3E_u4F8B" class="headerlink" title="六、举例"></a>六、举例</h4><p>原来一个region server中row key的索引是[1,1亿]。<br>现在分裂为两个region server,增加了一个节点。row key 索引分别是[1,5000万]、[5000万，1亿]。<br>这在总的索引表中，只有很细微的变化，就保证了存储文件的region不会变的很大(当然，region肯定是有限额的，超过多少，就会分裂)。<strong>所以，它就可以保证插入、查询的速度。</strong></p>
+<h4 id="u4E03_u3001_u7C7B_u6BD4"><a href="#u4E03_u3001_u7C7B_u6BD4" class="headerlink" title="七、类比"></a>七、类比</h4><p><em>region的分裂，可以想象成细胞的分裂。</em></p>
+<blockquote>
+<ul>
+<li>一直专注于一个细胞，细胞一旦太大，性能就变慢了，就<strong>裂变</strong>成新的小细胞。</li>
+</ul>
+</blockquote>
+<h4 id="u516B_u3001_u4F5C_u7528"><a href="#u516B_u3001_u4F5C_u7528" class="headerlink" title="八、作用"></a>八、作用</h4><blockquote>
+<ul>
+<li>保证了HBase的快速插入、查询。</li>
+</ul>
+</blockquote>
 </span>
       
     </div>
@@ -285,17 +294,13 @@ This means that UNIONTYPEs are effectively look-at-only.
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/18/Java的IO流/" rel="next" title="Java的IO流">
-                <i class="fa fa-chevron-left"></i> Java的IO流
+              <a href="/2016/03/30/maven工程添加依赖，查看源码/" rel="next" title="maven工程添加依赖，查看源码">
+                <i class="fa fa-chevron-left"></i> maven工程添加依赖，查看源码
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/" rel="prev" title="Hive自定义分隔符---自定义InputFormat">
-                Hive自定义分隔符---自定义InputFormat <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -322,8 +327,8 @@ This means that UNIONTYPEs are effectively look-at-only.
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/Hive的复合类型UNION/"
-           data-title="Hive的复合类型UNION" data-url="http://crazyhoney.github.io/2016/03/24/Hive的复合类型UNION/">
+      <div class="ds-thread" data-thread-key="2016/03/31/HBase的物理模型/"
+           data-title="HBase的物理模型" data-url="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/">
       </div>
     
   </div>
@@ -430,7 +435,7 @@ This means that UNIONTYPEs are effectively look-at-only.
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7A81_u7136_u60F3_u5230"><span class="nav-number">1.</span> <span class="nav-text">突然想到</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><span class="nav-number">1.</span> <span class="nav-text">刚学习了HBase的物理模型，有些心得，记录一下~</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1_u3001region_server"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、region server</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2_u3001region"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、region</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165"><span class="nav-number">1.2.</span> <span class="nav-text">二、问题引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848"><span class="nav-number">1.3.</span> <span class="nav-text">三、解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.4.</span> <span class="nav-text">四、region过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.5.</span> <span class="nav-text">五、region server过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516D_u3001_u4E3E_u4F8B"><span class="nav-number">1.6.</span> <span class="nav-text">六、举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E03_u3001_u7C7B_u6BD4"><span class="nav-number">1.7.</span> <span class="nav-text">七、类比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516B_u3001_u4F5C_u7528"><span class="nav-number">1.8.</span> <span class="nav-text">八、作用</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

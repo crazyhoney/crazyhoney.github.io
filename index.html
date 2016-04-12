@@ -197,15 +197,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -276,6 +267,110 @@
 <h1 id="u4E8C_u3001_u5C06hbase-site-xml_u653E_u5165src/main/resources_u76EE_u5F55_u4E0B"><a href="#u4E8C_u3001_u5C06hbase-site-xml_u653E_u5165src/main/resources_u76EE_u5F55_u4E0B" class="headerlink" title="二、将hbase-site.xml放入src/main/resources目录下"></a>二、将hbase-site.xml放入src/main/resources目录下</h1><h1 id="u4E09_u3001_u786E_u4FDDHDFS_u3001YARN_u3001HBase_u90FD_u6B63_u5E38_u542F_u52A8"><a href="#u4E09_u3001_u786E_u4FDDHDFS_u3001YARN_u3001HBase_u90FD_u6B63_u5E38_u542F_u52A8" class="headerlink" title="三、确保HDFS、YARN、HBase都正常启动"></a>三、确保HDFS、YARN、HBase都正常启动</h1>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/11/Java操作HBase的基本用法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" itemprop="url">
+                  微软2016校园招聘4月在线笔试2-403-Forbidden
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-07T13:34:52+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>昨天做了微软的在线笔试，那叫一个惨啊！</p>
+<p><img src="http://ww1.sinaimg.cn/large/75544e9fjw1f2o4608l54j205k05edfp.jpg" alt=""></p>
+<blockquote>
+<ul>
+<li>第一题目是全英文(我是很爱国好吗)</li>
+<li>该死的输入，半天搞不定</li>
+</ul>
+</blockquote>
+<p>，吐槽完毕，下面开始整理</p>
+<h1 id="u9898_u76EE"><a href="#u9898_u76EE" class="headerlink" title="题目"></a>题目</h1><h2 id="u8F93_u5165_uFF1A"><a href="#u8F93_u5165_uFF1A" class="headerlink" title="输入："></a>输入：</h2><p>样例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">5</span></span><br><span class="line">allow <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span>/<span class="number">30</span></span><br><span class="line">deny <span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line">allow <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">allow <span class="number">123.234</span><span class="number">.12</span><span class="number">.23</span>/<span class="number">3</span></span><br><span class="line">deny <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span></span><br><span class="line"><span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">1.2</span><span class="number">.3</span><span class="number">.5</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line"><span class="number">100.100</span><span class="number">.100</span><span class="number">.100</span></span><br><span class="line"><span class="number">219.142</span><span class="number">.53</span><span class="number">.100</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li>第一行两个数字n,m</li>
+<li>n:输入n个规则</li>
+<li>m:输入m个ip</li>
+</ul>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -409,6 +504,306 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/30/maven工程添加依赖，查看源码/" itemprop="url">
+                  maven工程添加依赖，查看源码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-30T14:06:20+08:00" content="2016-03-30">
+              2016-03-30
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/30/maven工程添加依赖，查看源码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/maven工程添加依赖，查看源码/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="u539F_u56E0"><a href="#u539F_u56E0" class="headerlink" title="原因"></a>原因</h1><p>最近在学习Hive，学习到了自定义函数UDF。要继承一个类org.apache.hadoop.hive.ql.exec.UDF<br>所以要添加Hive的依赖，下载源码才可以进行自定义函数。</p>
+<h1 id="u4E00_u3001_u6DFB_u52A0_u4F9D_u8D56"><a href="#u4E00_u3001_u6DFB_u52A0_u4F9D_u8D56" class="headerlink" title="一、添加依赖"></a>一、添加依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-exec<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-serde<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-service<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-metastore<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-common<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-cli<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-jdbc<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- more --&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>把以上依赖添加到maven工程的pom.xml中。按理来说，保存后，它会自动下载所依赖的jar包。但是可能是我哪里没有配置好，它没有自动下载。</li>
+</ul>
+</blockquote>
+<p>这个时候添加的依赖那里会出现一堆红叉。不要紧<br>，进入第二步。</p>
+<h1 id="u4E8C_u3001_u4E0B_u8F7D_u4F9D_u8D56_u7684jar_u5305"><a href="#u4E8C_u3001_u4E0B_u8F7D_u4F9D_u8D56_u7684jar_u5305" class="headerlink" title="二、下载依赖的jar包"></a>二、下载依赖的jar包</h1><h2 id="1_u3001_u6253_u5F00cmd_uFF0C_u8FDB_u5165_u5230_u9879_u76EE_u6240_u5728_u7684_u76EE_u5F55"><a href="#1_u3001_u6253_u5F00cmd_uFF0C_u8FDB_u5165_u5230_u9879_u76EE_u6240_u5728_u7684_u76EE_u5F55" class="headerlink" title="1、打开cmd，进入到项目所在的目录"></a>1、打开cmd，进入到项目所在的目录</h2><h2 id="2_u3001_u6267_u884Cmvn_clean_package_28_u8FD9_u6837_u53EF_u4EE5_u628A_u6240_u6709_u672A_u4E0B_u8F7D_u7684jar_u5305_u91CD_u65B0_u4E0B_u8F7D_29"><a href="#2_u3001_u6267_u884Cmvn_clean_package_28_u8FD9_u6837_u53EF_u4EE5_u628A_u6240_u6709_u672A_u4E0B_u8F7D_u7684jar_u5305_u91CD_u65B0_u4E0B_u8F7D_29" class="headerlink" title="2、执行mvn clean package(这样可以把所有未下载的jar包重新下载)"></a>2、执行mvn clean package(这样可以把所有未下载的jar包重新下载)</h2><blockquote>
+<ul>
+<li><p>此时需要耐心等待，因为服务器在国外（你懂滴）。</p>
+</li>
+<li><p>出现BULID SUCCESS即表示完成。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="3_u3001_u6D88_u9664_u7EA2_u53C9"><a href="#3_u3001_u6D88_u9664_u7EA2_u53C9" class="headerlink" title="3、消除红叉"></a>3、消除红叉</h2><p>此时，虽然jar包都已经下载完毕。但是红叉依旧存在。<br>此时在</p>
+<p><strong>项目上右键-&gt;Maven-&gt;Update project…</strong></p>
+<p>等它结束后，红叉都消失了</p>
+<p>p.s 我就是这样搞定的(不行的话，我也母鸡(╰_╯)# )</p>
+<h2 id="4_u3001_u6DFB_u52A0_u6E90_u7801"><a href="#4_u3001_u6DFB_u52A0_u6E90_u7801" class="headerlink" title="4、添加源码"></a>4、添加源码</h2><p>按理说，jar包我都下载好了。源代码我应该都可以看了啊。</p>
+<p>可是，问题依旧没有结束。。。</p>
+<p>eclipse中open type中输入hive<br><strong>结果：</strong></p>
+<h2 id="source_not_found"><a href="#source_not_found" class="headerlink" title="source not found"></a>source not found</h2><p>真是哔了狗了。我特么都下载了源代码，居然说找不到。闹哪样啊！！！</p>
+<h3 id="u5C1D_u8BD5_u2460"><a href="#u5C1D_u8BD5_u2460" class="headerlink" title="尝试①"></a>尝试①</h3><pre><code>添加external 源。把下好的jar包添加进去。还特么不行。
+</code></pre><h3 id="u5C1D_u8BD5_u2461"><a href="#u5C1D_u8BD5_u2461" class="headerlink" title="尝试②"></a>尝试②</h3><pre><code>我看到项目上右键-&gt;Maven里面有一个Download Sources
+我想着，不就是sources找不到吗，试试喽。点了一下。等了半天。居然好了。。。
+</code></pre><p><strong>看了一下，原来下载依赖的地方，多了一个以sources<br>结尾的jar包。可能必须要下载这个才可以吧。</strong></p>
+<h2 id="u6B64_u65F6_uFF0C_u6E90_u4EE3_u7801_u90FD_u5DF2_u7ECF_u53EF_u4EE5_u67E5_u770B_u4E86_u3002"><a href="#u6B64_u65F6_uFF0C_u6E90_u4EE3_u7801_u90FD_u5DF2_u7ECF_u53EF_u4EE5_u67E5_u770B_u4E86_u3002" class="headerlink" title="此时，源代码都已经可以查看了。"></a>此时，源代码都已经可以查看了。</h2>
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/29/Hive复杂数据类型的嵌套/" itemprop="url">
+                  Hive复杂数据类型的嵌套
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-29T10:05:55+08:00" content="2016-03-29">
+              2016-03-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/Hive复杂数据类型的嵌套/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/Hive复杂数据类型的嵌套/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>前几天尝试map,struct,map的嵌套，结果失败。之后又查到union还不完善，就以为这个办不成。<br>今早机缘巧合，看到一篇文章</p>
+<p>提到在嵌套多层的情况下，分隔符会随着复合类型嵌套层次的递增而发生变化，分隔符默认会以\001,\002,\003,\004…<br>变化。<br>我一看，不行那就试试喽，死马当活马医嘛，结果给“治”好了(￢_￢)。果然药不能停~~~</p>
+<h2 id="u4E0B_u9762_u6211_u4EEC_u5206_u9636_u6BB5_u6765_u641E_u8FD9_u4E2A_u5D4C_u5957_u5B9E_u9A8C_uFF0C_u9010_u5C42_u589E_u52A0_u96BE_u5EA6"><a href="#u4E0B_u9762_u6211_u4EEC_u5206_u9636_u6BB5_u6765_u641E_u8FD9_u4E2A_u5D4C_u5957_u5B9E_u9A8C_uFF0C_u9010_u5C42_u589E_u52A0_u96BE_u5EA6" class="headerlink" title="下面我们分阶段来搞这个嵌套实验，逐层增加难度"></a>下面我们分阶段来搞这个嵌套实验，逐层增加难度</h2><h1 id="map_u548Carray_u5D4C_u5957"><a href="#map_u548Carray_u5D4C_u5957" class="headerlink" title="map和array嵌套"></a>map和array嵌套</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> testmaparray(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>,</span><br><span class="line">  student_id <span class="built_in">int</span>,</span><br><span class="line">  staff_id <span class="built_in">int</span>,</span><br><span class="line">  <span class="keyword">value</span> <span class="built_in">int</span>,  </span><br><span class="line">  items <span class="built_in">array</span>&lt;</span><br><span class="line">              <span class="keyword">struct</span>&lt;</span><br><span class="line">                      <span class="keyword">value</span>:<span class="built_in">int</span>,</span><br><span class="line">                      staff_id:<span class="built_in">int</span>,</span><br><span class="line">                      logtime:<span class="built_in">date</span></span><br><span class="line">                    &gt;  </span><br><span class="line">             &gt;)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span></span><br><span class="line">collection items <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">' '</span></span><br><span class="line"><span class="keyword">map</span> <span class="keyword">keys</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span>;</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/29/Hive复杂数据类型的嵌套/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/" itemprop="url">
+                  Hive自定义分隔符---自定义InputFormat
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-25T10:23:04+08:00" content="2016-03-25">
+              2016-03-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/25/Hive自定义分隔符-自定义InputFormat/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25"><a href="#u540E_u9762_u518D_u6765_u653E_u622A_u56FE2016-03-25" class="headerlink" title="后面再来放截图2016-03-25"></a>后面再来放截图2016-03-25</h2><h1 id="u573A_u666F"><a href="#u573A_u666F" class="headerlink" title="场景"></a>场景</h1><p>一个公司中，上一个数据导入组有他们自己的表结构，定义的分隔符。</p>
+<p>你们数据处理组要用人家的数据。肯定不能改动人家的表啊，没有这个权限。</p>
+<p>假如数据导入组用的是$@_@$这种恶心的，又实用的分隔符(与内容重复的概率低)。</p>
+<p>你用Hive要进行处理，但是分隔符又不是Hive里面的分隔符，咋办涅？</p>
+<p><strong>解决方案：</strong></p>
+<blockquote>
+<p>*　自定义InputFormat类，来实现复杂分隔符的处理</p>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/25/Hive自定义分隔符-自定义InputFormat/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/24/Hive的复合类型UNION/" itemprop="url">
                   Hive的复合类型UNION
                 </a>
@@ -463,6 +858,295 @@
 
             
           </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/18/Java的IO流/" itemprop="url">
+                  Java的IO流
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-18T19:19:46+08:00" content="2016-03-18">
+              2016-03-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/Java的IO流/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/Java的IO流/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>//有时间再排版吧，累觉不爱 3/18</p>
+<h1 id="u4E00_u3001Java_u7684_u6D41_uFF1A"><a href="#u4E00_u3001Java_u7684_u6D41_uFF1A" class="headerlink" title="一、Java的流："></a>一、Java的流：</h1><blockquote>
+<ul>
+<li>各种各样的流对应各种各样的管道，它们有些可以套在一起使用。</li>
+</ul>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/75544e9fjw1f214xcgrxkj20qk04nac5.jpg" alt=""></p>
+<h1 id="u4E8C_u3001_u5206_u7C7B_uFF1A"><a href="#u4E8C_u3001_u5206_u7C7B_uFF1A" class="headerlink" title="二、分类："></a>二、分类：</h1><blockquote>
+<ul>
+<li>输入流，输出流——-文件的流向不同</li>
+</ul>
+</blockquote>
+<h2 id="u8F93_u5165_u6D41_3A_u8FDB_u5165_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29"><a href="#u8F93_u5165_u6D41_3A_u8FDB_u5165_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29" class="headerlink" title="<strong>输入流:进入程序(写的代码)</strong>"></a><strong>输入流:进入程序(写的代码)</strong></h2><h2 id="u8F93_u51FA_u6D41_3A_u4ECE_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29_u51FA_u53BB"><a href="#u8F93_u51FA_u6D41_3A_u4ECE_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29_u51FA_u53BB" class="headerlink" title="<strong>输出流:从程序(写的代码)出去</strong>"></a><strong>输出流:从程序(写的代码)出去</strong></h2><blockquote>
+<ul>
+<li><p>字节流，字符流——-处理的数据单位不同</p>
+</li>
+<li><p>节点流，处理流——-功能不同</p>
+</li>
+</ul>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/18/Java的IO流/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/17/SQL和数据库设计/" itemprop="url">
+                  SQL和数据库设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T15:56:41+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/SQL和数据库设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/SQL和数据库设计/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>(从mysql入手)<br>先数据库，再表，再有数据</p>
+<h2 id="u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406"><a href="#u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406" class="headerlink" title="一、数据库管理"></a>一、数据库管理</h2><h3 id="1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93"><a href="#1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93" class="headerlink" title="1、查询所有数据库"></a>1、查询所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">databases</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2_u3001_u521B_u5EFA_u6570_u636E_u5E93"><a href="#2_u3001_u521B_u5EFA_u6570_u636E_u5E93" class="headerlink" title="2、创建数据库"></a>2、创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称      <span class="comment">--使用默认字符集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8</span></span><br></pre></td></tr></table></figure>
+<h3 id="3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6"><a href="#3_u3001_u67E5_u770B_u6570_u636E_u5E93_u7684_u9ED8_u8BA4_u5B57_u7B26_u96C6" class="headerlink" title="3、查看数据库的默认字符集"></a>3、查看数据库的默认字符集</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> 数据库名称</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/17/SQL和数据库设计/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/17/Java线程复习/" itemprop="url">
+                  Java线程复习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T11:06:14+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/Java线程复习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/Java线程复习/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="join_28_29_u64CD_u4F5C_uFF1A"><a href="#join_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="join()操作："></a>join()操作：</h2><p>在主程序中，线程.join()操作，会使主程序（主线程）等待线程执行结束才继续向下执行。<br><strong>相当于方法调用</strong>。</p>
+<h2 id="yield_28_29_u64CD_u4F5C_uFF1A"><a href="#yield_28_29_u64CD_u4F5C_uFF1A" class="headerlink" title="yield()操作："></a>yield()操作：</h2><p>当在这个线程中调用了yield()之后，当前线程会让出CPU资源一小会，让别的线程去执行。</p>
+<p>举例&lt;(￣︶￣)&gt;:</p>
+<p>你在厕所坑位前准备上厕所，来了一个人急的马上要拉到裤子上了。你调用一下yield(),说：“你先来吧，我先让你上厕所！”</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/17/Java线程复习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

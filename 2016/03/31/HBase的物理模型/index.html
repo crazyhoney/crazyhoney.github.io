@@ -61,7 +61,7 @@
 <meta property="og:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
 2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
 二、问题引入HBase的数据是按列族分开存储的。当一个">
-<meta property="og:updated_time" content="2016-03-31T02:29:36.144Z">
+<meta property="og:updated_time" content="2016-04-12T03:19:19.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase的物理模型">
 <meta name="twitter:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
@@ -262,6 +262,7 @@
 <h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
 <h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
 <h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
+<a id="more"></a>
 <h4 id="u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="四、region过大怎么办"></a>四、region过大怎么办</h4><p>按上面描述，region过大，也会出现插入、查询的速度降低的问题。</p>
 <p><em>解决：</em></p>
 <p>原来的一个region,拆成两个region。</p>

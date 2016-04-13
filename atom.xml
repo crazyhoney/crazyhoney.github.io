@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-04-13T07:11:00.061Z</updated>
+  <updated>2016-04-13T07:17:02.425Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://crazyhoney.github.io/2016/04/13/%E4%BD%BF%E7%94%A8MapReduce%E5%AF%BC%E5%87%BAHBase%E6%95%B0%E6%8D%AE/"/>
     <id>http://crazyhoney.github.io/2016/04/13/使用MapReduce导出HBase数据/</id>
     <published>2016-04-13T06:51:31.000Z</published>
-    <updated>2016-04-13T07:11:00.061Z</updated>
+    <updated>2016-04-13T07:17:02.425Z</updated>
     <content type="html"><![CDATA[<h1 id="u4E00_u3001_u9700_u8981_u7684_u5DE5_u5177_u7C7B"><a href="#u4E00_u3001_u9700_u8981_u7684_u5DE5_u5177_u7C7B" class="headerlink" title="一、需要的工具类"></a>一、需要的工具类</h1><h2 id="1_u3001TableMapReduceUtil"><a href="#1_u3001TableMapReduceUtil" class="headerlink" title="1、TableMapReduceUtil"></a>1、TableMapReduceUtil</h2><p><em>作用：设置传入MR的HBase的表名等信息</em></p>
 <h2 id="2_u3001TableMapper"><a href="#2_u3001TableMapper" class="headerlink" title="2、TableMapper"></a>2、TableMapper</h2><p><em>作用：mapper类继承该类，实现对HBase表的操作</em></p>
 <h1 id="u4E8C_u3001_u5B9E_u73B0_u7684_u7248_u672C"><a href="#u4E8C_u3001_u5B9E_u73B0_u7684_u7248_u672C" class="headerlink" title="二、实现的版本"></a>二、实现的版本</h1><h2 id="u7248_u672C_u4E00"><a href="#u7248_u672C_u4E00" class="headerlink" title="版本一"></a>版本一</h2><blockquote>
@@ -31,7 +31,11 @@
 <h2 id="u7248_u672C_u4E8C"><a href="#u7248_u672C_u4E8C" class="headerlink" title="版本二"></a>版本二</h2><blockquote>
 <ul>
 <li>输入：表名，输出路径，一个列族：一个列</li>
-<li>输出：该表所有行的该列族，该列, 值到指定目录<h2 id="u7248_u672C_u4E09"><a href="#u7248_u672C_u4E09" class="headerlink" title="版本三"></a>版本三</h2></li>
+<li>输出：该表所有行的该列族，该列, 值到指定目录</li>
+</ul>
+</blockquote>
+<h2 id="u7248_u672C_u4E09"><a href="#u7248_u672C_u4E09" class="headerlink" title="版本三"></a>版本三</h2><blockquote>
+<ul>
 <li>输入：表名，输出路径，N，列族：列 。。。</li>
 <li>输出：该表所有行的N个（列族，该列, 值）到指定目录</li>
 </ul>
@@ -54,7 +58,11 @@
 <h2 id="u7248_u672C_u4E8C"><a href="#u7248_u672C_u4E8C" class="headerlink" title="版本二"></a>版本二</h2><blockquote>
 <ul>
 <li>输入：表名，输出路径，一个列族：一个列</li>
-<li>输出：该表所有行的该列族，该列, 值到指定目录<h2 id="u7248_u672C_u4E09"><a href="#u7248_u672C_u4E09" class="headerlink" title="版本三"></a>版本三</h2></li>
+<li>输出：该表所有行的该列族，该列, 值到指定目录</li>
+</ul>
+</blockquote>
+<h2 id="u7248_u672C_u4E09"><a href="#u7248_u672C_u4E09" class="headerlink" title="版本三"></a>版本三</h2><blockquote>
+<ul>
 <li>输入：表名，输出路径，N，列族：列 。。。</li>
 <li>输出：该表所有行的N个（列族，该列, 值）到指定目录</li>
 </ul>

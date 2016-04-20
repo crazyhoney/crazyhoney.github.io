@@ -51,22 +51,41 @@
 
 
 
-<meta name="description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
+<meta name="description" content="HBase中的observer分为三类:
+MasterObserver、RegionObserver、WALOBserver。
+自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
+
+
+覆盖其中的方法，实现需求
+
+
+2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBase的物理模型">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/index.html">
+<meta property="og:title" content="HBase的触发器——Observer">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/04/20/HBase的触发器——Observer/index.html">
 <meta property="og:site_name" content="CrazyHoney">
-<meta property="og:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
-<meta property="og:updated_time" content="2016-04-12T03:19:19.389Z">
+<meta property="og:description" content="HBase中的observer分为三类:
+MasterObserver、RegionObserver、WALOBserver。
+自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
+
+
+覆盖其中的方法，实现需求
+
+
+2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f33buutj2oj20rn0akahr.jpg">
+<meta property="og:updated_time" content="2016-04-20T10:09:04.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBase的物理模型">
-<meta name="twitter:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
+<meta name="twitter:title" content="HBase的触发器——Observer">
+<meta name="twitter:description" content="HBase中的observer分为三类:
+MasterObserver、RegionObserver、WALOBserver。
+自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
+
+
+覆盖其中的方法，实现需求
+
+
+2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
 
 
 
@@ -78,7 +97,7 @@
   };
 </script>
 
-  <title> HBase的物理模型 | CrazyHoney </title>
+  <title> HBase的触发器——Observer | CrazyHoney </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -227,7 +246,7 @@
             
             
               
-                HBase的物理模型
+                HBase的触发器——Observer
               
             
           </h1>
@@ -238,8 +257,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-31T10:07:57+08:00" content="2016-03-31">
-              2016-03-31
+            <time itemprop="dateCreated" datetime="2016-04-20T17:57:59+08:00" content="2016-04-20">
+              2016-04-20
             </time>
           </span>
 
@@ -249,8 +268,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/31/HBase的物理模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/31/HBase的物理模型/" itemprop="commentsCount"></span>
+                <a href="/2016/04/20/HBase的触发器——Observer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/HBase的触发器——Observer/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -269,32 +288,18 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E" class="headerlink" title="<em>刚学习了HBase的物理模型，有些心得，记录一下~</em>"></a><em>刚学习了HBase的物理模型，有些心得，记录一下~</em></h3><h4 id="u4E00_u3001_u57FA_u672C_u6982_u5FF5"><a href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1_u3001region_server"><a href="#1_u3001region_server" class="headerlink" title="1、region server"></a>1、region server</h5><p>  HBase是分布式数据库，region server 就是每一个存储数据的节点。</p>
-<h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
-<h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
-<h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
-<a id="more"></a>
-<h4 id="u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="四、region过大怎么办"></a>四、region过大怎么办</h4><p>按上面描述，region过大，也会出现插入、查询的速度降低的问题。</p>
-<p><em>解决：</em></p>
-<p>原来的一个region,拆成两个region。</p>
+        <span itemprop="articleBody"><p>HBase中的observer分为三类:</p>
+<p>MasterObserver、RegionObserver、WALOBserver。</p>
+<h2 id="u81EA_u5B9A_u4E49MasterObserver"><a href="#u81EA_u5B9A_u4E49MasterObserver" class="headerlink" title="自定义MasterObserver"></a>自定义MasterObserver</h2><h2 id="1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B"><a href="#1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B" class="headerlink" title="1、继承BaseMasterObserver类"></a>1、继承BaseMasterObserver类</h2><p>(是MasterObserver的默认实现类)</p>
 <blockquote>
 <ul>
-<li>类似于细胞分裂</li>
+<li>覆盖其中的方法，实现需求</li>
 </ul>
 </blockquote>
-<h4 id="u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="五、region server过大怎么办"></a>五、region server过大怎么办</h4><p>路子和上面相同，分裂为两个region server。</p>
-<h4 id="u516D_u3001_u4E3E_u4F8B"><a href="#u516D_u3001_u4E3E_u4F8B" class="headerlink" title="六、举例"></a>六、举例</h4><p>原来一个region server中row key的索引是[1,1亿]。<br>现在分裂为两个region server,增加了一个节点。row key 索引分别是[1,5000万]、[5000万，1亿]。<br>这在总的索引表中，只有很细微的变化，就保证了存储文件的region不会变的很大(当然，region肯定是有限额的，超过多少，就会分裂)。<strong>所以，它就可以保证插入、查询的速度。</strong></p>
-<h4 id="u4E03_u3001_u7C7B_u6BD4"><a href="#u4E03_u3001_u7C7B_u6BD4" class="headerlink" title="七、类比"></a>七、类比</h4><p><em>region的分裂，可以想象成细胞的分裂。</em></p>
-<blockquote>
-<ul>
-<li>一直专注于一个细胞，细胞一旦太大，性能就变慢了，就<strong>裂变</strong>成新的小细胞。</li>
-</ul>
-</blockquote>
-<h4 id="u516B_u3001_u4F5C_u7528"><a href="#u516B_u3001_u4F5C_u7528" class="headerlink" title="八、作用"></a>八、作用</h4><blockquote>
-<ul>
-<li>保证了HBase的快速插入、查询。</li>
-</ul>
-</blockquote>
+<h2 id="2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B"><a href="#2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B" class="headerlink" title="2、打成jar包，放到hbase的lib目录下"></a>2、打成jar包，放到hbase的lib目录下</h2><h2 id="3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6"><a href="#3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6" class="headerlink" title="3、12.4.3.修改hbase的配置文件hbase-site.xml文件"></a>3、12.4.3.修改hbase的配置文件hbase-site.xml文件</h2><p><strong>增加如下内容</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.coprocessor.master.classes<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>自己写的类的全路径名<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="4_u3001_u91CD_u542FHBase_u96C6_u7FA4"><a href="#4_u3001_u91CD_u542FHBase_u96C6_u7FA4" class="headerlink" title="4、重启HBase集群"></a>4、重启HBase集群</h2><p><strong>在重启集群的时候，使用tail -f  …/hbse…master.log文件输出，判断是否出错。</strong></p>
+<h2 id="5_u3001_u4EE3_u7801"><a href="#5_u3001_u4EE3_u7801" class="headerlink" title="5、代码"></a>5、代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * PreCreateTableObserver.java</span><br><span class="line"> *</span><br><span class="line"> *  Created on: 2016年4月20日 下午3:20:20</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">package</span> HBase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HRegionInfo;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.BaseMasterObserver;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.MasterCoprocessorEnvironment;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.ObserverContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.commons.logging.LogFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@author</span> Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreCreateTableObserver</span> <span class="keyword">extends</span> <span class="title">BaseMasterObserver</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	Log log = LogFactory.getLog(PreCreateTableObserver.class);</span><br><span class="line">	<span class="comment">/* (non-Javadoc)</span><br><span class="line">	 * @see org.apache.hadoop.hbase.coprocessor.BaseMasterObserver#preCreateTable(org.apache.hadoop.hbase.coprocessor.ObserverContext, org.apache.hadoop.hbase.HTableDescriptor, org.apache.hadoop.hbase.HRegionInfo[])</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preCreateTable</span><span class="params">(</span><br><span class="line">			ObserverContext&lt;MasterCoprocessorEnvironment&gt; ctx,</span><br><span class="line">			HTableDescriptor desc, HRegionInfo[] regions)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		log.info(<span class="string">"\n这段代码被执行了\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u516D_u3001_u6D4B_u8BD5"><a href="#u516D_u3001_u6D4B_u8BD5" class="headerlink" title="六、测试"></a>六、测试</h2><p>在hbase建表后，查看master.log.发现：<br><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f33buutj2oj20rn0akahr.jpg" alt=""></p>
 </span>
       
     </div>
@@ -306,17 +311,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/30/maven工程添加依赖，查看源码/" rel="next" title="maven工程添加依赖，查看源码">
-                <i class="fa fa-chevron-left"></i> maven工程添加依赖，查看源码
+              <a href="/2016/04/20/使用Hive查询HBase数据/" rel="next" title="使用Hive查询HBase数据">
+                <i class="fa fa-chevron-left"></i> 使用Hive查询HBase数据
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" rel="prev" title="微软2016校园招聘4月在线笔试2-403-Forbidden">
-                微软2016校园招聘4月在线笔试2-403-Forbidden <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -343,8 +344,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/31/HBase的物理模型/"
-           data-title="HBase的物理模型" data-url="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/">
+      <div class="ds-thread" data-thread-key="2016/04/20/HBase的触发器——Observer/"
+           data-title="HBase的触发器——Observer" data-url="http://crazyhoney.github.io/2016/04/20/HBase的触发器——Observer/">
       </div>
     
   </div>
@@ -451,7 +452,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><span class="nav-number">1.</span> <span class="nav-text">刚学习了HBase的物理模型，有些心得，记录一下~</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1_u3001region_server"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、region server</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2_u3001region"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、region</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165"><span class="nav-number">1.2.</span> <span class="nav-text">二、问题引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848"><span class="nav-number">1.3.</span> <span class="nav-text">三、解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.4.</span> <span class="nav-text">四、region过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.5.</span> <span class="nav-text">五、region server过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516D_u3001_u4E3E_u4F8B"><span class="nav-number">1.6.</span> <span class="nav-text">六、举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E03_u3001_u7C7B_u6BD4"><span class="nav-number">1.7.</span> <span class="nav-text">七、类比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516B_u3001_u4F5C_u7528"><span class="nav-number">1.8.</span> <span class="nav-text">八、作用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u5B9A_u4E49MasterObserver"><span class="nav-number">1.</span> <span class="nav-text">自定义MasterObserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B"><span class="nav-number">2.</span> <span class="nav-text">1、继承BaseMasterObserver类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B"><span class="nav-number">3.</span> <span class="nav-text">2、打成jar包，放到hbase的lib目录下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6"><span class="nav-number">4.</span> <span class="nav-text">3、12.4.3.修改hbase的配置文件hbase-site.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_u3001_u91CD_u542FHBase_u96C6_u7FA4"><span class="nav-number">5.</span> <span class="nav-text">4、重启HBase集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5_u3001_u4EE3_u7801"><span class="nav-number">6.</span> <span class="nav-text">5、代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u516D_u3001_u6D4B_u8BD5"><span class="nav-number">7.</span> <span class="nav-text">六、测试</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

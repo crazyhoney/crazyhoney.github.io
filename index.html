@@ -229,6 +229,103 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/20/使用Hive查询HBase数据/" itemprop="url">
+                  使用Hive查询HBase数据
+                </a>
+              
+            
+          </h1>
+        
+		 <span id="busuanzi_container_page_pv" style="text-align: center">
+			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-04-20T10:25:02+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/20/使用Hive查询HBase数据/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/使用Hive查询HBase数据/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="u4E00_u3001_u914D_u7F6E"><a href="#u4E00_u3001_u914D_u7F6E" class="headerlink" title="一、配置"></a>一、配置</h1><h2 id="1_u3001_u6574_u5408_u5DE5_u5177_u7C7B"><a href="#1_u3001_u6574_u5408_u5DE5_u5177_u7C7B" class="headerlink" title="1、整合工具类"></a>1、整合工具类</h2><h3 id="281_29_u3001_u7248_u672C_u95EE_u9898"><a href="#281_29_u3001_u7248_u672C_u95EE_u9898" class="headerlink" title="(1)、版本问题"></a>(1)、版本问题</h3><blockquote>
+<ul>
+<li>我使用的是Hive-0.14.0和hbase-0.98.8</li>
+</ul>
+</blockquote>
+<p><strong>hive-Hbase-handler-0.14.0.jar</strong></p>
+<p><em>这个版本是跟着hive的</em></p>
+<h3 id="282_29_u3001_u6839_u636Ehive_u7248_u672C_u786E_u5B9Ahbase_u7248_u672C"><a href="#282_29_u3001_u6839_u636Ehive_u7248_u672C_u786E_u5B9Ahbase_u7248_u672C" class="headerlink" title="(2)、根据hive版本确定hbase版本"></a>(2)、根据hive版本确定hbase版本</h3><h4 id="u2460_u3001_u5728maven_u4ED3_u5E93_u627E_u5230_u5BF9_u5E94_u7684_u4F9D_u8D56_u6DFB_u52A0_u5230pom-xml_uFF0C_u4F8B_u5982_uFF1A"><a href="#u2460_u3001_u5728maven_u4ED3_u5E93_u627E_u5230_u5BF9_u5E94_u7684_u4F9D_u8D56_u6DFB_u52A0_u5230pom-xml_uFF0C_u4F8B_u5982_uFF1A" class="headerlink" title="①、在maven仓库找到对应的依赖添加到pom.xml，例如："></a>①、在maven仓库找到对应的依赖添加到pom.xml，例如：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hive-hbase-handler<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">version</span>&gt;</span>0.14.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/20/使用Hive查询HBase数据/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/18/使用MapReduce向HBase导入数据/" itemprop="url">
                   使用MapReduce向HBase导入数据
                 </a>
@@ -1099,115 +1196,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/18/Java的IO流/" itemprop="url">
-                  Java的IO流
-                </a>
-              
-            
-          </h1>
-        
-		 <span id="busuanzi_container_page_pv" style="text-align: center">
-			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-		</span>
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-03-18T19:19:46+08:00" content="2016-03-18">
-              2016-03-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/18/Java的IO流/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/Java的IO流/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>//有时间再排版吧，累觉不爱 3/18</p>
-<h1 id="u4E00_u3001Java_u7684_u6D41_uFF1A"><a href="#u4E00_u3001Java_u7684_u6D41_uFF1A" class="headerlink" title="一、Java的流："></a>一、Java的流：</h1><blockquote>
-<ul>
-<li>各种各样的流对应各种各样的管道，它们有些可以套在一起使用。</li>
-</ul>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/large/75544e9fjw1f214xcgrxkj20qk04nac5.jpg" alt=""></p>
-<h1 id="u4E8C_u3001_u5206_u7C7B_uFF1A"><a href="#u4E8C_u3001_u5206_u7C7B_uFF1A" class="headerlink" title="二、分类："></a>二、分类：</h1><blockquote>
-<ul>
-<li>输入流，输出流——-文件的流向不同</li>
-</ul>
-</blockquote>
-<h2 id="u8F93_u5165_u6D41_3A_u8FDB_u5165_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29"><a href="#u8F93_u5165_u6D41_3A_u8FDB_u5165_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29" class="headerlink" title="<strong>输入流:进入程序(写的代码)</strong>"></a><strong>输入流:进入程序(写的代码)</strong></h2><h2 id="u8F93_u51FA_u6D41_3A_u4ECE_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29_u51FA_u53BB"><a href="#u8F93_u51FA_u6D41_3A_u4ECE_u7A0B_u5E8F_28_u5199_u7684_u4EE3_u7801_29_u51FA_u53BB" class="headerlink" title="<strong>输出流:从程序(写的代码)出去</strong>"></a><strong>输出流:从程序(写的代码)出去</strong></h2><blockquote>
-<ul>
-<li><p>字节流，字符流——-处理的数据单位不同</p>
-</li>
-<li><p>节点流，处理流——-功能不同</p>
-</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/18/Java的IO流/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1254,7 +1242,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

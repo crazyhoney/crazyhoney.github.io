@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://crazyhoney.github.io/2016/04/20/%E4%BD%BF%E7%94%A8Hive%E6%9F%A5%E8%AF%A2HBase%E6%95%B0%E6%8D%AE/</loc>
+    <lastmod>2016-04-20T03:02:51.622Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://crazyhoney.github.io/2016/04/18/%E4%BD%BF%E7%94%A8MapReduce%E5%90%91HBase%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2016-04-19T03:23:51.909Z</lastmod>
   </url>

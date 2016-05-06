@@ -229,6 +229,101 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/06/多线程继承Thread和实现Runnable的区别/" itemprop="url">
+                  多线程继承Thread和实现Runnable的区别
+                </a>
+              
+            
+          </h1>
+        
+		 <span id="busuanzi_container_page_pv" style="text-align: center">
+			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-05-06T10:55:02+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/06/多线程继承Thread和实现Runnable的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/多线程继承Thread和实现Runnable的区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="u6267_u884C_u539F_u7406"><a href="#u6267_u884C_u539F_u7406" class="headerlink" title="执行原理"></a>执行原理</h1><p><strong>转自：<a href="http://blog.chinaunix.net/uid-20665441-id-310538.html">http://blog.chinaunix.net/uid-20665441-id-310538.html</a></strong></p>
+<h1 id="u5B9E_u73B0Runnable_u7684_u597D_u5904"><a href="#u5B9E_u73B0Runnable_u7684_u597D_u5904" class="headerlink" title="实现Runnable的好处"></a>实现Runnable的好处</h1><p><strong>转自：<a href="http://www.oschina.net/question/565065_86563">http://www.oschina.net/question/565065_86563</a></strong></p>
+<p> 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： </p>
+<p>(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线程）同程序的代码，数据有效的分离，较好地体现了面向对象的设计思想。 </p>
+<p>(2)可以避免由于Java的单继承特性带来的局限。我们经常碰到这样一种情况，即当我们要将已经继承了某一个类的子类放入多线程中，由于一个类不能同时有两个父类，所以不能用继承Thread类的方式，那么，这个类就只能采用实现Runnable接口的方式了。 </p>
+<p>(3)有利于程序的健壮性，代码能够被多个线程共享，代码与数据是独立的。当多个线程的执行代码来自同一个类的实例时，即称它们共享相同的代码。多个线程操作相同的数据，与它们的代码无关。当共享访问相同的对象是，即它们共享相同的数据。当线程被构造时，需要的代码和数据通过一个对象作为构造函数实参传递进去，这个对象就是一个实现了Runnable接口的类的实例。 </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/06/多线程继承Thread和实现Runnable的区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/05/SQL语句执行顺序/" itemprop="url">
                   SQL语句执行顺序
                 </a>
@@ -1136,112 +1231,6 @@ SNO PNO        GRADE
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" itemprop="url">
-                  微软2016校园招聘4月在线笔试2-403-Forbidden
-                </a>
-              
-            
-          </h1>
-        
-		 <span id="busuanzi_container_page_pv" style="text-align: center">
-			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-		</span>
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-04-07T13:34:52+08:00" content="2016-04-07">
-              2016-04-07
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>昨天做了微软的在线笔试，那叫一个惨啊！</p>
-<p><img src="http://ww1.sinaimg.cn/large/75544e9fjw1f2o4608l54j205k05edfp.jpg" alt=""></p>
-<blockquote>
-<ul>
-<li>第一题目是全英文(我是很爱国好吗)</li>
-<li>该死的输入，半天搞不定</li>
-</ul>
-</blockquote>
-<p>，吐槽完毕，下面开始整理</p>
-<h1 id="u9898_u76EE"><a href="#u9898_u76EE" class="headerlink" title="题目"></a>题目</h1><h2 id="u8F93_u5165_uFF1A"><a href="#u8F93_u5165_uFF1A" class="headerlink" title="输入："></a>输入：</h2><p>样例：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span> <span class="number">5</span></span><br><span class="line">allow <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span>/<span class="number">30</span></span><br><span class="line">deny <span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line">allow <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">allow <span class="number">123.234</span><span class="number">.12</span><span class="number">.23</span>/<span class="number">3</span></span><br><span class="line">deny <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span></span><br><span class="line"><span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">1.2</span><span class="number">.3</span><span class="number">.5</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line"><span class="number">100.100</span><span class="number">.100</span><span class="number">.100</span></span><br><span class="line"><span class="number">219.142</span><span class="number">.53</span><span class="number">.100</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<ul>
-<li>第一行两个数字n,m</li>
-<li>n:输入n个规则</li>
-<li>m:输入m个ip</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1288,7 +1277,7 @@ SNO PNO        GRADE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

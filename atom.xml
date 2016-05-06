@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-05-05T14:37:55.081Z</updated>
+  <updated>2016-05-06T03:06:00.558Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[多线程继承Thread和实现Runnable的区别]]></title>
+    <link href="http://crazyhoney.github.io/2016/05/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BB%A7%E6%89%BFThread%E5%92%8C%E5%AE%9E%E7%8E%B0Runnable%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://crazyhoney.github.io/2016/05/06/多线程继承Thread和实现Runnable的区别/</id>
+    <published>2016-05-06T02:55:02.000Z</published>
+    <updated>2016-05-06T03:06:00.558Z</updated>
+    <content type="html"><![CDATA[<h1 id="u6267_u884C_u539F_u7406"><a href="#u6267_u884C_u539F_u7406" class="headerlink" title="执行原理"></a>执行原理</h1><p><strong>转自：<a href="http://blog.chinaunix.net/uid-20665441-id-310538.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-20665441-id-310538.html</a></strong></p>
+<h1 id="u5B9E_u73B0Runnable_u7684_u597D_u5904"><a href="#u5B9E_u73B0Runnable_u7684_u597D_u5904" class="headerlink" title="实现Runnable的好处"></a>实现Runnable的好处</h1><p><strong>转自：<a href="http://www.oschina.net/question/565065_86563" target="_blank" rel="external">http://www.oschina.net/question/565065_86563</a></strong></p>
+<p> 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： </p>
+<p>(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线程）同程序的代码，数据有效的分离，较好地体现了面向对象的设计思想。 </p>
+<p>(2)可以避免由于Java的单继承特性带来的局限。我们经常碰到这样一种情况，即当我们要将已经继承了某一个类的子类放入多线程中，由于一个类不能同时有两个父类，所以不能用继承Thread类的方式，那么，这个类就只能采用实现Runnable接口的方式了。 </p>
+<p>(3)有利于程序的健壮性，代码能够被多个线程共享，代码与数据是独立的。当多个线程的执行代码来自同一个类的实例时，即称它们共享相同的代码。多个线程操作相同的数据，与它们的代码无关。当共享访问相同的对象是，即它们共享相同的数据。当线程被构造时，需要的代码和数据通过一个对象作为构造函数实参传递进去，这个对象就是一个实现了Runnable接口的类的实例。 </p>
+<a id="more"></a>
+<h1 id="u81EA_u5DF1_u7684_u601D_u8003"><a href="#u81EA_u5DF1_u7684_u601D_u8003" class="headerlink" title="自己的思考"></a>自己的思考</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">runnableThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="comment">//synchronized (this) &#123;</span></span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (<span class="keyword">this</span>.ticket &gt; <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="comment">//synchronized (this) &#123;</span></span><br><span class="line">						System.out.println(<span class="string">"卖票：ticket"</span> + <span class="keyword">this</span>.ticket-- + <span class="string">"  ---当前线程id:"</span></span><br><span class="line">								+ Thread.currentThread().getId()</span><br><span class="line">								+ <span class="string">"---余票"</span>+ticket);</span><br><span class="line">					<span class="comment">//&#125;</span></span><br><span class="line">					<span class="comment">/*try &#123;</span><br><span class="line">						Thread.sleep(100);</span><br><span class="line">					&#125; catch (InterruptedException e) &#123;</span><br><span class="line">						e.printStackTrace();</span><br><span class="line">					&#125;</span><br><span class="line">                    */</span></span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		runnableThread mt1 = <span class="keyword">new</span> runnableThread();</span><br><span class="line">		runnableThread mt2 = <span class="keyword">new</span> runnableThread();</span><br><span class="line">		runnableThread mt3 = <span class="keyword">new</span> runnableThread();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();<span class="comment">// 启动了三个线程共享那一个类里面的数据</span></span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();</span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码run()方法中，如果Thread.sleep(100),则买票时会出现问题，如：第10张票被卖了2次。</p>
+<p><strong>保证安全的方法：把卖票的步骤用synchronized包起来。那么就不会出问题了。</strong></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="u6267_u884C_u539F_u7406"><a href="#u6267_u884C_u539F_u7406" class="headerlink" title="执行原理"></a>执行原理</h1><p><strong>转自：<a href="http://blog.chinaunix.net/uid-20665441-id-310538.html">http://blog.chinaunix.net/uid-20665441-id-310538.html</a></strong></p>
+<h1 id="u5B9E_u73B0Runnable_u7684_u597D_u5904"><a href="#u5B9E_u73B0Runnable_u7684_u597D_u5904" class="headerlink" title="实现Runnable的好处"></a>实现Runnable的好处</h1><p><strong>转自：<a href="http://www.oschina.net/question/565065_86563">http://www.oschina.net/question/565065_86563</a></strong></p>
+<p> 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： </p>
+<p>(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线程）同程序的代码，数据有效的分离，较好地体现了面向对象的设计思想。 </p>
+<p>(2)可以避免由于Java的单继承特性带来的局限。我们经常碰到这样一种情况，即当我们要将已经继承了某一个类的子类放入多线程中，由于一个类不能同时有两个父类，所以不能用继承Thread类的方式，那么，这个类就只能采用实现Runnable接口的方式了。 </p>
+<p>(3)有利于程序的健壮性，代码能够被多个线程共享，代码与数据是独立的。当多个线程的执行代码来自同一个类的实例时，即称它们共享相同的代码。多个线程操作相同的数据，与它们的代码无关。当共享访问相同的对象是，即它们共享相同的数据。当线程被构造时，需要的代码和数据通过一个对象作为构造函数实参传递进去，这个对象就是一个实现了Runnable接口的类的实例。 </p>]]>
+    
+    </summary>
+    
+      <category term="Java" scheme="http://crazyhoney.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[SQL语句执行顺序]]></title>
@@ -1117,52 +1148,6 @@ NULL  NULL
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="u7B56_u7565_u6A21_u5F0F"><a href="#u7B56_u7565_u6A21_u5F0F" class="headerlink" title="策略模式"></a>策略模式</h1><h2 id="u7B80_u5355_u7684_u]]>
-    </summary>
-    
-      <category term="设计模式" scheme="http://crazyhoney.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式（五）]]></title>
-    <link href="http://crazyhoney.github.io/2016/03/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%BA%94%EF%BC%89/"/>
-    <id>http://crazyhoney.github.io/2016/03/14/设计模式（五）/</id>
-    <published>2016-03-14T04:46:43.000Z</published>
-    <updated>2016-05-04T14:44:12.366Z</updated>
-    <content type="html"><![CDATA[<h1 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A" class="headerlink" title="简单的说就是(๑•ᴗ•๑)："></a>简单的说就是(๑•ᴗ•๑)：</h2><blockquote>
-<ul>
-<li>你点一下一个按钮（比如说：帮助-&gt;关于），你再点一次的话，它不会再弹出一个窗口。</li>
-<li>类比：<br>  计划生育，让你只能生一个孩子。</li>
-</ul>
-</blockquote>
-<h2 id="u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_uFFE2__uFFE2_29_uFF1A"><a href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_uFFE2__uFFE2_29_uFF1A" class="headerlink" title="专业一点就是(￢_￢)："></a>专业一点就是(￢_￢)：</h2><blockquote>
-<ul>
-<li>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
-</ul>
-</blockquote>
-<p><img src="http://www.cxyclub.cn/Upload/Images/2013072518/40FF1255E7B9ADFF.png" alt="Singleton"></p>
-<h2 id="u505A_u6CD5"><a href="#u505A_u6CD5" class="headerlink" title="做法"></a>做法</h2><blockquote>
-<ul>
-<li><strong>构造函数私有化（类外不可以调用构造函数，便不可以创建对象）</strong></li>
-<li><strong>有一个私有的静态的成员变量（属性），可以是指针、引用或者对象（见“饿汉”）</strong></li>
-<li><strong>有一个公有的函数，可以返回一个该类对象（如果有的话直接返回，如果没有则创建）</strong></li>
-</ul>
-</blockquote>
-<h2 id="u61D2_u6C49"><a href="#u61D2_u6C49" class="headerlink" title="懒汉"></a>懒汉</h2><blockquote>
-<ul>
-<li><strong>顾名思义：需要创建时才创建对象</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Singleton.cpp</span><br><span class="line"> *	单例模式</span><br><span class="line"> *  Created on: 2016年3月11日 下午3:38:31</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 懒汉：需要创建时才创建对象</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">class</span> Singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> Singleton * instance;</span><br><span class="line">	Singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> Singleton * <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (instance == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      <span class="comment">//懒汉，进入函数后判断是否创建，如果未创建则创建对象</span></span><br><span class="line">			instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里不创建</span></span><br><span class="line">Singleton* Singleton::instance = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//懒汉</span></span><br><span class="line">	Singleton * s1 = Singleton::GetInstance();</span><br><span class="line">	Singleton * s2 = Singleton::GetInstance();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u997F_u6C49"><a href="#u997F_u6C49" class="headerlink" title="饿汉"></a>饿汉</h2><blockquote>
-<ul>
-<li><strong>顾名思义：从一开始加载的时候就创建对象</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * singleton2.cpp</span><br><span class="line"> *	单例模式  饿汉</span><br><span class="line"> *  Created on: 2016年3月11日 下午4:24:03</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">class</span> singleton &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> singleton* instance;</span><br><span class="line">	singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> singleton* <span class="title">GetInstace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//饿汉，直接返回已经创建好的对象</span></span><br><span class="line">		<span class="keyword">return</span> instance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里直接创建</span></span><br><span class="line">singleton* singleton::instance = <span class="keyword">new</span> singleton();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	singleton* s1 = singleton::GetInstace();</span><br><span class="line">	singleton* s2 = singleton::GetInstace();</span><br><span class="line">	<span class="keyword">if</span> (s1 == s2) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"s1 == s2"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h1 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="u7B80_u5355_u7684_u]]>
     </summary>
     
       <category term="设计模式" scheme="http://crazyhoney.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>

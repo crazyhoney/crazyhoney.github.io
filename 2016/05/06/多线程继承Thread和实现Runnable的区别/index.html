@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HBase," />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -51,22 +51,25 @@
 
 
 
-<meta name="description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
+<meta name="description" content="执行原理转自：http://blog.chinaunix.net/uid-20665441-id-310538.html
+实现Runnable的好处转自：http://www.oschina.net/question/565065_86563
+ 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： 
+(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBase的物理模型">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/index.html">
+<meta property="og:title" content="多线程继承Thread和实现Runnable的区别">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/05/06/多线程继承Thread和实现Runnable的区别/index.html">
 <meta property="og:site_name" content="CrazyHoney">
-<meta property="og:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
-<meta property="og:updated_time" content="2016-05-04T14:40:55.847Z">
+<meta property="og:description" content="执行原理转自：http://blog.chinaunix.net/uid-20665441-id-310538.html
+实现Runnable的好处转自：http://www.oschina.net/question/565065_86563
+ 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： 
+(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线">
+<meta property="og:updated_time" content="2016-05-06T03:06:00.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBase的物理模型">
-<meta name="twitter:description" content="刚学习了HBase的物理模型，有些心得，记录一下~&quot;&amp;gt;刚学习了HBase的物理模型，有些心得，记录一下~一、基本概念1、region server  HBase是分布式数据库，region server 就是每一个存储数据的节点。
-2、region  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。
-二、问题引入HBase的数据是按列族分开存储的。当一个">
+<meta name="twitter:title" content="多线程继承Thread和实现Runnable的区别">
+<meta name="twitter:description" content="执行原理转自：http://blog.chinaunix.net/uid-20665441-id-310538.html
+实现Runnable的好处转自：http://www.oschina.net/question/565065_86563
+ 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： 
+(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线">
 
 
 
@@ -78,7 +81,7 @@
   };
 </script>
 
-  <title> HBase的物理模型 | CrazyHoney </title>
+  <title> 多线程继承Thread和实现Runnable的区别 | CrazyHoney </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -227,7 +230,7 @@
             
             
               
-                HBase的物理模型
+                多线程继承Thread和实现Runnable的区别
               
             
           </h1>
@@ -238,8 +241,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-03-31T10:07:57+08:00" content="2016-03-31">
-              2016-03-31
+            <time itemprop="dateCreated" datetime="2016-05-06T10:55:02+08:00" content="2016-05-06">
+              2016-05-06
             </time>
           </span>
 
@@ -249,8 +252,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/31/HBase的物理模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/31/HBase的物理模型/" itemprop="commentsCount"></span>
+                <a href="/2016/05/06/多线程继承Thread和实现Runnable的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/多线程继承Thread和实现Runnable的区别/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -269,32 +272,16 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E" class="headerlink" title="<em>刚学习了HBase的物理模型，有些心得，记录一下~</em>"></a><em>刚学习了HBase的物理模型，有些心得，记录一下~</em></h3><h4 id="u4E00_u3001_u57FA_u672C_u6982_u5FF5"><a href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1_u3001region_server"><a href="#1_u3001region_server" class="headerlink" title="1、region server"></a>1、region server</h5><p>  HBase是分布式数据库，region server 就是每一个存储数据的节点。</p>
-<h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
-<h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
-<h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
+        <span itemprop="articleBody"><h1 id="u6267_u884C_u539F_u7406"><a href="#u6267_u884C_u539F_u7406" class="headerlink" title="执行原理"></a>执行原理</h1><p><strong>转自：<a href="http://blog.chinaunix.net/uid-20665441-id-310538.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-20665441-id-310538.html</a></strong></p>
+<h1 id="u5B9E_u73B0Runnable_u7684_u597D_u5904"><a href="#u5B9E_u73B0Runnable_u7684_u597D_u5904" class="headerlink" title="实现Runnable的好处"></a>实现Runnable的好处</h1><p><strong>转自：<a href="http://www.oschina.net/question/565065_86563" target="_blank" rel="external">http://www.oschina.net/question/565065_86563</a></strong></p>
+<p> 可见， 实现Runnable接口相对于继承Thread类来说，有如下显著的好处： </p>
+<p>(1)适合多个相同程序代码的线程去处理同一资源的情况，把虚拟CPU（线程）同程序的代码，数据有效的分离，较好地体现了面向对象的设计思想。 </p>
+<p>(2)可以避免由于Java的单继承特性带来的局限。我们经常碰到这样一种情况，即当我们要将已经继承了某一个类的子类放入多线程中，由于一个类不能同时有两个父类，所以不能用继承Thread类的方式，那么，这个类就只能采用实现Runnable接口的方式了。 </p>
+<p>(3)有利于程序的健壮性，代码能够被多个线程共享，代码与数据是独立的。当多个线程的执行代码来自同一个类的实例时，即称它们共享相同的代码。多个线程操作相同的数据，与它们的代码无关。当共享访问相同的对象是，即它们共享相同的数据。当线程被构造时，需要的代码和数据通过一个对象作为构造函数实参传递进去，这个对象就是一个实现了Runnable接口的类的实例。 </p>
 <a id="more"></a>
-<h4 id="u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="四、region过大怎么办"></a>四、region过大怎么办</h4><p>按上面描述，region过大，也会出现插入、查询的速度降低的问题。</p>
-<p><em>解决：</em></p>
-<p>原来的一个region,拆成两个region。</p>
-<blockquote>
-<ul>
-<li>类似于细胞分裂</li>
-</ul>
-</blockquote>
-<h4 id="u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><a href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E" class="headerlink" title="五、region server过大怎么办"></a>五、region server过大怎么办</h4><p>路子和上面相同，分裂为两个region server。</p>
-<h4 id="u516D_u3001_u4E3E_u4F8B"><a href="#u516D_u3001_u4E3E_u4F8B" class="headerlink" title="六、举例"></a>六、举例</h4><p>原来一个region server中row key的索引是[1,1亿]。<br>现在分裂为两个region server,增加了一个节点。row key 索引分别是[1,5000万]、[5000万，1亿]。<br>这在总的索引表中，只有很细微的变化，就保证了存储文件的region不会变的很大(当然，region肯定是有限额的，超过多少，就会分裂)。<strong>所以，它就可以保证插入、查询的速度。</strong></p>
-<h4 id="u4E03_u3001_u7C7B_u6BD4"><a href="#u4E03_u3001_u7C7B_u6BD4" class="headerlink" title="七、类比"></a>七、类比</h4><p><em>region的分裂，可以想象成细胞的分裂。</em></p>
-<blockquote>
-<ul>
-<li>一直专注于一个细胞，细胞一旦太大，性能就变慢了，就<strong>裂变</strong>成新的小细胞。</li>
-</ul>
-</blockquote>
-<h4 id="u516B_u3001_u4F5C_u7528"><a href="#u516B_u3001_u4F5C_u7528" class="headerlink" title="八、作用"></a>八、作用</h4><blockquote>
-<ul>
-<li>保证了HBase的快速插入、查询。</li>
-</ul>
-</blockquote>
+<h1 id="u81EA_u5DF1_u7684_u601D_u8003"><a href="#u81EA_u5DF1_u7684_u601D_u8003" class="headerlink" title="自己的思考"></a>自己的思考</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">runnableThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			<span class="comment">//synchronized (this) &#123;</span></span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (<span class="keyword">this</span>.ticket &gt; <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="comment">//synchronized (this) &#123;</span></span><br><span class="line">						System.out.println(<span class="string">"卖票：ticket"</span> + <span class="keyword">this</span>.ticket-- + <span class="string">"  ---当前线程id:"</span></span><br><span class="line">								+ Thread.currentThread().getId()</span><br><span class="line">								+ <span class="string">"---余票"</span>+ticket);</span><br><span class="line">					<span class="comment">//&#125;</span></span><br><span class="line">					<span class="comment">/*try &#123;</span><br><span class="line">						Thread.sleep(100);</span><br><span class="line">					&#125; catch (InterruptedException e) &#123;</span><br><span class="line">						e.printStackTrace();</span><br><span class="line">					&#125;</span><br><span class="line">                    */</span></span><br><span class="line">				&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		runnableThread mt1 = <span class="keyword">new</span> runnableThread();</span><br><span class="line">		runnableThread mt2 = <span class="keyword">new</span> runnableThread();</span><br><span class="line">		runnableThread mt3 = <span class="keyword">new</span> runnableThread();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();<span class="comment">// 启动了三个线程共享那一个类里面的数据</span></span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();</span><br><span class="line">		<span class="keyword">new</span> Thread(mt1).start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码run()方法中，如果Thread.sleep(100),则买票时会出现问题，如：第10张票被卖了2次。</p>
+<p><strong>保证安全的方法：把卖票的步骤用synchronized包起来。那么就不会出问题了。</strong></p>
 </span>
       
     </div>
@@ -303,7 +290,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HBase/" rel="tag">#HBase</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
         </div>
       
@@ -312,17 +299,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/30/maven工程添加依赖，查看源码/" rel="next" title="maven工程添加依赖，查看源码">
-                <i class="fa fa-chevron-left"></i> maven工程添加依赖，查看源码
+              <a href="/2016/05/05/SQL语句执行顺序/" rel="next" title="SQL语句执行顺序">
+                <i class="fa fa-chevron-left"></i> SQL语句执行顺序
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/07/微软2016校园招聘4月在线笔试2-403-Forbidden/" rel="prev" title="微软2016校园招聘4月在线笔试2-403-Forbidden">
-                微软2016校园招聘4月在线笔试2-403-Forbidden <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -349,8 +332,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/31/HBase的物理模型/"
-           data-title="HBase的物理模型" data-url="http://crazyhoney.github.io/2016/03/31/HBase的物理模型/">
+      <div class="ds-thread" data-thread-key="2016/05/06/多线程继承Thread和实现Runnable的区别/"
+           data-title="多线程继承Thread和实现Runnable的区别" data-url="http://crazyhoney.github.io/2016/05/06/多线程继承Thread和实现Runnable的区别/">
       </div>
     
   </div>
@@ -457,7 +440,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><span class="nav-number">1.</span> <span class="nav-text">刚学习了HBase的物理模型，有些心得，记录一下~</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1_u3001region_server"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、region server</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2_u3001region"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、region</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165"><span class="nav-number">1.2.</span> <span class="nav-text">二、问题引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848"><span class="nav-number">1.3.</span> <span class="nav-text">三、解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u56DB_u3001region_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.4.</span> <span class="nav-text">四、region过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E94_u3001region_server_u8FC7_u5927_u600E_u4E48_u529E"><span class="nav-number">1.5.</span> <span class="nav-text">五、region server过大怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516D_u3001_u4E3E_u4F8B"><span class="nav-number">1.6.</span> <span class="nav-text">六、举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u4E03_u3001_u7C7B_u6BD4"><span class="nav-number">1.7.</span> <span class="nav-text">七、类比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u516B_u3001_u4F5C_u7528"><span class="nav-number">1.8.</span> <span class="nav-text">八、作用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u6267_u884C_u539F_u7406"><span class="nav-number">1.</span> <span class="nav-text">执行原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u5B9E_u73B0Runnable_u7684_u597D_u5904"><span class="nav-number">2.</span> <span class="nav-text">实现Runnable的好处</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u81EA_u5DF1_u7684_u601D_u8003"><span class="nav-number">3.</span> <span class="nav-text">自己的思考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

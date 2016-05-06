@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://crazyhoney.github.io/2016/03/17/SQL%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2016-05-06T01:52:26.251Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://crazyhoney.github.io/2016/05/05/SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</loc>
+    <lastmod>2016-05-05T14:37:55.081Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://crazyhoney.github.io/2016/05/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E5%90%84%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%9A%84%E6%80%9D%E6%83%B3%E5%92%8C%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2016-05-05T08:36:14.550Z</lastmod>
   </url>
@@ -59,11 +69,6 @@
   <url>
     <loc>http://crazyhoney.github.io/2016/04/20/%E4%BD%BF%E7%94%A8Hive%E6%9F%A5%E8%AF%A2HBase%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2016-05-04T14:42:31.960Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://crazyhoney.github.io/2016/03/17/SQL%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2016-05-04T14:42:18.311Z</lastmod>
   </url>
   
   <url>

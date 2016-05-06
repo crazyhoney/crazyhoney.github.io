@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://crazyhoney.github.io/"/>
-  <updated>2016-05-04T14:37:51.251Z</updated>
+  <updated>2016-05-05T14:37:55.081Z</updated>
   <id>http://crazyhoney.github.io/</id>
   
   <author>
@@ -13,6 +13,102 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[SQL语句执行顺序]]></title>
+    <link href="http://crazyhoney.github.io/2016/05/05/SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+    <id>http://crazyhoney.github.io/2016/05/05/SQL语句执行顺序/</id>
+    <published>2016-05-05T13:37:48.000Z</published>
+    <updated>2016-05-05T14:37:55.081Z</updated>
+    <content type="html"><![CDATA[<h1 id="SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3"><a href="#SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3" class="headerlink" title="SQL语句执行详解"></a>SQL语句执行详解</h1><p><strong>转自：<a href="http://www.jb51.net/article/74083.htm" target="_blank" rel="external">http://www.jb51.net/article/74083.htm</a></strong></p>
+<p>我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被处理。</p>
+<p> 每个步骤都会产生一个虚拟表，该虚拟表被用作下一个步骤的输入。这些虚拟表对调用者（客户端应用程序或者外部查询）不可用。只是最后一步生成的表才会返回 给调用者。如果没有在查询中指定某一子句，将跳过相应的步骤。下面是对应用于SQL server 2000和SQL Server 2005的各个逻辑步骤的简单描述。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(8)<span class="operator"><span class="keyword">SELECT</span> (<span class="number">9</span>)<span class="keyword">DISTINCT</span> (<span class="number">11</span>)&lt;Top <span class="keyword">Num</span>&gt; &lt;<span class="keyword">select</span> <span class="keyword">list</span>&gt;</span><br><span class="line">(<span class="number">1</span>)<span class="keyword">FROM</span> [left_table]</span><br><span class="line">(<span class="number">3</span>)&lt;join_type&gt; <span class="keyword">JOIN</span> &lt;right_table&gt;</span><br><span class="line">(<span class="number">2</span>)<span class="keyword">ON</span> &lt;join_condition&gt;</span><br><span class="line">(<span class="number">4</span>)<span class="keyword">WHERE</span> &lt;where_condition&gt;</span><br><span class="line">(<span class="number">5</span>)<span class="keyword">GROUP</span> <span class="keyword">BY</span> &lt;group_by_list&gt;</span><br><span class="line">(<span class="number">6</span>)<span class="keyword">WITH</span> &lt;<span class="keyword">CUBE</span> | <span class="keyword">RollUP</span>&gt;</span><br><span class="line">(<span class="number">7</span>)<span class="keyword">HAVING</span> &lt;having_condition&gt;</span><br><span class="line">(<span class="number">10</span>)<span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;order_by_list&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>逻辑查询处理阶段简介</p>
+<p>FROM：对FROM子句中的前两个表执行笛卡尔积（Cartesian product)(交叉联接），生成虚拟表VT1</p>
+<p>ON：对VT1应用ON筛选器。只有那些使<join_condition>为真的行才被插入VT2。</join_condition></p>
+<p>OUTER(JOIN)：如 果指定了OUTER JOIN（相对于CROSS JOIN 或(INNER JOIN),保留表（preserved table：左外部联接把左表标记为保留表，右外部联接把右表标记为保留表，完全外部联接把两个表都标记为保留表）中未找到匹配的行将作为外部行添加到 VT2,生成VT3.如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表为止。</p>
+<p>WHERE：对VT3应用WHERE筛选器。只有使<where_condition>为true的行才被插入VT4.</where_condition></p>
+<p>GROUP BY：按GROUP BY子句中的列列表对VT4中的行分组，生成VT5.</p>
+<p>CUBE|ROLLUP：把超组(Suppergroups)插入VT5,生成VT6.</p>
+<p>HAVING：对VT6应用HAVING筛选器。只有使<having_condition>为true的组才会被插入VT7.</having_condition></p>
+<p>SELECT：处理SELECT列表，产生VT8.</p>
+<p>DISTINCT：将重复的行从VT8中移除，产生VT9.</p>
+<p>ORDER BY：将VT9中的行按ORDER BY 子句中的列列表排序，生成游标（VC10).</p>
+<p>TOP：从VC10的开始处选择指定数量或比例的行，生成表VT11,并返回调用者。</p>
+<h1 id="where_u3001group_by_u548Chaving"><a href="#where_u3001group_by_u548Chaving" class="headerlink" title="where、group by和having"></a>where、group by和having</h1><p><strong>转自：<a href="http://www.51testing.com/html/73/33873-212893.html" target="_blank" rel="external">http://www.51testing.com/html/73/33873-212893.html</a></strong></p>
+<p>having就是来弥补where在分组数据判断时的不足。因为where执行优先级别要快于聚合语句。</p>
+<p>聚合函数，这是必需先讲的一种特殊的函数：0 P9 u&amp; h7 z2 n) I5 Z) i, V2 I<br>例如SUM, COUNT, MAX, AVG等。这些函数和其它函数的根本区别就是它们一般作用在多条记录上。<br>SELECT SUM(population) FROM tablename</p>
+<p>这里的SUM作用在所有返回记录的population字段上，结果就是该查询只返回一个结果，即所有 国家的总人口数。 通过使用GROUP BY 子句，可以让SUM 和 COUNT 这些函数对属于一组的数据起作用。<br> 当你指定 GROUP BY region 时， 属于同一个region（地区）的一组数据将只能返回一行值．<br>也就是说，表中所有除region（地区）外的字段，只能通过 SUM, COUNT等聚合函数运算后返回一个值<br>HAVING子句可以让我们筛选成分组后的各组数据<br>HAVING子句在聚合后对组记录进行筛选<br>而WHERE子句在聚合前先筛选记录．也就是说作用在GROUP BY 子句和HAVING子句前<br> 看下面这几个例子吧：</p>
+<p>一、显示每个地区的总人口数和总面积．<br>SELECT region, SUM(population), SUM(area)<br> FROM bbc<br>GROUP BY region<br> 先以region把返回记录分成多个组，这就是GROUP BY的字面含义。分完组后，然后用聚合函数对每组中的不同字段（一或多条记录）作运算。# B<em> i’ z  `, }</em> S, E5 i</p>
+<p>二、 显示每个地区的总人口数和总面积．仅显示那些面积超过1000000的地区。<br> SELECT region, SUM(population), SUM(area)<br>FROM bbc8<br>GROUP BY region<br>HAVING SUM(area)&gt;1000000<br>在这里，我们不能用where来筛选超过1000000的地区，因为表中不存在这样一条记录。<br>相反，HAVING子句可以让我们筛选成组后的各组数据．</p>
+<p>三、我在多举一些例子</p>
+<p>SQL&gt; select * from sc;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>  1 YW            95
+  1 SX            98
+  1 YY            90
+  2 YW            89
+  2 SX            91
+  2 YY            92
+  3 YW            85
+  3 SX            88
+  3 YY            96
+  4 YW            95
+  4 SX            89
+
+SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>4 YY            88
+</code></pre><p>这个表所描述的是4个学生对应每科学习成绩的记录，其中SNO（学生号）、PNO（课程名）、GRADE（成绩）。</p>
+<p>1、显示90分以上学生的课程名和成绩</p>
+<p>//这是一个简单的查询，并没有使用分组查询</p>
+<p>SQL&gt; select sno,pno,grade from sc where grade&gt;=90;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>1 YW            95
+1 SX            98
+1 YY            90
+2 SX            91
+2 YY            92
+3 YY            96
+4 YW            95
+</code></pre><p>已选择7行。</p>
+<p>2、显示每个学生的成绩在90分以上的各有多少门</p>
+<p>//进行分组显示，并且按照where条件之后计数</p>
+<p>SQL&gt; select sno,count(*) from sc where grade&gt;=90 group by sno;</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+4          1
+3          1
+</code></pre><p>3、这里我们并没有使用having语句，接下来如果我们要评选三好学生，条件是至少有两门课程在90分以上才能有资格，列出有资格的学生号及90分以上的课程数。</p>
+<p>//进行分组显示，并且按照where条件之后计数，在根据having子句筛选分组</p>
+<p>SQL&gt; select sno,count(<em>) from sc where grade&gt;=90 group by sno having count(</em>)&gt;=2；</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+</code></pre><p>这个结果是我们想要的，它列出了具有评选三好学生资格的学生号，跟上一个例子比较之后，发现这是在分组后进行的子查询，也印证了软考教材所描述是错误的。</p>
+<p>4、学校评选先进学生，要求平均成绩大于90分的学生都有资格，并且语文课必须在95分以上，请列出有资格的学生</p>
+<p>//实际上，这个查询先把语文大于95分的学生号提取出来，之后求平均值，分组显示后根据having语句选出平均成绩大于90的</p>
+<p>SQL&gt; select sno,avg(grade) from sc where SNO IN (SELECT SNO FROM SC WHERE GRADE&gt;=95 AND PNO=’YW’) group by sno having avg(grade)&gt;=90;</p>
+<pre><code>SNO AVG(GRADE)
+</code></pre><hr>
+<pre><code>1 94.3333333
+4 90.6666667
+</code></pre><p>5、查询比平均成绩至少比学号是3的平均成绩高的学生学号以及平均分数</p>
+<p>//having子句中可进行比较和子查询</p>
+<p>SQL&gt; select sno,avg(grade) from sc<br>  2  group by sno<br>  3  having avg(grade) &gt; (select avg(grade) from sc where sno=3);</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3"><a href="#SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3" class="headerlink" title="SQL语句执行详解"></a]]>
+    </summary>
+    
+      <category term="数据库" scheme="http://crazyhoney.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[testTags]]></title>
@@ -800,7 +896,7 @@ NULL  NULL
     <link href="http://crazyhoney.github.io/2016/03/17/SQL%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"/>
     <id>http://crazyhoney.github.io/2016/03/17/SQL和数据库设计/</id>
     <published>2016-03-17T07:56:41.000Z</published>
-    <updated>2016-05-04T14:42:18.311Z</updated>
+    <updated>2016-05-06T01:52:26.251Z</updated>
     <content type="html"><![CDATA[<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>(从mysql入手)<br>先数据库，再表，再有数据</p>
 <h2 id="u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406"><a href="#u4E00_u3001_u6570_u636E_u5E93_u7BA1_u7406" class="headerlink" title="一、数据库管理"></a>一、数据库管理</h2><h3 id="1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93"><a href="#1_u3001_u67E5_u8BE2_u6240_u6709_u6570_u636E_u5E93" class="headerlink" title="1、查询所有数据库"></a>1、查询所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">show</span> <span class="keyword">databases</span></span></span><br></pre></td></tr></table></figure>
 <h3 id="2_u3001_u521B_u5EFA_u6570_u636E_u5E93"><a href="#2_u3001_u521B_u5EFA_u6570_u636E_u5E93" class="headerlink" title="2、创建数据库"></a>2、创建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称      <span class="comment">--使用默认字符集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> 数据库名称 <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8</span></span><br></pre></td></tr></table></figure>
@@ -818,14 +914,61 @@ NULL  NULL
 <h4 id="285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0"><a href="#285_29_u3001_u4FEE_u6539_u5B57_u6BB5_u540D_u79F0" class="headerlink" title="(5)、修改字段名称"></a>(5)、修改字段名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">change</span> <span class="keyword">column</span> 字段名 字段类型（类型长度）</span></span><br></pre></td></tr></table></figure>
 <h4 id="286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0"><a href="#286_29_u3001_u4FEE_u6539_u8868_u540D_u79F0" class="headerlink" title="(6)、修改表名称"></a>(6)、修改表名称</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">rename</span> <span class="keyword">to</span> 新表名</span></span><br></pre></td></tr></table></figure>
 <h3 id="6_u3001_u589E_u5220_u6539_u6570_u636E"><a href="#6_u3001_u589E_u5220_u6539_u6570_u636E" class="headerlink" title="6、增删改数据"></a>6、增删改数据</h3><h2 id="u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684"><a href="#u4EE5_u540E_u6709_u65F6_u95F4_u518D_u5199_uFF0C_u5E72_u4E0D_u52A8_u4E86_u3002_u5148_u5199_u6570_u636E_u5E93_u8BBE_u8BA1_u7684" class="headerlink" title="以后有时间再写，干不动了。先写数据库设计的"></a>以后有时间再写，干不动了。先写数据库设计的</h2><hr>
-<h1 id="u6570_u636E_u5E93_u8BBE_u8BA1"><a href="#u6570_u636E_u5E93_u8BBE_u8BA1" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>键：一个属性或多个属性组合<br>候选键：用来唯一标识一条元组。（一个关系可以有多个）<br>主键：所有候选键拿出来用的键。（一个关系只能有一个）</p>
-<h2 id="u4E00_u3001_u8303_u5F0F"><a href="#u4E00_u3001_u8303_u5F0F" class="headerlink" title="一、范式"></a>一、范式</h2><h3 id="u7B2C_u4E00_u8303_u5F0F_281NF_29"><a href="#u7B2C_u4E00_u8303_u5F0F_281NF_29" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h3><p>条件：关系R的每个属性的值域是不可分割的值。<br>即：要求每个字段必须是不可分割的独立单元</p>
-<h3 id="u7B2C_u4E8C_u8303_u5F0F_282NF_29"><a href="#u7B2C_u4E8C_u8303_u5F0F_282NF_29" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>非主属性</strong>都完全依赖于候选键（这种依赖包括传递的依赖）<br>A-&gt;B : A决定B，B依赖A<br>A-&gt;B B-&gt;C : A决定C。C依赖A（B传递了C对A的依赖）</p>
-<h3 id="u7B2C_u4E09_u8303_u5F0F_283NF_29"><a href="#u7B2C_u4E09_u8303_u5F0F_283NF_29" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h3><p>条件一：关系R是2NF<br>条件二：关系R的每个<strong>非主属性</strong>都不传递对候选键的依赖。<br>即：每个非主属性都依赖于某一候选键（这种依赖不包括传递的依赖）</p>
+<h1 id="u6570_u636E_u5E93_u8BBE_u8BA1"><a href="#u6570_u636E_u5E93_u8BBE_u8BA1" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>键：一个属性或多个属性组合<br>候选键：用来唯一标识一条元组。（一个关系可以有多个）<br>主键：所有候选键拿出来用的键。（一个关系只能有一个）<br>非主属性：不包含在任何候选键里的属性。<br>完全依赖和非完全依赖：<br>        例：<br>         <strong>部分函数依赖</strong>   (学生id,课程id)-&gt;学生所在系<br>         <em>因为</em>：学生id-&gt;学生所在系，而学生id是(学生id,课程id)的真子集。<br>         <strong>部分函数依赖</strong>   (学生id,课程id)-&gt;成绩<br>         <em>因为</em>：不存在(学生id,课程id)的真子集决定成绩。</p>
+<h2 id="u4E00_u3001_u8303_u5F0F"><a href="#u4E00_u3001_u8303_u5F0F" class="headerlink" title="一、范式"></a>一、范式</h2><p><strong>里面的例子转自：<a href="http://blog.itpub.net/12125877/viewspace-474702/" target="_blank" rel="external">http://blog.itpub.net/12125877/viewspace-474702/</a></strong></p>
+<h3 id="u7B2C_u4E00_u8303_u5F0F_281NF_29"><a href="#u7B2C_u4E00_u8303_u5F0F_281NF_29" class="headerlink" title="第一范式(1NF)"></a>第一范式(1NF)</h3><p>条件：关系R的每个属性的值域是不可分割的值。<br>即：要求每个字段必须是不可分割的独立单元</p>
+<h3 id="u7B2C_u4E8C_u8303_u5F0F_282NF_29"><a href="#u7B2C_u4E8C_u8303_u5F0F_282NF_29" class="headerlink" title="第二范式(2NF)"></a>第二范式(2NF)</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>非主属性</strong>都完全函数依赖于候选键（这种依赖包括传递的依赖）<br>A-&gt;B : A决定B，B依赖A<br>A-&gt;B B-&gt;C : A决定C。C依赖A（B传递了C对A的依赖）<br><strong>例如：</strong></p>
+<pre><code>假定选课关系表为SelectCourse(学号, 姓名, 年龄, 课程名称, 成绩, 学分)，关键字为组合关键字(学号, 课程名称)，因为存在如下决定关系： 
+
+(学号, 课程名称) → (姓名, 年龄, 成绩, 学分) 
+
+这个数据库表不满足第二范式，因为存在如下决定关系： 
+
+(课程名称) → (学分) 
+
+(学号) → (姓名, 年龄) 
+</code></pre><p><em>即存在组合关键字中的字段决定非关键字的情况。 </em></p>
+<pre><code>把选课关系表SelectCourse改为如下三个表： 
+
+学生：Student(学号, 姓名, 年龄)； 
+
+课程：Course(课程名称, 学分)； 
+
+选课关系：SelectCourse(学号, 课程名称, 成绩)。 
+</code></pre><p><em>这样的数据库表是符合第二范式的， 消除了数据冗余、更新异常、插入异常和删除异常。 </em></p>
+<h3 id="u7B2C_u4E09_u8303_u5F0F_283NF_29"><a href="#u7B2C_u4E09_u8303_u5F0F_283NF_29" class="headerlink" title="第三范式(3NF)"></a>第三范式(3NF)</h3><p>条件一：关系R是2NF<br>条件二：关系R的每个<strong>非主属性</strong>都不传递对候选键的依赖。<br>即：每个非主属性都完全函数依赖于某一候选键（这种依赖不包括传递的依赖）<br><strong>例如：</strong><br>    假定学生关系表为Student(学号, 姓名, 年龄, 所在学院, 学院地点, 学院电话)，关键字为单一关键字”学号”，因为存在如下决定关系： </p>
+<pre><code>(学号) → (姓名, 年龄, 所在学院, 学院地点, 学院电话) 
+
+这个数据库是符合2NF的，但是不符合3NF，因为存在如下决定关系： 
+
+(学号) → (所在学院) → (学院地点, 学院电话) 
+
+即存在非关键字段&quot;学院地点&quot;、&quot;学院电话&quot;对关键字段&quot;学号&quot;的传递函数依赖。 
+
+它也会存在数据冗余、更新异常、插入异常和删除异常的情况，读者可自行分析得知。 
+
+把学生关系表分为如下两个表： 
+
+学生：(学号, 姓名, 年龄, 所在学院)； 
+
+学院：(学院, 地点, 电话)。 
+</code></pre><p><em>这样的数据库表是符合第三范式的，消除了数据冗余、更新异常、插入异常和删除异常。 </em></p>
 <h3 id="BSCNF_u8303_u5F0F"><a href="#BSCNF_u8303_u5F0F" class="headerlink" title="BSCNF范式"></a>BSCNF范式</h3><p>条件一：关系R是1NF<br>条件二：关系R的每个<strong>属性</strong>都不传递对候选键的依赖。</p>
-<p>理解：3NF说的是每个非主属性，而BCNF范式说的是每个属性。<br>因为主属性（主键）可以是属性的组合。所以存在以下情况：<br>存在关系R: (A,B)-&gt;B B-&gt;C  (A,B)是关系的候选键也是主键，B传递了C对于候选键的依赖。<br>所以R不是BCNF。<br>以后再来这个补充例子</p>
-<p>2016-03-17 17：03</p>
-<hr>
+<p>理解：3NF说的是每个非主属性，而BCNF范式说的是每个属性。<br>因为主属性（主键）可以是属性的组合。所以存在以下情况：<br>存在关系R: (A,B)-&gt;B B-&gt;C  (A,B)是关系的候选键也是主键，B传递了C对于候选键的依赖。<br>所以R不是BCNF。<br><strong>例如：</strong><br>    假设仓库管理关系表为StorehouseManage(仓库ID, 存储物品ID, 管理员ID, 数量)，且有一个管理员只在一个仓库工作；一个仓库可以存储多种物品。这个数据库表中存在如下决定关系： </p>
+<pre><code>(仓库ID, 存储物品ID) →(管理员ID, 数量) 
+
+(管理员ID, 存储物品ID) → (仓库ID, 数量) 
+
+所以，(仓库ID, 存储物品ID)和(管理员ID, 存储物品ID)都是StorehouseManage的候选关键字，表中的唯一非关键字段为数量，它是符合第三范式的。但是，由于存在如下决定关系： 
+
+(仓库ID) → (管理员ID) 
+
+(管理员ID) → (仓库ID) 
+</code></pre><p>*即存在关键字段决定关键字段的情况，所以其不符合BCNF范式。它会出现异常。<br>    把仓库管理关系表分解为二个关系表： </p>
+<pre><code>仓库管理：StorehouseManage(仓库ID, 管理员ID)； 
+
+仓库：Storehouse(仓库ID, 存储物品ID, 数量)。 
+</code></pre><p><em>这样的数据库表是符合BCNF范式的，消除了删除异常、插入异常和更新异常。 </em></p>
 <h2 id="u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB"><a href="#u4E8C_u3001_u5173_u7CFB_u7684_u5BF9_u5E94_u8054_u7CFB" class="headerlink" title="二、关系的对应联系"></a>二、关系的对应联系</h2><h3 id="1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29"><a href="#1_u3001_u4E00_u5BF9_u4E00_u8054_u7CFB_281_3A1_29" class="headerlink" title="1、一对一联系(1:1)"></a>1、一对一联系(1:1)</h3><p>一个关系的一条元组唯一对另一个关系的一条元组。</p>
 <blockquote>
 <ul>
@@ -834,6 +977,7 @@ NULL  NULL
 </blockquote>
 <p><strong>两个关系通过候选键属性进行关联</strong></p>
 <h3 id="2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29"><a href="#2_u3001_u4E00_u5BF9_u591A_u8054_u7CFB_281_3An_29" class="headerlink" title="2、一对多联系(1:n)"></a>2、一对多联系(1:n)</h3><p>一个关系的一条元组对应另一个关系的多条元组<br>条件：1）两个关系有同名属性<br>      2）一方的同名属性一定是候选键<br>         多方的同名属性一定不是候选键（是外键）<br>外键：连个关系在关联时，多方的同名属性。<br>    作用：保证两个关系的关联。</p>
+<p><strong>若两个关系是一对多联系时，将一方的候选键放到多方作外键</strong></p>
 <h3 id="3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29"><a href="#3_u3001_u591A_u5BF9_u591A_u8054_u7CFB_28m_3An_29" class="headerlink" title="3、多对多联系(m:n)"></a>3、多对多联系(m:n)</h3><blockquote>
 <p><em>　两个关系必然没有同名属性，且不可将一方主键加到另一方作外键。
 </em>　两个关系分别向对方是一对多。</p>
@@ -1019,30 +1163,6 @@ NULL  NULL
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="u5355_u4F8B_u6A21_u5F0F"><a href="#u5355_u4F8B_u6A21_u5F0F" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="u7B80_u5355_u7684_u]]>
-    </summary>
-    
-      <category term="设计模式" scheme="http://crazyhoney.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[设计模式（四）]]></title>
-    <link href="http://crazyhoney.github.io/2016/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
-    <id>http://crazyhoney.github.io/2016/03/13/设计模式（四）/</id>
-    <published>2016-03-13T13:41:52.000Z</published>
-    <updated>2016-05-04T14:44:24.084Z</updated>
-    <content type="html"><![CDATA[<h2 id="u9002_u914D_u5668_u6A21_u5F0F"><a href="#u9002_u914D_u5668_u6A21_u5F0F" class="headerlink" title="适配器模式"></a>适配器模式</h2><h2 id="u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A"><a href="#u7B80_u5355_u7684_u8BF4_u5C31_u662F_28_u0E51_u2022_u1D17_u2022_u0E51_29_uFF1A" class="headerlink" title="简单的说就是(๑•ᴗ•๑)："></a>简单的说就是(๑•ᴗ•๑)：</h2><p>电源适配器（把220V的交流电转换为电器能够使用的电压）</p>
-<h2 id="u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_u2299_u02CD_u2299_29_uFF1A"><a href="#u4E13_u4E1A_u4E00_u70B9_u5C31_u662F_28_u2299_u02CD_u2299_29_uFF1A" class="headerlink" title="专业一点就是(⊙ˍ⊙)："></a>专业一点就是(⊙ˍ⊙)：</h2><p>想复用一些现成的类，但是接口又与复用环境要求不一致。那么使用适配器转换接口。</p>
-<hr>
-<h2 id="1_u3001_u7C7B_u9002_u914D_u5668"><a href="#1_u3001_u7C7B_u9002_u914D_u5668" class="headerlink" title="1、类适配器"></a>1、类适配器</h2><ul>
-<li>[x] 适用于C++（因为它支持多继承）</li>
-</ul>
-<p><img src="http://www.myexception.cn/img/2012/09/10/111548767.jpg" alt="ClassAdapter"></p>
-<h2 id="u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u548CAdaptee_u7684_u65B9_u6CD5_uFF0C_u6240_u4EE5_u53EF_u4EE5_u76F4_u63A5_u5728_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u7684_u8F6C_u6362"><a href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u548CAdaptee_u7684_u65B9_u6CD5_uFF0C_u6240_u4EE5_u53EF_u4EE5_u76F4_u63A5_u5728_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u7684_u8F6C_u6362" class="headerlink" title="<strong>适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换</strong>"></a><strong>适配器类继承了Target和Adaptee的方法，所以可以直接在方法中调用Adaptee的方法，实现接口的转换</strong></h2><h2 id="2_u3001_u5BF9_u8C61_u9002_u914D_u5668"><a href="#2_u3001_u5BF9_u8C61_u9002_u914D_u5668" class="headerlink" title="2、对象适配器"></a>2、对象适配器</h2><p><img src="http://www.myexception.cn/img/2012/06/25/1359217096.png" alt="ObjectAdapter"></p>
-<h2 id="u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u7684_u65B9_u6CD5_uFF0C_u5E76_u4E14_u542B_u6709Adaptee_u7684_u5BF9_u8C61_uFF08_u6216_u8005_u6307_u9488_uFF09_u3002_u53EF_u4EE5_u518D_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u8F6C_u6362"><a href="#u9002_u914D_u5668_u7C7B_u7EE7_u627F_u4E86Target_u7684_u65B9_u6CD5_uFF0C_u5E76_u4E14_u542B_u6709Adaptee_u7684_u5BF9_u8C61_uFF08_u6216_u8005_u6307_u9488_uFF09_u3002_u53EF_u4EE5_u518D_u65B9_u6CD5_u4E2D_u8C03_u7528Adaptee_u7684_u65B9_u6CD5_uFF0C_u5B9E_u73B0_u63A5_u53E3_u8F6C_u6362" class="headerlink" title="<strong>适配器类继承了Target的方法，并且含有Adaptee的对象（或者指针）。可以再方法中调用Adaptee的方法，实现接口转换</strong>"></a><strong>适配器类继承了Target的方法，并且含有Adaptee的对象（或者指针）。可以再方法中调用Adaptee的方法，实现接口转换</strong></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Adapter.cpp</span><br><span class="line"> *</span><br><span class="line"> *  Created on: 2016年3月11日 下午4:48:49</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Target &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我要20V的电压"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> Adaptee &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">SpecialMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我这里提供10V的电压"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//类适配器</span></span><br><span class="line"><span class="keyword">class</span> ClsAdapter: <span class="keyword">public</span> Target, <span class="keyword">private</span> Adaptee &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"类适配器"</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"你要20V，我给你20V"</span> &lt;&lt; endl;</span><br><span class="line">		SpecialMethod();</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我给你转换为20V"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象适配器</span></span><br><span class="line"><span class="keyword">class</span> ObjAdapter: <span class="keyword">public</span> Target &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Adaptee ptr;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">/*ObjAdapter(Adaptee ptr)&#123;</span><br><span class="line">	 this-&gt;ptr = ptr;</span><br><span class="line">	 &#125;*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"对象适配器"</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"你要20V，我给你20V"</span> &lt;&lt; endl;</span><br><span class="line">		ptr.SpecialMethod();</span><br><span class="line">		<span class="comment">//ptr-&gt;SpecialMethod();</span></span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"我给你转换为20V"</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//类适配器</span></span><br><span class="line">	ClsAdapter cls;</span><br><span class="line">	cls.Method();</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"=================="</span> &lt;&lt; endl;</span><br><span class="line">	<span class="comment">//对象适配器</span></span><br><span class="line">	ObjAdapter obj;</span><br><span class="line">	obj.Method();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u9002_u914D_u5668_u6A21_u5F0F"><a href="#u9002_u914D_u5668_u6A21_u5F0F" class="headerlink" title="适配器模式"></a>适配器模式</h2><h2 id="u7B80]]>
     </summary>
     
       <category term="设计模式" scheme="http://crazyhoney.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>

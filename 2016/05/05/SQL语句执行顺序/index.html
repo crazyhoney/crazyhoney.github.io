@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HBase," />
+  <meta name="keywords" content="数据库," />
 
 
 
@@ -51,41 +51,19 @@
 
 
 
-<meta name="description" content="HBase中的observer分为三类:
-MasterObserver、RegionObserver、WALOBserver。
-自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
-
-
-覆盖其中的方法，实现需求
-
-
-2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
+<meta name="description" content="SQL语句执行详解转自：http://www.jb51.net/article/74083.htm
+我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HBase的触发器——Observer">
-<meta property="og:url" content="http://crazyhoney.github.io/2016/04/20/HBase的触发器——Observer/index.html">
+<meta property="og:title" content="SQL语句执行顺序">
+<meta property="og:url" content="http://crazyhoney.github.io/2016/05/05/SQL语句执行顺序/index.html">
 <meta property="og:site_name" content="CrazyHoney">
-<meta property="og:description" content="HBase中的observer分为三类:
-MasterObserver、RegionObserver、WALOBserver。
-自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
-
-
-覆盖其中的方法，实现需求
-
-
-2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/75544e9fjw1f33buutj2oj20rn0akahr.jpg">
-<meta property="og:updated_time" content="2016-05-04T14:40:01.146Z">
+<meta property="og:description" content="SQL语句执行详解转自：http://www.jb51.net/article/74083.htm
+我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被">
+<meta property="og:updated_time" content="2016-05-05T14:37:55.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HBase的触发器——Observer">
-<meta name="twitter:description" content="HBase中的observer分为三类:
-MasterObserver、RegionObserver、WALOBserver。
-自定义MasterObserver1、继承BaseMasterObserver类(是MasterObserver的默认实现类)
-
-
-覆盖其中的方法，实现需求
-
-
-2、打成jar包，放到hbase的lib目录下3、12.4.3.修改hbase的配置文件hbase-site.">
+<meta name="twitter:title" content="SQL语句执行顺序">
+<meta name="twitter:description" content="SQL语句执行详解转自：http://www.jb51.net/article/74083.htm
+我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被">
 
 
 
@@ -97,7 +75,7 @@ MasterObserver、RegionObserver、WALOBserver。
   };
 </script>
 
-  <title> HBase的触发器——Observer | CrazyHoney </title>
+  <title> SQL语句执行顺序 | CrazyHoney </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +224,7 @@ MasterObserver、RegionObserver、WALOBserver。
             
             
               
-                HBase的触发器——Observer
+                SQL语句执行顺序
               
             
           </h1>
@@ -257,8 +235,8 @@ MasterObserver、RegionObserver、WALOBserver。
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-04-20T17:57:59+08:00" content="2016-04-20">
-              2016-04-20
+            <time itemprop="dateCreated" datetime="2016-05-05T21:37:48+08:00" content="2016-05-05">
+              2016-05-05
             </time>
           </span>
 
@@ -268,8 +246,8 @@ MasterObserver、RegionObserver、WALOBserver。
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/20/HBase的触发器——Observer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/HBase的触发器——Observer/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/SQL语句执行顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/SQL语句执行顺序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -288,19 +266,87 @@ MasterObserver、RegionObserver、WALOBserver。
       
 
       
-        <span itemprop="articleBody"><p>HBase中的observer分为三类:</p>
-<p>MasterObserver、RegionObserver、WALOBserver。</p>
-<h2 id="u81EA_u5B9A_u4E49MasterObserver"><a href="#u81EA_u5B9A_u4E49MasterObserver" class="headerlink" title="自定义MasterObserver"></a>自定义MasterObserver</h2><h2 id="1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B"><a href="#1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B" class="headerlink" title="1、继承BaseMasterObserver类"></a>1、继承BaseMasterObserver类</h2><p>(是MasterObserver的默认实现类)</p>
-<blockquote>
-<ul>
-<li>覆盖其中的方法，实现需求</li>
-</ul>
-</blockquote>
-<h2 id="2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B"><a href="#2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B" class="headerlink" title="2、打成jar包，放到hbase的lib目录下"></a>2、打成jar包，放到hbase的lib目录下</h2><h2 id="3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6"><a href="#3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6" class="headerlink" title="3、12.4.3.修改hbase的配置文件hbase-site.xml文件"></a>3、12.4.3.修改hbase的配置文件hbase-site.xml文件</h2><p><strong>增加如下内容</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.coprocessor.master.classes<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>自己写的类的全路径名<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h2 id="4_u3001_u91CD_u542FHBase_u96C6_u7FA4"><a href="#4_u3001_u91CD_u542FHBase_u96C6_u7FA4" class="headerlink" title="4、重启HBase集群"></a>4、重启HBase集群</h2><p><strong>在重启集群的时候，使用tail -f  …/hbse…master.log文件输出，判断是否出错。</strong></p>
-<h2 id="5_u3001_u4EE3_u7801"><a href="#5_u3001_u4EE3_u7801" class="headerlink" title="5、代码"></a>5、代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * PreCreateTableObserver.java</span><br><span class="line"> *</span><br><span class="line"> *  Created on: 2016年4月20日 下午3:20:20</span><br><span class="line"> *      Author: Wayne 13186259527@163.com</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">package</span> HBase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HRegionInfo;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.BaseMasterObserver;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.MasterCoprocessorEnvironment;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.coprocessor.ObserverContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.commons.logging.LogFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * <span class="doctag">@author</span> Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreCreateTableObserver</span> <span class="keyword">extends</span> <span class="title">BaseMasterObserver</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	Log log = LogFactory.getLog(PreCreateTableObserver.class);</span><br><span class="line">	<span class="comment">/* (non-Javadoc)</span><br><span class="line">	 * @see org.apache.hadoop.hbase.coprocessor.BaseMasterObserver#preCreateTable(org.apache.hadoop.hbase.coprocessor.ObserverContext, org.apache.hadoop.hbase.HTableDescriptor, org.apache.hadoop.hbase.HRegionInfo[])</span><br><span class="line">	 */</span></span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preCreateTable</span><span class="params">(</span><br><span class="line">			ObserverContext&lt;MasterCoprocessorEnvironment&gt; ctx,</span><br><span class="line">			HTableDescriptor desc, HRegionInfo[] regions)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		log.info(<span class="string">"\n这段代码被执行了\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u516D_u3001_u6D4B_u8BD5"><a href="#u516D_u3001_u6D4B_u8BD5" class="headerlink" title="六、测试"></a>六、测试</h2><p>在hbase建表后，查看master.log.发现：<br><img src="http://ww2.sinaimg.cn/large/75544e9fjw1f33buutj2oj20rn0akahr.jpg" alt=""></p>
+        <span itemprop="articleBody"><h1 id="SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3"><a href="#SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3" class="headerlink" title="SQL语句执行详解"></a>SQL语句执行详解</h1><p><strong>转自：<a href="http://www.jb51.net/article/74083.htm" target="_blank" rel="external">http://www.jb51.net/article/74083.htm</a></strong></p>
+<p>我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被处理。</p>
+<p> 每个步骤都会产生一个虚拟表，该虚拟表被用作下一个步骤的输入。这些虚拟表对调用者（客户端应用程序或者外部查询）不可用。只是最后一步生成的表才会返回 给调用者。如果没有在查询中指定某一子句，将跳过相应的步骤。下面是对应用于SQL server 2000和SQL Server 2005的各个逻辑步骤的简单描述。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(8)<span class="operator"><span class="keyword">SELECT</span> (<span class="number">9</span>)<span class="keyword">DISTINCT</span> (<span class="number">11</span>)&lt;Top <span class="keyword">Num</span>&gt; &lt;<span class="keyword">select</span> <span class="keyword">list</span>&gt;</span><br><span class="line">(<span class="number">1</span>)<span class="keyword">FROM</span> [left_table]</span><br><span class="line">(<span class="number">3</span>)&lt;join_type&gt; <span class="keyword">JOIN</span> &lt;right_table&gt;</span><br><span class="line">(<span class="number">2</span>)<span class="keyword">ON</span> &lt;join_condition&gt;</span><br><span class="line">(<span class="number">4</span>)<span class="keyword">WHERE</span> &lt;where_condition&gt;</span><br><span class="line">(<span class="number">5</span>)<span class="keyword">GROUP</span> <span class="keyword">BY</span> &lt;group_by_list&gt;</span><br><span class="line">(<span class="number">6</span>)<span class="keyword">WITH</span> &lt;<span class="keyword">CUBE</span> | <span class="keyword">RollUP</span>&gt;</span><br><span class="line">(<span class="number">7</span>)<span class="keyword">HAVING</span> &lt;having_condition&gt;</span><br><span class="line">(<span class="number">10</span>)<span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;order_by_list&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>逻辑查询处理阶段简介</p>
+<p>FROM：对FROM子句中的前两个表执行笛卡尔积（Cartesian product)(交叉联接），生成虚拟表VT1</p>
+<p>ON：对VT1应用ON筛选器。只有那些使<join_condition>为真的行才被插入VT2。</join_condition></p>
+<p>OUTER(JOIN)：如 果指定了OUTER JOIN（相对于CROSS JOIN 或(INNER JOIN),保留表（preserved table：左外部联接把左表标记为保留表，右外部联接把右表标记为保留表，完全外部联接把两个表都标记为保留表）中未找到匹配的行将作为外部行添加到 VT2,生成VT3.如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表为止。</p>
+<p>WHERE：对VT3应用WHERE筛选器。只有使<where_condition>为true的行才被插入VT4.</where_condition></p>
+<p>GROUP BY：按GROUP BY子句中的列列表对VT4中的行分组，生成VT5.</p>
+<p>CUBE|ROLLUP：把超组(Suppergroups)插入VT5,生成VT6.</p>
+<p>HAVING：对VT6应用HAVING筛选器。只有使<having_condition>为true的组才会被插入VT7.</having_condition></p>
+<p>SELECT：处理SELECT列表，产生VT8.</p>
+<p>DISTINCT：将重复的行从VT8中移除，产生VT9.</p>
+<p>ORDER BY：将VT9中的行按ORDER BY 子句中的列列表排序，生成游标（VC10).</p>
+<p>TOP：从VC10的开始处选择指定数量或比例的行，生成表VT11,并返回调用者。</p>
+<h1 id="where_u3001group_by_u548Chaving"><a href="#where_u3001group_by_u548Chaving" class="headerlink" title="where、group by和having"></a>where、group by和having</h1><p><strong>转自：<a href="http://www.51testing.com/html/73/33873-212893.html" target="_blank" rel="external">http://www.51testing.com/html/73/33873-212893.html</a></strong></p>
+<p>having就是来弥补where在分组数据判断时的不足。因为where执行优先级别要快于聚合语句。</p>
+<p>聚合函数，这是必需先讲的一种特殊的函数：0 P9 u&amp; h7 z2 n) I5 Z) i, V2 I<br>例如SUM, COUNT, MAX, AVG等。这些函数和其它函数的根本区别就是它们一般作用在多条记录上。<br>SELECT SUM(population) FROM tablename</p>
+<p>这里的SUM作用在所有返回记录的population字段上，结果就是该查询只返回一个结果，即所有 国家的总人口数。 通过使用GROUP BY 子句，可以让SUM 和 COUNT 这些函数对属于一组的数据起作用。<br> 当你指定 GROUP BY region 时， 属于同一个region（地区）的一组数据将只能返回一行值．<br>也就是说，表中所有除region（地区）外的字段，只能通过 SUM, COUNT等聚合函数运算后返回一个值<br>HAVING子句可以让我们筛选成分组后的各组数据<br>HAVING子句在聚合后对组记录进行筛选<br>而WHERE子句在聚合前先筛选记录．也就是说作用在GROUP BY 子句和HAVING子句前<br> 看下面这几个例子吧：</p>
+<p>一、显示每个地区的总人口数和总面积．<br>SELECT region, SUM(population), SUM(area)<br> FROM bbc<br>GROUP BY region<br> 先以region把返回记录分成多个组，这就是GROUP BY的字面含义。分完组后，然后用聚合函数对每组中的不同字段（一或多条记录）作运算。# B<em> i’ z  `, }</em> S, E5 i</p>
+<p>二、 显示每个地区的总人口数和总面积．仅显示那些面积超过1000000的地区。<br> SELECT region, SUM(population), SUM(area)<br>FROM bbc8<br>GROUP BY region<br>HAVING SUM(area)&gt;1000000<br>在这里，我们不能用where来筛选超过1000000的地区，因为表中不存在这样一条记录。<br>相反，HAVING子句可以让我们筛选成组后的各组数据．</p>
+<p>三、我在多举一些例子</p>
+<p>SQL&gt; select * from sc;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>  1 YW            95
+  1 SX            98
+  1 YY            90
+  2 YW            89
+  2 SX            91
+  2 YY            92
+  3 YW            85
+  3 SX            88
+  3 YY            96
+  4 YW            95
+  4 SX            89
+
+SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>4 YY            88
+</code></pre><p>这个表所描述的是4个学生对应每科学习成绩的记录，其中SNO（学生号）、PNO（课程名）、GRADE（成绩）。</p>
+<p>1、显示90分以上学生的课程名和成绩</p>
+<p>//这是一个简单的查询，并没有使用分组查询</p>
+<p>SQL&gt; select sno,pno,grade from sc where grade&gt;=90;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>1 YW            95
+1 SX            98
+1 YY            90
+2 SX            91
+2 YY            92
+3 YY            96
+4 YW            95
+</code></pre><p>已选择7行。</p>
+<p>2、显示每个学生的成绩在90分以上的各有多少门</p>
+<p>//进行分组显示，并且按照where条件之后计数</p>
+<p>SQL&gt; select sno,count(*) from sc where grade&gt;=90 group by sno;</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+4          1
+3          1
+</code></pre><p>3、这里我们并没有使用having语句，接下来如果我们要评选三好学生，条件是至少有两门课程在90分以上才能有资格，列出有资格的学生号及90分以上的课程数。</p>
+<p>//进行分组显示，并且按照where条件之后计数，在根据having子句筛选分组</p>
+<p>SQL&gt; select sno,count(<em>) from sc where grade&gt;=90 group by sno having count(</em>)&gt;=2；</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+</code></pre><p>这个结果是我们想要的，它列出了具有评选三好学生资格的学生号，跟上一个例子比较之后，发现这是在分组后进行的子查询，也印证了软考教材所描述是错误的。</p>
+<p>4、学校评选先进学生，要求平均成绩大于90分的学生都有资格，并且语文课必须在95分以上，请列出有资格的学生</p>
+<p>//实际上，这个查询先把语文大于95分的学生号提取出来，之后求平均值，分组显示后根据having语句选出平均成绩大于90的</p>
+<p>SQL&gt; select sno,avg(grade) from sc where SNO IN (SELECT SNO FROM SC WHERE GRADE&gt;=95 AND PNO=’YW’) group by sno having avg(grade)&gt;=90;</p>
+<pre><code>SNO AVG(GRADE)
+</code></pre><hr>
+<pre><code>1 94.3333333
+4 90.6666667
+</code></pre><p>5、查询比平均成绩至少比学号是3的平均成绩高的学生学号以及平均分数</p>
+<p>//having子句中可进行比较和子查询</p>
+<p>SQL&gt; select sno,avg(grade) from sc<br>  2  group by sno<br>  3  having avg(grade) &gt; (select avg(grade) from sc where sno=3);</p>
 </span>
       
     </div>
@@ -309,7 +355,7 @@ MasterObserver、RegionObserver、WALOBserver。
       
         <div class="post-tags">
           
-            <a href="/tags/HBase/" rel="tag">#HBase</a>
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
           
         </div>
       
@@ -318,17 +364,13 @@ MasterObserver、RegionObserver、WALOBserver。
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/20/使用Hive查询HBase数据/" rel="next" title="使用Hive查询HBase数据">
-                <i class="fa fa-chevron-left"></i> 使用Hive查询HBase数据
+              <a href="/2016/05/04/testTags/" rel="next" title="testTags">
+                <i class="fa fa-chevron-left"></i> testTags
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/27/使用Java操作Solr实现增、删和查询数据/" rel="prev" title="使用Java操作Solr实现增、删和查询数据">
-                使用Java操作Solr实现增、删和查询数据 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -355,8 +397,8 @@ MasterObserver、RegionObserver、WALOBserver。
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/20/HBase的触发器——Observer/"
-           data-title="HBase的触发器——Observer" data-url="http://crazyhoney.github.io/2016/04/20/HBase的触发器——Observer/">
+      <div class="ds-thread" data-thread-key="2016/05/05/SQL语句执行顺序/"
+           data-title="SQL语句执行顺序" data-url="http://crazyhoney.github.io/2016/05/05/SQL语句执行顺序/">
       </div>
     
   </div>
@@ -463,7 +505,7 @@ MasterObserver、RegionObserver、WALOBserver。
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u5B9A_u4E49MasterObserver"><span class="nav-number">1.</span> <span class="nav-text">自定义MasterObserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1_u3001_u7EE7_u627FBaseMasterObserver_u7C7B"><span class="nav-number">2.</span> <span class="nav-text">1、继承BaseMasterObserver类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_u3001_u6253_u6210jar_u5305_uFF0C_u653E_u5230hbase_u7684lib_u76EE_u5F55_u4E0B"><span class="nav-number">3.</span> <span class="nav-text">2、打成jar包，放到hbase的lib目录下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_u300112-4-3-_u4FEE_u6539hbase_u7684_u914D_u7F6E_u6587_u4EF6hbase-site-xml_u6587_u4EF6"><span class="nav-number">4.</span> <span class="nav-text">3、12.4.3.修改hbase的配置文件hbase-site.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_u3001_u91CD_u542FHBase_u96C6_u7FA4"><span class="nav-number">5.</span> <span class="nav-text">4、重启HBase集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5_u3001_u4EE3_u7801"><span class="nav-number">6.</span> <span class="nav-text">5、代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u516D_u3001_u6D4B_u8BD5"><span class="nav-number">7.</span> <span class="nav-text">六、测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3"><span class="nav-number">1.</span> <span class="nav-text">SQL语句执行详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#where_u3001group_by_u548Chaving"><span class="nav-number">2.</span> <span class="nav-text">where、group by和having</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

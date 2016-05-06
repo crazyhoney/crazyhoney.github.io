@@ -206,15 +206,176 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/05/SQL语句执行顺序/" itemprop="url">
+                  SQL语句执行顺序
+                </a>
+              
+            
+          </h1>
+        
+		 <span id="busuanzi_container_page_pv" style="text-align: center">
+			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-05-05T21:37:48+08:00" content="2016-05-05">
+              2016-05-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/05/SQL语句执行顺序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/SQL语句执行顺序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <h1 id="SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3"><a href="#SQL_u8BED_u53E5_u6267_u884C_u8BE6_u89E3" class="headerlink" title="SQL语句执行详解"></a>SQL语句执行详解</h1><p><strong>转自：<a href="http://www.jb51.net/article/74083.htm" target="_blank" rel="external">http://www.jb51.net/article/74083.htm</a></strong></p>
+<p>我们做软件开发的，大部分人都离不开跟数据库打交道，特别是erp开发的，跟数据库打交道更是频繁，由于SQL 不同于与其他编程语言的最明显特征是处理代码的顺序。在大数编程语言中，代码按编码顺序被处理，但是在SQL语言中，第一个被处理的子句是FROM子句，尽管SELECT语句第一个出现，但是几乎总是最后被处理。</p>
+<p> 每个步骤都会产生一个虚拟表，该虚拟表被用作下一个步骤的输入。这些虚拟表对调用者（客户端应用程序或者外部查询）不可用。只是最后一步生成的表才会返回 给调用者。如果没有在查询中指定某一子句，将跳过相应的步骤。下面是对应用于SQL server 2000和SQL Server 2005的各个逻辑步骤的简单描述。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(8)<span class="operator"><span class="keyword">SELECT</span> (<span class="number">9</span>)<span class="keyword">DISTINCT</span> (<span class="number">11</span>)&lt;Top <span class="keyword">Num</span>&gt; &lt;<span class="keyword">select</span> <span class="keyword">list</span>&gt;</span><br><span class="line">(<span class="number">1</span>)<span class="keyword">FROM</span> [left_table]</span><br><span class="line">(<span class="number">3</span>)&lt;join_type&gt; <span class="keyword">JOIN</span> &lt;right_table&gt;</span><br><span class="line">(<span class="number">2</span>)<span class="keyword">ON</span> &lt;join_condition&gt;</span><br><span class="line">(<span class="number">4</span>)<span class="keyword">WHERE</span> &lt;where_condition&gt;</span><br><span class="line">(<span class="number">5</span>)<span class="keyword">GROUP</span> <span class="keyword">BY</span> &lt;group_by_list&gt;</span><br><span class="line">(<span class="number">6</span>)<span class="keyword">WITH</span> &lt;<span class="keyword">CUBE</span> | <span class="keyword">RollUP</span>&gt;</span><br><span class="line">(<span class="number">7</span>)<span class="keyword">HAVING</span> &lt;having_condition&gt;</span><br><span class="line">(<span class="number">10</span>)<span class="keyword">ORDER</span> <span class="keyword">BY</span> &lt;order_by_list&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>逻辑查询处理阶段简介</p>
+<p>FROM：对FROM子句中的前两个表执行笛卡尔积（Cartesian product)(交叉联接），生成虚拟表VT1</p>
+<p>ON：对VT1应用ON筛选器。只有那些使<join_condition>为真的行才被插入VT2。</join_condition></p>
+<p>OUTER(JOIN)：如 果指定了OUTER JOIN（相对于CROSS JOIN 或(INNER JOIN),保留表（preserved table：左外部联接把左表标记为保留表，右外部联接把右表标记为保留表，完全外部联接把两个表都标记为保留表）中未找到匹配的行将作为外部行添加到 VT2,生成VT3.如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表为止。</p>
+<p>WHERE：对VT3应用WHERE筛选器。只有使<where_condition>为true的行才被插入VT4.</where_condition></p>
+<p>GROUP BY：按GROUP BY子句中的列列表对VT4中的行分组，生成VT5.</p>
+<p>CUBE|ROLLUP：把超组(Suppergroups)插入VT5,生成VT6.</p>
+<p>HAVING：对VT6应用HAVING筛选器。只有使<having_condition>为true的组才会被插入VT7.</having_condition></p>
+<p>SELECT：处理SELECT列表，产生VT8.</p>
+<p>DISTINCT：将重复的行从VT8中移除，产生VT9.</p>
+<p>ORDER BY：将VT9中的行按ORDER BY 子句中的列列表排序，生成游标（VC10).</p>
+<p>TOP：从VC10的开始处选择指定数量或比例的行，生成表VT11,并返回调用者。</p>
+<h1 id="where_u3001group_by_u548Chaving"><a href="#where_u3001group_by_u548Chaving" class="headerlink" title="where、group by和having"></a>where、group by和having</h1><p><strong>转自：<a href="http://www.51testing.com/html/73/33873-212893.html" target="_blank" rel="external">http://www.51testing.com/html/73/33873-212893.html</a></strong></p>
+<p>having就是来弥补where在分组数据判断时的不足。因为where执行优先级别要快于聚合语句。</p>
+<p>聚合函数，这是必需先讲的一种特殊的函数：0 P9 u&amp; h7 z2 n) I5 Z) i, V2 I<br>例如SUM, COUNT, MAX, AVG等。这些函数和其它函数的根本区别就是它们一般作用在多条记录上。<br>SELECT SUM(population) FROM tablename</p>
+<p>这里的SUM作用在所有返回记录的population字段上，结果就是该查询只返回一个结果，即所有 国家的总人口数。 通过使用GROUP BY 子句，可以让SUM 和 COUNT 这些函数对属于一组的数据起作用。<br> 当你指定 GROUP BY region 时， 属于同一个region（地区）的一组数据将只能返回一行值．<br>也就是说，表中所有除region（地区）外的字段，只能通过 SUM, COUNT等聚合函数运算后返回一个值<br>HAVING子句可以让我们筛选成分组后的各组数据<br>HAVING子句在聚合后对组记录进行筛选<br>而WHERE子句在聚合前先筛选记录．也就是说作用在GROUP BY 子句和HAVING子句前<br> 看下面这几个例子吧：</p>
+<p>一、显示每个地区的总人口数和总面积．<br>SELECT region, SUM(population), SUM(area)<br> FROM bbc<br>GROUP BY region<br> 先以region把返回记录分成多个组，这就是GROUP BY的字面含义。分完组后，然后用聚合函数对每组中的不同字段（一或多条记录）作运算。# B<em> i’ z  `, }</em> S, E5 i</p>
+<p>二、 显示每个地区的总人口数和总面积．仅显示那些面积超过1000000的地区。<br> SELECT region, SUM(population), SUM(area)<br>FROM bbc8<br>GROUP BY region<br>HAVING SUM(area)&gt;1000000<br>在这里，我们不能用where来筛选超过1000000的地区，因为表中不存在这样一条记录。<br>相反，HAVING子句可以让我们筛选成组后的各组数据．</p>
+<p>三、我在多举一些例子</p>
+<p>SQL&gt; select * from sc;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>  1 YW            95
+  1 SX            98
+  1 YY            90
+  2 YW            89
+  2 SX            91
+  2 YY            92
+  3 YW            85
+  3 SX            88
+  3 YY            96
+  4 YW            95
+  4 SX            89
+
+SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>4 YY            88
+</code></pre><p>这个表所描述的是4个学生对应每科学习成绩的记录，其中SNO（学生号）、PNO（课程名）、GRADE（成绩）。</p>
+<p>1、显示90分以上学生的课程名和成绩</p>
+<p>//这是一个简单的查询，并没有使用分组查询</p>
+<p>SQL&gt; select sno,pno,grade from sc where grade&gt;=90;</p>
+<pre><code>SNO PNO        GRADE
+</code></pre><hr>
+<pre><code>1 YW            95
+1 SX            98
+1 YY            90
+2 SX            91
+2 YY            92
+3 YY            96
+4 YW            95
+</code></pre><p>已选择7行。</p>
+<p>2、显示每个学生的成绩在90分以上的各有多少门</p>
+<p>//进行分组显示，并且按照where条件之后计数</p>
+<p>SQL&gt; select sno,count(*) from sc where grade&gt;=90 group by sno;</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+4          1
+3          1
+</code></pre><p>3、这里我们并没有使用having语句，接下来如果我们要评选三好学生，条件是至少有两门课程在90分以上才能有资格，列出有资格的学生号及90分以上的课程数。</p>
+<p>//进行分组显示，并且按照where条件之后计数，在根据having子句筛选分组</p>
+<p>SQL&gt; select sno,count(<em>) from sc where grade&gt;=90 group by sno having count(</em>)&gt;=2；</p>
+<pre><code>SNO   COUNT(*)
+</code></pre><hr>
+<pre><code>1          3
+2          2
+</code></pre><p>这个结果是我们想要的，它列出了具有评选三好学生资格的学生号，跟上一个例子比较之后，发现这是在分组后进行的子查询，也印证了软考教材所描述是错误的。</p>
+<p>4、学校评选先进学生，要求平均成绩大于90分的学生都有资格，并且语文课必须在95分以上，请列出有资格的学生</p>
+<p>//实际上，这个查询先把语文大于95分的学生号提取出来，之后求平均值，分组显示后根据having语句选出平均成绩大于90的</p>
+<p>SQL&gt; select sno,avg(grade) from sc where SNO IN (SELECT SNO FROM SC WHERE GRADE&gt;=95 AND PNO=’YW’) group by sno having avg(grade)&gt;=90;</p>
+<pre><code>SNO AVG(GRADE)
+</code></pre><hr>
+<pre><code>1 94.3333333
+4 90.6666667
+</code></pre><p>5、查询比平均成绩至少比学号是3的平均成绩高的学生学号以及平均分数</p>
+<p>//having子句中可进行比较和子查询</p>
+<p>SQL&gt; select sno,avg(grade) from sc<br>  2  group by sno<br>  3  having avg(grade) &gt; (select avg(grade) from sc where sno=3);</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1081,99 +1242,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/31/HBase的物理模型/" itemprop="url">
-                  HBase的物理模型
-                </a>
-              
-            
-          </h1>
-        
-		 <span id="busuanzi_container_page_pv" style="text-align: center">
-			本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-		</span>
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-03-31T10:07:57+08:00" content="2016-03-31">
-              2016-03-31
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/31/HBase的物理模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/31/HBase的物理模型/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 id="u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E"><a href="#u521A_u5B66_u4E60_u4E86HBase_u7684_u7269_u7406_u6A21_u578B_uFF0C_u6709_u4E9B_u5FC3_u5F97_uFF0C_u8BB0_u5F55_u4E00_u4E0B_7E" class="headerlink" title="<em>刚学习了HBase的物理模型，有些心得，记录一下~</em>"></a><em>刚学习了HBase的物理模型，有些心得，记录一下~</em></h3><h4 id="u4E00_u3001_u57FA_u672C_u6982_u5FF5"><a href="#u4E00_u3001_u57FA_u672C_u6982_u5FF5" class="headerlink" title="一、基本概念"></a>一、基本概念</h4><h5 id="1_u3001region_server"><a href="#1_u3001region_server" class="headerlink" title="1、region server"></a>1、region server</h5><p>  HBase是分布式数据库，region server 就是每一个存储数据的节点。</p>
-<h5 id="2_u3001region"><a href="#2_u3001region" class="headerlink" title="2、region"></a>2、region</h5><p>  每一个region server中，按行把大文件分为小文件。一个小文件就是一个region。</p>
-<h4 id="u4E8C_u3001_u95EE_u9898_u5F15_u5165"><a href="#u4E8C_u3001_u95EE_u9898_u5F15_u5165" class="headerlink" title="二、问题引入"></a>二、问题引入</h4><p>HBase的数据是按列族分开存储的。当一个region server上的列族文件越来越大，那么它插入、查询的速度必然降低。</p>
-<h4 id="u4E09_u3001_u89E3_u51B3_u65B9_u6848"><a href="#u4E09_u3001_u89E3_u51B3_u65B9_u6848" class="headerlink" title="三、解决方案"></a>三、解决方案</h4><p>当一个列族文件过大时，按行，将文件划分为region。大文件变为小文件，效率就提高了。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/31/HBase的物理模型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1220,7 +1288,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
